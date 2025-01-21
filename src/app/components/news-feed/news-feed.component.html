@@ -1,0 +1,84 @@
+<div class="news-feed">
+  <header>
+    <h1>Trump 2024 Campaign News</h1>
+
+    <div class="controls">
+      <div class="filters">
+        <input
+          type="text"
+          [ngModel]="searchTerm"
+          (ngModelChange)="onSearchInput($event)"
+          placeholder="Search news..."
+          class="search-input"
+          aria-label="Search news"
+        >
+
+        <select
+          [ngModel]="selectedSource"
+          (ngModelChange)="onSourceChange($event)"
+          class="source-select"
+          aria-label="Filter by news source"
+          title="Filter by news source"
+        >
+          <option value="">All Sources</option>
+          <option *ngFor="let source of availableSources" [value]="source">
+            {{ source }}
+          </option>
+        </select>
+
+        <button
+          *ngIf="hasActiveFilters"
+          (click)="clearFilters()"
+          class="clear-btn"
+          aria-label="Clear all filters"
+        >
+          Clear Filters
+        </button>
+      </div>
+
+      <div class="refresh-control">
+        <button
+          (click)="refreshNews()"
+          [disabled]="loading"
+          class="refresh-btn"
+          aria-label="Refresh news feed"
+        >
+          <span *ngIf="!loading">Refresh</span>
+          <span *ngIf="loading">Refreshing...</span>
+        </button>
+        <span class="last-updated" aria-label="Last updated time">
+          Last updated: {{ lastUpdatedText }}
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <div *ngIf="loading && !newsItems.length" class="loading" role="status">
+    <div class="loading-spinner"></div>
+    <p>Loading latest news...</p>
+  </div>
+
+  <div *ngIf="error" class="error" role="alert">
+    <p>{{ error }}</p>
+    <button (click)="fetchNews()" class="retry-btn">
+      Try Again
+    </button>
+  </div>
+
+  <div *ngIf="!loading || newsItems.length" class="news-items">
+    <div *ngIf="filteredItems.length === 0" class="no-results" role="status">
+      <p *ngIf="hasActiveFilters">
+        No news items found matching your search criteria.
+        <button (click)="clearFilters()" class="clear-btn">Clear Filters</button>
+      </p>
+      <p *ngIf="!hasActiveFilters">
+        No news items available. Try refreshing the page.
+      </p>
+    </div>
+
+    <app-news-item
+      *ngFor="let item of filteredItems"
+      [item]="item">
+    </app-news-item>
+  </div>
+</div>

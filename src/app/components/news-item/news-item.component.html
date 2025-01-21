@@ -1,0 +1,26 @@
+<div class="news-item">
+  <div class="news-content">
+    <h2>
+      <a [href]="item.link" target="_blank" rel="noopener noreferrer">
+        {{ item.title }}
+      </a>
+    </h2>
+
+    <div class="meta">
+      <span class="source">{{ item.source }}</span>
+      <span class="category" *ngIf="item.category">{{ item.category }}</span>
+      <span class="date">{{ formatDate(item.pubDate) }}</span>
+    </div>
+
+    <div class="content">
+      <img *ngIf="item.imageUrl" [src]="item.imageUrl" [alt]="item.title" class="thumbnail">
+      <p>{{ item.content }}</p>
+    </div>
+
+    <div class="actions">
+      <a [href]="item.link" target="_blank" rel="noopener noreferrer" class="read-more">
+        Read on Reddit →
+      </a>
+    </div>
+  </div>
+</div>
