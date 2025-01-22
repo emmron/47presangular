@@ -1,26 +1,44 @@
-<div class="news-item">
+<article class="news-item">
   <div class="news-content">
-    <h2>
-      <a [href]="item.link" target="_blank" rel="noopener noreferrer">
-        {{ item.title }}
-      </a>
-    </h2>
+    <header>
+      <h2>
+        <a [href]="item.link" target="_blank" rel="noopener noreferrer">
+          {{ item.title }}
+        </a>
+      </h2>
 
-    <div class="meta">
-      <span class="source">{{ item.source }}</span>
-      <span class="category" *ngIf="item.category">{{ item.category }}</span>
-      <span class="date">{{ formatDate(item.pubDate) }}</span>
-    </div>
+      <div class="meta">
+        <span class="source">{{ item.source }}</span>
+        <span class="category" *ngIf="item.category">{{ item.category }}</span>
+        <time class="date" [dateTime]="item.pubDate.toISOString()">
+          {{ formatDate(item.pubDate) }}
+        </time>
+      </div>
+    </header>
 
     <div class="content">
-      <img *ngIf="item.imageUrl" [src]="item.imageUrl" [alt]="item.title" class="thumbnail">
+      <img *ngIf="item.imageUrl"
+        [src]="item.imageUrl"
+        [alt]="'Thumbnail for: ' + item.title"
+        [title]="item.title"
+        class="thumbnail"
+        loading="lazy">
       <p>{{ item.content }}</p>
     </div>
 
-    <div class="actions">
-      <a [href]="item.link" target="_blank" rel="noopener noreferrer" class="read-more">
-        Read on Reddit →
+    <footer class="actions">
+      <a [href]="item.link"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="read-more"
+        [attr.aria-label]="'Read full post: ' + item.title">
+        <span>Read on Reddit</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+          <polyline points="15 3 21 3 21 9"></polyline>
+          <line x1="10" y1="14" x2="21" y2="3"></line>
+        </svg>
       </a>
-    </div>
+    </footer>
   </div>
-</div>
+</article>
