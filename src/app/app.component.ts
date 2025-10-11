@@ -1,4 +1,17 @@
 import { Component } from '@angular/core';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+  selector: 'app-root',
+  standalone: true,
+          <p class="tagline">Tracking momentum across narratives, events, and daily coverage.</p>
+        </div>
+        <nav class="primary-nav">
+          <a routerLink="/timeline" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+            Timeline
+          </a>
+            Timeline
+          </a>
+            Timeline
+          </a>
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { AuthService } from './auth/auth.service';
@@ -242,6 +255,8 @@ export class AppComponent {
           max-width: 640px;
         }
       }
+    `,
+  ],
     `
   ]
 })
