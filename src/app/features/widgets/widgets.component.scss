@@ -1,0 +1,133 @@
+.widgets {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 1.5rem 2rem 3rem;
+
+  .widgets-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+
+    h1 {
+      margin: 0 0 0.75rem 0;
+      font-size: 1.8rem;
+    }
+
+    p {
+      margin: 0;
+      max-width: 680px;
+      color: #546e7a;
+    }
+
+    button {
+      border-radius: 999px;
+      border: none;
+      padding: 0.6rem 1.5rem;
+      font-weight: 600;
+      background: linear-gradient(135deg, #7b1fa2, #512da8);
+      color: #ffffff;
+      cursor: pointer;
+      height: fit-content;
+    }
+  }
+
+  .widgets-layout {
+    display: grid;
+    grid-template-columns: minmax(240px, 320px) 1fr;
+    gap: 2rem;
+
+    @media (max-width: 960px) {
+      grid-template-columns: 1fr;
+    }
+
+    aside {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 1.5rem;
+      border: 1px solid rgba(96, 125, 139, 0.18);
+      box-shadow: 0 14px 30px rgba(15, 23, 42, 0.08);
+
+      h2 {
+        margin: 0 0 1rem 0;
+        font-size: 1.1rem;
+      }
+
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: grid;
+        gap: 0.75rem;
+
+        li {
+          padding: 0.85rem 1rem;
+          border-radius: 12px;
+          border: 1px solid rgba(84, 110, 122, 0.18);
+          cursor: pointer;
+          transition: border-color 0.2s ease, background 0.2s ease;
+
+          &.active {
+            border-color: #512da8;
+            background: rgba(81, 45, 168, 0.08);
+          }
+
+          h3 {
+            margin: 0;
+            font-size: 1rem;
+          }
+
+          p {
+            margin: 0.25rem 0;
+            color: #455a64;
+            font-size: 0.9rem;
+          }
+
+          small {
+            color: #607d8b;
+          }
+        }
+      }
+    }
+
+    .preview {
+      background: #ffffff;
+      border-radius: 18px;
+      padding: 1.75rem;
+      border: 1px solid rgba(96, 125, 139, 0.18);
+      box-shadow: 0 16px 36px rgba(15, 23, 42, 0.1);
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+
+      pre {
+        background: #0f172a;
+        color: #e3f2fd;
+        padding: 1rem;
+        border-radius: 12px;
+        overflow-x: auto;
+        font-size: 0.85rem;
+      }
+
+      .contract {
+        list-style: disc;
+        padding-left: 1.25rem;
+        margin: 0;
+        display: grid;
+        gap: 0.35rem;
+      }
+
+      .cta {
+        a {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.35rem;
+          color: #1e88e5;
+          font-weight: 600;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+}

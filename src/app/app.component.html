@@ -1,3 +1,32 @@
+<div class="app-shell">
+  <header class="topbar">
+    <div class="brand">
+      <span class="label">Trump 47</span>
+      <h1>Campaign Command Center</h1>
+    </div>
+    <nav class="primary-nav">
+      <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+      <a routerLink="/events" routerLinkActive="active">Events</a>
+      <a routerLink="/positions" routerLinkActive="active">Positions</a>
+      <a routerLink="/timeline" routerLinkActive="active">Timeline</a>
+      <a routerLink="/widgets" routerLinkActive="active">Widgets</a>
+    </nav>
+  </header>
+
+  <main class="layout">
+    <section class="primary">
+      <router-outlet></router-outlet>
+    </section>
+    <aside class="news-rail">
+      <h2>Rapid Response Wire</h2>
+      <p class="subtitle">
+        Automated stream of campaign news, digital releases, and media moments for
+        surrogates and partners.
+      </p>
+      <app-news-feed></app-news-feed>
+    </aside>
+  </main>
+</div>
 <main class="layout">
   <div class="layout__inner">
     <section class="layout__hero" aria-label="Featured campaign coverage">

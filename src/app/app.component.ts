@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { NewsFeedComponent } from './components/news-feed/news-feed.component';
@@ -9,6 +10,9 @@ import { EventMapComponent } from './components/media/event-map/event-map.compon
 @Component({
   selector: 'app-root',
   standalone: true,
+  imports: [RouterOutlet, RouterLink, RouterLinkActive, NewsFeedComponent],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss'],
   imports: [RouterOutlet, CommonModule, NewsFeedComponent, LiveStreamWidgetComponent, AdSpotlightComponent, EventMapComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
