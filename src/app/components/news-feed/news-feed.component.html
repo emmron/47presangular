@@ -53,32 +53,41 @@
     </div>
   </header>
 
-  <div *ngIf="loading && !newsItems.length" class="loading" role="status">
-    <div class="loading-spinner"></div>
-    <p>Loading latest news...</p>
-  </div>
+  <div class="content-layout">
+    <section class="main-column" aria-label="Campaign news">
+      <div *ngIf="loading && !newsItems.length" class="loading" role="status">
+        <div class="loading-spinner"></div>
+        <p>Loading latest news...</p>
+      </div>
 
-  <div *ngIf="error" class="error" role="alert">
-    <p>{{ error }}</p>
-    <button (click)="fetchNews()" class="retry-btn">
-      Try Again
-    </button>
-  </div>
+      <div *ngIf="error" class="error" role="alert">
+        <p>{{ error }}</p>
+        <button (click)="fetchNews()" class="retry-btn">
+          Try Again
+        </button>
+      </div>
 
-  <div *ngIf="!loading || newsItems.length" class="news-items">
-    <div *ngIf="filteredItems.length === 0" class="no-results" role="status">
-      <p *ngIf="hasActiveFilters">
-        No news items found matching your search criteria.
-        <button (click)="clearFilters()" class="clear-btn">Clear Filters</button>
-      </p>
-      <p *ngIf="!hasActiveFilters">
-        No news items available. Try refreshing the page.
-      </p>
-    </div>
+      <div *ngIf="!loading || newsItems.length" class="news-items">
+        <div *ngIf="filteredItems.length === 0" class="no-results" role="status">
+          <p *ngIf="hasActiveFilters">
+            No news items found matching your search criteria.
+            <button (click)="clearFilters()" class="clear-btn">Clear Filters</button>
+          </p>
+          <p *ngIf="!hasActiveFilters">
+            No news items available. Try refreshing the page.
+          </p>
+        </div>
 
-    <app-news-item
-      *ngFor="let item of filteredItems"
-      [item]="item">
-    </app-news-item>
+        <app-news-item
+          *ngFor="let item of filteredItems"
+          [item]="item">
+        </app-news-item>
+      </div>
+    </section>
+
+    <aside class="sidebar" aria-label="Engagement tools">
+      <app-engagement-panel [story]="featuredStory"></app-engagement-panel>
+      <app-poll-widget></app-poll-widget>
+    </aside>
   </div>
 </div>

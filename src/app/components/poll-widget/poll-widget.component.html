@@ -1,0 +1,31 @@
+<aside class="poll-widget" aria-label="Campaign pulse polls">
+  <h2>Campaign pulse</h2>
+  <p class="description">Quick poll results from the grassroots community.</p>
+
+  <ng-container *ngIf="(polls$ | async) as polls; else loading">
+    <article *ngFor="let poll of polls" class="poll" aria-live="polite">
+      <header>
+        <h3>{{ poll.question }}</h3>
+        <span class="updated">Updated {{ poll.lastUpdatedRelative }}</span>
+      </header>
+      <ul>
+        <li *ngFor="let option of poll.options">
+          <span class="label">{{ option.label }}</span>
+          <div class="bar">
+            <div class="fill" [style.width.%]="option.percentage"></div>
+          </div>
+          <span class="value">{{ option.percentage }}%</span>
+        </li>
+      </ul>
+      <footer>
+        <span class="total">{{ poll.totalVotes | number }} responses</span>
+      </footer>
+    </article>
+
+    <p *ngIf="polls.length === 0" class="empty-state">Poll results are coming soon.</p>
+  </ng-container>
+
+  <ng-template #loading>
+    <div class="loading">Loading poll snapshots...</div>
+  </ng-template>
+</aside>

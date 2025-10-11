@@ -26,6 +26,15 @@
       <p>{{ item.content }}</p>
     </div>
 
+    <div class="og-preview" *ngIf="ogImageUrl">
+      <img
+        [src]="ogImageUrl"
+        [alt]="'OpenGraph preview for ' + item.title"
+        loading="lazy"
+      >
+      <p>Dynamic social preview generated for high-impact sharing.</p>
+    </div>
+
     <footer class="actions">
       <a [href]="item.link"
         target="_blank"

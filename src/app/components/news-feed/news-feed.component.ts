@@ -5,12 +5,14 @@ import { Subject } from 'rxjs';
 import { takeUntil, debounceTime } from 'rxjs/operators';
 import { NewsStateService } from '../../services/news-state.service';
 import { NewsItemComponent } from '../news-item/news-item.component';
+import { EngagementPanelComponent } from '../engagement-panel/engagement-panel.component';
+import { PollWidgetComponent } from '../poll-widget/poll-widget.component';
 import { NewsItem, NewsFilter } from '../../models/news.model';
 
 @Component({
   selector: 'app-news-feed',
   standalone: true,
-  imports: [CommonModule, FormsModule, NewsItemComponent],
+  imports: [CommonModule, FormsModule, NewsItemComponent, EngagementPanelComponent, PollWidgetComponent],
   templateUrl: './news-feed.component.html',
   styleUrls: ['./news-feed.component.scss']
 })
@@ -98,5 +100,10 @@ export class NewsFeedComponent implements OnInit, OnDestroy {
 
   get hasActiveFilters(): boolean {
     return !!(this.searchTerm || this.selectedSource);
+  }
+
+  get featuredStory(): NewsItem | null {
+    const items = this.filteredItems;
+    return items.length ? items[0] : null;
   }
 }

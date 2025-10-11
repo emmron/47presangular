@@ -3,6 +3,35 @@
   margin: 0 auto;
   padding: 20px;
 
+  .content-layout {
+    display: grid;
+    gap: 24px;
+    grid-template-columns: minmax(0, 1fr);
+
+    @media (min-width: 1024px) {
+      grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+      align-items: start;
+    }
+  }
+
+  .main-column {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+
+    app-engagement-panel,
+    app-poll-widget {
+      width: 100%;
+      display: block;
+    }
+  }
+
   @media (max-width: 768px) {
     padding: 16px;
   }
@@ -257,8 +286,8 @@
     gap: 32px;
     animation: slideUp 0.4s ease-out;
 
-    @media (min-width: 1024px) {
-      grid-template-columns: repeat(2, 1fr);
+    @media (min-width: 768px) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
 }

@@ -1,0 +1,60 @@
+<section class="engagement-panel" aria-labelledby="engagement-heading">
+  <h2 id="engagement-heading">Stay in the loop</h2>
+  <p class="panel-subtitle">
+    Get campaign headlines in your inbox and boost stories that matter.
+  </p>
+
+  <form class="newsletter-form" (ngSubmit)="submitNewsletter()" novalidate>
+    <label for="newsletter-email" class="sr-only">Email address</label>
+    <input
+      id="newsletter-email"
+      type="email"
+      name="email"
+      [(ngModel)]="email"
+      placeholder="you@example.com"
+      [disabled]="isSubmitting"
+      required
+    >
+    <button type="submit" [disabled]="isSubmitting">
+      <span *ngIf="!isSubmitting">Subscribe</span>
+      <span *ngIf="isSubmitting">Joining...</span>
+    </button>
+  </form>
+
+  <p *ngIf="successMessage" class="status success" role="status">{{ successMessage }}</p>
+  <p *ngIf="errorMessage" class="status error" role="alert">{{ errorMessage }}</p>
+
+  <div class="share">
+    <h3>Share this story</h3>
+    <div class="share-buttons">
+      <a
+        [href]="'https://twitter.com/intent/tweet?text=' + encode(shareText) + '&url=' + encode(shareUrl)"
+        target="_blank"
+        rel="noopener noreferrer"
+        (click)="onShare('twitter')"
+        aria-label="Share on Twitter"
+      >
+        <span aria-hidden="true">𝕏</span>
+      </a>
+      <a
+        [href]="'https://www.facebook.com/sharer/sharer.php?u=' + encode(shareUrl)"
+        target="_blank"
+        rel="noopener noreferrer"
+        (click)="onShare('facebook')"
+        aria-label="Share on Facebook"
+      >
+        <span aria-hidden="true">f</span>
+      </a>
+      <a
+        [href]="'https://www.linkedin.com/shareArticle?mini=true&url=' + encode(shareUrl) + '&title=' + encode(shareText)"
+        target="_blank"
+        rel="noopener noreferrer"
+        (click)="onShare('linkedin')"
+        aria-label="Share on LinkedIn"
+      >
+        <span aria-hidden="true">in</span>
+      </a>
+    </div>
+    <p class="share-tip">Your shares help surface the campaign stories readers engage with most.</p>
+  </div>
+</section>

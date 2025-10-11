@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { EngagementService } from '../../services/engagement.service';
+import { NewsItem } from '../../models/news.model';
 
 @Component({
   selector: 'app-news-item',
@@ -9,9 +11,11 @@ import { CommonModule } from '@angular/common';
   styleUrl: './news-item.component.scss'
 })
 export class NewsItemComponent {
-  @Input() item: any;
+  @Input() item!: NewsItem;
 
-  formatDate(date: string): string {
+  constructor(private engagementService: EngagementService) { }
+
+  formatDate(date: Date): string {
     return new Date(date).toLocaleDateString('en-US', {
       year: 'numeric',
       month: 'long',
@@ -19,5 +23,12 @@ export class NewsItemComponent {
       hour: '2-digit',
       minute: '2-digit'
     });
+  }
+
+  get ogImageUrl(): string | null {
+    if (!this.item) {
+      return null;
+    }
+    return this.engagementService.buildOgImageUrl(this.item);
   }
 }
