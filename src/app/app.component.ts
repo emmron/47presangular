@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
-import { LayoutModule } from './layout/layout.module';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   standalone: true,
+  imports: [RouterOutlet],
+  template: `
+    <router-outlet></router-outlet>
   imports: [RouterOutlet, RouterLink, RouterLinkActive],
   template: `
     <main class="app-shell">
