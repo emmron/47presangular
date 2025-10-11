@@ -54,6 +54,16 @@ The Angular app consumes the backend at `/api/news`. Configure your dev proxy (e
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
+## Deployment
+
+Pushing to the `main` branch automatically builds and publishes the static site to GitHub Pages. The [`deploy.yml`](.github/workflows/deploy.yml) workflow handles the build and deployment steps:
+
+1. Installs dependencies with `npm ci` using Node.js 20.
+2. Builds the Angular app with a repository-aware `base-href` so assets resolve correctly at `https://<user>.github.io/<repo>/`.
+3. Uploads `dist/trump-tracker/browser` as the static artifact and deploys it to GitHub Pages.
+
+After the first successful run, enable GitHub Pages in the repository settings and choose the "GitHub Actions" source. Subsequent pushes to `main` will update the live site automatically.
+
 ## Running unit tests
 
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).

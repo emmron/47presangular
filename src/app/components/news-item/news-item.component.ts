@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { NewsItem } from '../../models/news.model';
+
 import { NewsItem } from '../../models/news.model';
 import { TrackingService } from '../../services/tracking.service';
 import { ReferralService } from '../../services/referral.service';
@@ -23,11 +23,9 @@ interface ShareLink {
 export class NewsItemComponent {
   @Input() item!: NewsItem;
 
-  formatDate(date: Date | string): string {
-
   constructor(
-    private tracking: TrackingService,
-    private referrals: ReferralService,
+    private readonly tracking: TrackingService,
+    private readonly referrals: ReferralService
   ) {}
 
   formatDate(date: string | Date): string {
@@ -45,9 +43,6 @@ export class NewsItemComponent {
     return ['/news', this.item.id];
   }
 
-  toIsoString(date: Date | string): string {
-    const value = typeof date === 'string' ? new Date(date) : date;
-    return value.toISOString();
   get dateTimeAttr(): string {
     const value = this.item.pubDate instanceof Date ? this.item.pubDate : new Date(this.item.pubDate);
     return value.toISOString();
@@ -60,8 +55,8 @@ export class NewsItemComponent {
       medium: 'social_share',
       campaign: 'news_distribution',
       content: this.item.id,
-      referralCode,
-    };
+      referralCode
+    } as const;
     const trackedUrl = this.tracking.buildTrackedUrl(this.item.link, params);
     const encodedTitle = encodeURIComponent(this.item.title);
     const encodedUrl = encodeURIComponent(trackedUrl);
@@ -71,27 +66,27 @@ export class NewsItemComponent {
         network: 'x',
         label: 'Share on X',
         url: `https://twitter.com/intent/tweet?text=${encodedTitle}&url=${encodedUrl}`,
-        icon: '🐦',
+        icon: '🐦'
       },
       {
         network: 'facebook',
         label: 'Share on Facebook',
         url: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`,
-        icon: '📘',
+        icon: '📘'
       },
       {
         network: 'telegram',
         label: 'Share on Telegram',
         url: `https://t.me/share/url?url=${encodedUrl}&text=${encodedTitle}`,
-        icon: '📨',
-      },
+        icon: '📨'
+      }
     ];
   }
 
-  onShare(network: string): void {
+  onShare(network: ShareLink['network']): void {
     this.tracking.emitEvent('news_share', {
       network,
-      newsId: this.item.id,
+      newsId: this.item.id
     });
   }
 }
