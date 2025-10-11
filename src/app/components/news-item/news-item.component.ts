@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NewsItem, MediaAsset } from '../../models/news.model';
 import { RouterModule } from '@angular/router';
 
 import { NewsItem } from '../../models/news.model';
@@ -18,9 +19,17 @@ interface ShareLink {
   standalone: true,
   imports: [CommonModule, RouterModule],
   templateUrl: './news-item.component.html',
-  styleUrl: './news-item.component.scss'
+  styleUrls: ['./news-item.component.scss']
 })
 export class NewsItemComponent {
+  @Input({ required: true }) item!: NewsItem;
+
+  get primaryImage(): MediaAsset | undefined {
+    return this.item.mediaAssets.find(asset => asset.type === 'IMAGE');
+  }
+
+  formatDate(date: Date): string {
+    return new Date(date).toLocaleDateString('en-US', {
   @Input() item!: NewsItem;
 
   constructor(

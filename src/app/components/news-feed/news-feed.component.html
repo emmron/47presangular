@@ -21,8 +21,8 @@
           title="Filter by news source"
         >
           <option value="">All Sources</option>
-          <option *ngFor="let source of availableSources" [value]="source">
-            {{ source }}
+          <option *ngFor="let source of availableSources" [value]="source.slug">
+            {{ source.name }}
           </option>
         </select>
 

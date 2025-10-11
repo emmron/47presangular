@@ -12,6 +12,12 @@
       </h2>
 
       <div class="meta">
+        <span class="source">{{ item.source.name }}</span>
+        <span class="topics" *ngIf="item.topics.length">
+          <span *ngFor="let topic of item.topics" class="topic-chip">{{ topic }}</span>
+        </span>
+        <time class="date" [dateTime]="item.publishedAt.toISOString()">
+          {{ formatDate(item.publishedAt) }}
         <span class="source">{{ item.source }}</span>
         <span class="category" *ngIf="item.category">{{ item.category }}</span>
         <time class="date" [attr.dateTime]="dateTimeAttr">
@@ -21,6 +27,15 @@
     </header>
 
     <div class="content">
+      <img *ngIf="primaryImage"
+        [src]="primaryImage.url"
+        [alt]="primaryImage.caption || item.title"
+        class="thumbnail"
+        loading="lazy">
+      <p *ngIf="item.summary; else fallback">{{ item.summary }}</p>
+      <ng-template #fallback>
+        <p>{{ item.content }}</p>
+      </ng-template>
       <img
         *ngIf="item.imageUrl"
         [src]="item.imageUrl"
@@ -45,6 +60,9 @@
         target="_blank"
         rel="noopener noreferrer"
         class="read-more"
+        [attr.aria-label]="'Read full article: ' + item.title">
+        <span>Read full article</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         [attr.aria-label]="'Read full post on Reddit: ' + item.title"
       >
         <span>Read on Reddit</span>
