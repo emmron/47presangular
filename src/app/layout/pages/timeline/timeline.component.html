@@ -1,0 +1,19 @@
+<section class="timeline" *ngIf="timeline$ | async as timeline">
+  <header class="timeline__header">
+    <h2>Campaign timeline</h2>
+    <p>Daily chronology of notable headlines and developments.</p>
+  </header>
+
+  <ol class="timeline__list">
+    <li *ngFor="let entry of timeline" class="timeline__day">
+      <h3>{{ entry.day | date:'fullDate' }}</h3>
+      <ul>
+        <li *ngFor="let item of entry.items">
+          <time>{{ item.pubDate | date:'shortTime' }}</time>
+          <span class="timeline__title">{{ item.title }}</span>
+          <span class="timeline__source">{{ item.source }}</span>
+        </li>
+      </ul>
+    </li>
+  </ol>
+</section>

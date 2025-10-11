@@ -1,0 +1,77 @@
+<section class="topic" *ngIf="viewState$ | async as state">
+  <div *ngIf="state.state === 'loading'" class="topic__status topic__status--loading">
+    Loading topic briefing…
+  </div>
+
+  <div *ngIf="state.state === 'error'" class="topic__status topic__status--error">
+    <p>We couldn't load this topic right now.</p>
+    <p class="topic__status-detail">{{ state.error.message }}</p>
+    <a routerLink="/timeline" class="topic__back">Back to timeline</a>
+  </div>
+
+  <ng-container *ngIf="state.state === 'loaded'">
+    <a routerLink="/timeline" class="topic__back">← Back to curated timeline</a>
+
+    <header class="topic__header">
+      <div>
+        <h1>{{ state.data.detail.topic.title }}</h1>
+        <p class="topic__summary">{{ state.data.detail.topic.summary }}</p>
+      </div>
+      <aside class="topic__meta">
+        <span>Last updated</span>
+        <strong>{{ state.data.lastUpdated | date: 'medium' }}</strong>
+      </aside>
+    </header>
+
+    <div class="topic__callouts" *ngIf="state.data.callouts.length">
+      <section *ngFor="let callout of state.data.callouts" class="topic__callout">
+        <h2>{{ callout.title }}</h2>
+        <div class="topic__callout-body" [innerHTML]="callout.body"></div>
+      </section>
+    </div>
+
+    <div class="topic__chart" *ngIf="state.data.momentumChart[0]?.series?.length">
+      <ngx-charts-line-chart
+        [results]="state.data.momentumChart"
+        [scheme]="colorScheme"
+        [timeline]="true"
+        [autoScale]="true"
+        [xAxis]="true"
+        [yAxis]="true"
+        [xAxisLabel]="'Date'"
+        [yAxisLabel]="'Momentum'"
+        [showXAxisLabel]="true"
+        [showYAxisLabel]="true"
+        [animations]="false"
+      ></ngx-charts-line-chart>
+    </div>
+
+    <article class="topic__body" [innerHTML]="state.data.curatedHtml"></article>
+
+    <section class="topic__events">
+      <header>
+        <h2>Key developments</h2>
+      </header>
+      <div class="topic__event-grid">
+        <article class="topic__event" *ngFor="let group of state.data.eventGroups; trackBy: trackByEvent">
+          <header>
+            <h3>{{ group.event.title }}</h3>
+            <span class="topic__event-date">{{ group.event.date | date: 'medium' }}</span>
+          </header>
+          <p class="topic__event-description">{{ group.event.description }}</p>
+          <ul class="topic__news" *ngIf="group.items.length; else empty">
+            <li *ngFor="let item of group.items">
+              <a [href]="item.link" target="_blank" rel="noopener noreferrer">
+                {{ item.title }}
+              </a>
+              <small>{{ item.source }} · {{ item.pubDate | date: 'short' }} · Momentum {{ item.momentumScore ?? '—' }}</small>
+            </li>
+          </ul>
+          <ng-template #empty>
+            <p class="topic__empty">No linked stories yet for this moment.</p>
+          </ng-template>
+        </article>
+      </div>
+    </section>
+  </ng-container>
+</section>

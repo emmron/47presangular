@@ -1,5 +1,5 @@
 {
-  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "$schema": "https://angular.dev/schemas/cli-workspace-schema.json",
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
@@ -49,9 +49,19 @@
                   "type": "anyComponentStyle",
                   "maximumWarning": "6kB",
                   "maximumError": "8kB"
+                  "maximumError": "10kB"
+                  "maximumError": "8kB"
+                  "maximumWarning": "8kB",
+                  "maximumError": "12kB"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ]
             },
             "development": {
               "optimization": false,

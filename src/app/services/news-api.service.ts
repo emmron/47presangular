@@ -1,35 +1,156 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map, retry } from 'rxjs/operators';
-import { NewsItem } from '../models/news.model';
+
+import { NewsItem, StoryDetail, StorySource, TimelineEvent } from '../models/news.model';
 import { LoadingState, toLoadingState } from '../models/loading-state.model';
+import { MediaAsset, NewsItem, NewsQueryOptions, NewsResponse } from '../models/news.model';
+import { environment } from '../../environments/environment';
+
+type ApiSourceType = 'OFFICIAL' | 'LICENSED' | 'SOCIAL';
+type ApiMediaType = 'IMAGE' | 'VIDEO' | 'AUDIO';
+
+type ApiNewsItem = Omit<NewsItem, 'publishedAt' | 'mediaAssets'> & {
+  publishedAt: string;
+  mediaAssets: Array<MediaAsset & { type: ApiMediaType }>;
+  source: NewsItem['source'] & { type: ApiSourceType };
+};
+
+type ApiNewsResponse = Omit<NewsResponse, 'items'> & {
+  items: ApiNewsItem[];
+};
+
+interface NewsItemResponse {
+  id: string;
+  title: string;
+  link: string;
+  pubDate: string;
+  content: string;
+  source: string;
+  category?: string;
+  imageUrl?: string;
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class NewsApiService {
-  private readonly SUBREDDITS = [
-    'politics',
-    'news',
-    'worldnews'
-  ];
+  private readonly baseUrl = environment.api.baseUrl;
 
   constructor(private http: HttpClient) {}
 
-  getNews(): Observable<LoadingState<NewsItem[]>> {
-    // Fetch from multiple subreddits and combine results
-    const requests = this.SUBREDDITS.map(subreddit =>
-      this.http.get<any>(`https://www.reddit.com/r/${subreddit}/search.json?q=trump+2024+campaign&restrict_sr=1&sort=new&limit=25`)
-    );
+  getNews(options: NewsQueryOptions = {}): Observable<LoadingState<NewsResponse>> {
+    const params = this.buildQueryParams(options);
 
     return toLoadingState(
-      this.http.get<any>('https://www.reddit.com/r/politics+news+worldnews/search.json?q=trump+2024+campaign&restrict_sr=1&sort=new&limit=100').pipe(
-        map(response => this.transformRedditResponse(response)),
-        retry(3),
-        catchError(this.handleError)
+      this.http.get<ApiNewsResponse>(`${this.baseUrl}/news`, { params }).pipe(
+        retry({ count: 2, delay: 500 }),
+        map(response => this.transformResponse(response)),
+        catchError(error => this.handleError(error))
       )
     );
+  }
+
+  private buildQueryParams(options: NewsQueryOptions): HttpParams {
+    let params = new HttpParams();
+
+    if (options.page) {
+      params = params.set('page', options.page.toString());
+    }
+    if (options.pageSize) {
+      params = params.set('pageSize', options.pageSize.toString());
+    }
+    if (options.sources?.length) {
+      params = params.set('sources', options.sources.join(','));
+    }
+    if (options.topics?.length) {
+      params = params.set('topics', options.topics.join(','));
+    }
+    if (options.search) {
+      params = params.set('search', options.search);
+    }
+
+    return params;
+  private readonly API_URL = '/api/news';
+
+  constructor(private readonly http: HttpClient) {}
+
+  getNews(forceRefresh = false): Observable<LoadingState<NewsItem[]>> {
+    const params = forceRefresh ? { refresh: 'true' } : undefined;
+
+    return toLoadingState(
+      this.http
+        .get<NewsItemResponse[]>(this.API_URL, { params })
+        .pipe(
+          retry(2),
+          map(response => this.transformResponse(response)),
+          catchError(error => this.handleError(error))
+        )
+    );
+  }
+
+  getStoryDetail(id: string): Observable<StoryDetail> {
+    return this.http.get<any>(`${this.API_URL}/${id}`).pipe(
+      map(response => this.transformStoryDetail(response)),
+      catchError(error => this.handleError(error))
+    );
+  }
+
+  private transformResponse(items: NewsItemResponse[]): NewsItem[] {
+    return items.map(item => ({
+      ...item,
+      pubDate: new Date(item.pubDate)
+    }));
+  }
+
+  private transformStoryDetail(response: any): StoryDetail {
+    if (!response) {
+      throw new Error('Invalid story response');
+    }
+
+    const summary = Array.isArray(response.summary)
+      ? response.summary.filter(Boolean)
+      : response.summary
+      ? [response.summary]
+      : [];
+
+    const sources: StorySource[] = Array.isArray(response.sources)
+      ? response.sources
+          .filter((source: any) => source)
+          .map((source: any) => ({
+            name: source.name ?? source.title ?? 'Source',
+            url: source.url ?? source.link ?? '',
+            type: source.type,
+            summary: source.summary ?? source.excerpt
+          }))
+          .filter((source: StorySource) => !!source.url)
+      : [];
+
+    const timelineEvents: TimelineEvent[] = Array.isArray(response.timelineEvents)
+      ? response.timelineEvents
+          .filter((event: any) => event)
+          .map((event: any) => ({
+            date: event.date ?? event.timestamp ?? '',
+            headline: event.headline ?? event.title ?? 'Campaign milestone',
+            description: event.description ?? event.summary
+          }))
+          .filter((event: TimelineEvent) => !!event.date && !!event.headline)
+      : [];
+
+    return {
+      id: response.id ?? response.articleId ?? '',
+      title: response.title ?? 'Campaign story',
+      link: response.link ?? response.url ?? '',
+      pubDate: response.pubDate ? new Date(response.pubDate) : new Date(),
+      content: response.content ?? response.summary ?? '',
+      source: response.source ?? response.primarySource ?? 'Campaign coverage',
+      category: response.category,
+      imageUrl: response.imageUrl ?? response.image,
+      summary,
+      sources,
+      timelineEvents
+    };
   }
 
   private transformRedditResponse(response: any): NewsItem[] {
@@ -38,7 +159,7 @@ export class NewsApiService {
     }
 
     return response.data.children
-      .filter((post: any) => post.data && !post.data.over_18) // Filter out NSFW content
+      .filter((post: any) => post.data && !post.data.over_18)
       .map((post: any) => ({
         id: post.data.id,
         title: post.data.title,
@@ -51,38 +172,45 @@ export class NewsApiService {
       }));
   }
 
-  private getPostImage(postData: any): string | undefined {
-    if (postData.thumbnail && postData.thumbnail !== 'self' && postData.thumbnail !== 'default') {
-      return postData.thumbnail;
-    }
-    if (postData.preview?.images?.[0]?.source?.url) {
-      return postData.preview.images[0].source.url.replace(/&amp;/g, '&');
-    }
-    return undefined;
+  private transformResponse(response: ApiNewsResponse): NewsResponse {
+    return {
+      ...response,
+      items: response.items.map(item => ({
+        ...item,
+        publishedAt: new Date(item.publishedAt),
+        mediaAssets: item.mediaAssets?.map(asset => ({ ...asset })) ?? [],
+      })),
+    };
   }
 
   private handleError(error: HttpErrorResponse): Observable<never> {
-    let errorMessage = 'An unknown error occurred';
+    let message = 'Unable to load news feed.';
 
-    if (error.error instanceof ErrorEvent) {
-      errorMessage = `Client Error: ${error.error.message}`;
-    } else {
-      switch (error.status) {
-        case 429:
-          errorMessage = 'Too many requests. Please try again later';
-          break;
-        case 500:
-          errorMessage = 'Reddit service is temporarily unavailable';
-          break;
-        case 503:
-          errorMessage = 'Reddit is under heavy load. Please try again later';
-          break;
-        default:
-          errorMessage = `Server Error: ${error.status} - ${error.message}`;
-      }
+    if (error.status === 0) {
+      message = 'Cannot reach news service. Please verify your connection.';
+    } else if (error.error instanceof ErrorEvent) {
+      message = error.error.message;
+    } else if (error.status === 429) {
+      message = 'News service is receiving too many requests. Try again shortly.';
+    } else if (error.error?.message) {
+      message = error.error.message;
     }
 
-    console.error('Reddit API Error:', error);
+    return throwError(() => new Error(message));
+    let errorMessage = 'Unable to load news at this time.';
+
+    if (error.error instanceof ErrorEvent) {
+      errorMessage = error.error.message;
+    } else if (error.error?.message) {
+      const detail = typeof error.error.detail === 'string' ? `: ${error.error.detail}` : '';
+      errorMessage = `${error.error.message}${detail}`;
+    } else if (error.status === 0) {
+      errorMessage = 'News service is unreachable. Please check your network connection.';
+    } else {
+      errorMessage = `News service error ${error.status}: ${error.statusText || 'Unknown error'}`;
+    }
+
+    console.error('News API Error:', error);
     return throwError(() => new Error(errorMessage));
   }
 }

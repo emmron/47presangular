@@ -1,0 +1,102 @@
+<header class="site-header" role="banner">
+  <div class="site-header__inner">
+    <div class="site-header__branding">
+      <a class="site-header__logo" routerLink="/news" aria-label="Trump 47 Tracker home">
+        <span class="site-header__logo-mark" aria-hidden="true">47</span>
+        <span class="site-header__logo-text">
+          <span class="site-header__logo-primary">Trump 47</span>
+          <span class="site-header__logo-secondary">Campaign Tracker</span>
+        </span>
+      </a>
+    </div>
+
+    <nav class="primary-nav" aria-label="Primary" role="navigation">
+      <ul class="primary-nav__list" (focusin)="toggleMegaMenu(true)" (focusout)="toggleMegaMenu(false)"
+        (mouseenter)="toggleMegaMenu(true)" (mouseleave)="toggleMegaMenu(false)">
+        <li class="primary-nav__item" *ngFor="let link of navLinks">
+          <a class="primary-nav__link" [routerLink]="link.route" routerLinkActive="is-active" (click)="closeOverlays()">
+            {{ link.label }}
+          </a>
+        </li>
+        <li class="primary-nav__item primary-nav__item--mega">
+          <button class="primary-nav__link mega-trigger" type="button" aria-haspopup="true"
+            [attr.aria-expanded]="megaMenuOpen" aria-controls="issues-mega" (click)="toggleMegaMenu()">
+            Issues
+            <span class="chevron" [class.is-open]="megaMenuOpen" aria-hidden="true"></span>
+          </button>
+          <div id="issues-mega" class="mega-menu" [class.is-open]="megaMenuOpen" [attr.aria-hidden]="!megaMenuOpen">
+            <div class="mega-menu__inner">
+              <div class="mega-menu__section" *ngFor="let section of megaMenuSections">
+                <p class="mega-menu__heading">{{ section.heading }}</p>
+                <ul class="mega-menu__list">
+                  <li class="mega-menu__item" *ngFor="let item of section.items">
+                    <a [routerLink]="item.route" [fragment]="item.fragment" (click)="closeOverlays()">
+                      <span class="mega-menu__item-label">{{ item.label }}</span>
+                      <span class="mega-menu__item-description">{{ item.description }}</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="site-header__actions">
+      <div class="cta-list" role="group" aria-label="Campaign calls to action">
+        <a *ngFor="let cta of ctas" class="cta" [ngClass]="'cta--' + cta.style" [href]="cta.href" target="_blank"
+          rel="noopener noreferrer">
+          <span class="cta__label">{{ cta.label }}</span>
+          <span class="cta__description">{{ cta.description }}</span>
+        </a>
+      </div>
+      <button class="menu-toggle" type="button" (click)="toggleMobileMenu()" [attr.aria-expanded]="isMobileMenuOpen"
+        aria-controls="mobile-drawer">
+        <span class="visually-hidden">Toggle navigation</span>
+        <span class="menu-toggle__bar"></span>
+        <span class="menu-toggle__bar"></span>
+        <span class="menu-toggle__bar"></span>
+      </button>
+    </div>
+  </div>
+
+  <div class="mobile-drawer" id="mobile-drawer" [class.is-open]="isMobileMenuOpen"
+    [attr.aria-hidden]="!isMobileMenuOpen">
+    <div class="mobile-drawer__panel" role="dialog" aria-modal="true" aria-label="Navigation menu">
+      <div class="mobile-drawer__header">
+        <p class="mobile-drawer__title">Navigate</p>
+        <button class="mobile-drawer__close" type="button" (click)="closeMobileMenu()">
+          <span class="visually-hidden">Close menu</span>
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <nav aria-label="Mobile primary" role="navigation" class="mobile-drawer__nav">
+        <ul>
+          <li *ngFor="let link of navLinks">
+            <a [routerLink]="link.route" routerLinkActive="is-active" (click)="closeMobileMenu()">{{ link.label }}</a>
+          </li>
+          <li class="mobile-drawer__section-label">Issues</li>
+          <li class="mobile-drawer__mega" *ngFor="let section of megaMenuSections">
+            <p class="mobile-drawer__heading">{{ section.heading }}</p>
+            <ul>
+              <li *ngFor="let item of section.items">
+                <a [routerLink]="item.route" [fragment]="item.fragment" (click)="closeMobileMenu()">
+                  <span class="mobile-drawer__link-label">{{ item.label }}</span>
+                  <span class="mobile-drawer__link-description">{{ item.description }}</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <div class="mobile-drawer__ctas" role="group" aria-label="Campaign calls to action">
+        <a *ngFor="let cta of ctas" class="cta" [ngClass]="'cta--' + cta.style" [href]="cta.href" target="_blank"
+          rel="noopener noreferrer">
+          <span class="cta__label">{{ cta.label }}</span>
+          <span class="cta__description">{{ cta.description }}</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</header>

@@ -1,9 +1,9 @@
-<div class="news-feed">
+<div class="news-feed" role="region" aria-labelledby="news-feed-heading">
   <header>
-    <h1>Trump 2024 Campaign News</h1>
+    <h1 id="news-feed-heading">Trump 2024 Campaign News</h1>
 
     <div class="controls">
-      <div class="filters">
+      <div class="filters" role="search">
         <input
           type="text"
           [ngModel]="searchTerm"
@@ -21,8 +21,8 @@
           title="Filter by news source"
         >
           <option value="">All Sources</option>
-          <option *ngFor="let source of availableSources" [value]="source">
-            {{ source }}
+          <option *ngFor="let source of availableSources" [value]="source.slug">
+            {{ source.name }}
           </option>
         </select>
 
@@ -46,7 +46,7 @@
           <span *ngIf="!loading">Refresh</span>
           <span *ngIf="loading">Refreshing...</span>
         </button>
-        <span class="last-updated" aria-label="Last updated time">
+        <span class="last-updated" aria-label="Last updated time" aria-live="polite">
           Last updated: {{ lastUpdatedText }}
         </span>
       </div>
@@ -65,7 +65,7 @@
     </button>
   </div>
 
-  <div *ngIf="!loading || newsItems.length" class="news-items">
+  <div *ngIf="!loading || newsItems.length" class="news-items" role="list">
     <div *ngIf="filteredItems.length === 0" class="no-results" role="status">
       <p *ngIf="hasActiveFilters">
         No news items found matching your search criteria.
@@ -78,7 +78,9 @@
 
     <app-news-item
       *ngFor="let item of filteredItems"
-      [item]="item">
+      [item]="item"
+      role="listitem"
+      class="news-items__item">
     </app-news-item>
   </div>
 </div>

@@ -1,0 +1,76 @@
+@use '../../shared/styles/tokens';
+@use '../../shared/styles/mixins';
+
+.campaign-sidebar {
+  position: sticky;
+  top: var(--space-9);
+  display: grid;
+  gap: var(--space-6);
+  align-content: start;
+  padding: var(--space-5);
+  background: rgba(tokens.color('surface'), 0.98);
+  border: 1px solid tokens.color('border');
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow);
+
+  &__section {
+    display: grid;
+    gap: var(--space-3);
+  }
+
+  &__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: var(--space-3);
+
+    &--compact {
+      gap: var(--space-2);
+    }
+  }
+
+  &__card,
+  &__link {
+    display: grid;
+    gap: 0.35rem;
+    padding: var(--space-3) var(--space-4);
+    border-radius: var(--radius-lg);
+    border: 1px solid tokens.color('border');
+    background: tokens.color('surface-muted');
+    color: tokens.color('text-primary');
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+
+    &:hover,
+    &:focus {
+      transform: translateY(-2px);
+      border-color: tokens.color('primary');
+      box-shadow: var(--shadow);
+    }
+  }
+
+  &__card-label {
+    font-weight: var(--font-weight-semibold);
+    color: tokens.color('text-primary');
+  }
+
+  &__card-description {
+    color: tokens.color('text-secondary');
+    font-size: 0.95rem;
+  }
+}
+
+@include mixins.respond('lg') {
+  .campaign-sidebar {
+    position: static;
+    top: auto;
+    padding: var(--space-4);
+    border-radius: var(--radius-lg);
+  }
+}
+
+@include mixins.respond('md') {
+  .campaign-sidebar {
+    gap: var(--space-4);
+  }
+}

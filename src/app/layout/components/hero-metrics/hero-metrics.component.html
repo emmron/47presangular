@@ -1,0 +1,43 @@
+<section class="hero" *ngIf="metrics$ | async as metrics">
+  <div class="hero__headline" *ngIf="metrics.latestHeadline; else emptyState">
+    <p class="hero__eyebrow">Top story</p>
+    <h2 class="hero__title">{{ metrics.latestHeadline }}</h2>
+    <p class="hero__source" *ngIf="metrics.latestSource">Sourced from {{ metrics.latestSource }}</p>
+  </div>
+
+  <ng-template #emptyState>
+    <div class="hero__headline">
+      <p class="hero__eyebrow">Campaign insights</p>
+      <h2 class="hero__title">Tracking breaking news, policy shifts, and campaign moments</h2>
+    </div>
+  </ng-template>
+
+  <div class="hero__metrics">
+    <article class="metric">
+      <h3 class="metric__value">
+        <ng-container *ngIf="!metrics.loading; else loadingValue">{{ metrics.totalArticles }}</ng-container>
+      </h3>
+      <p class="metric__label">Stories aggregated today</p>
+      <p class="metric__helper" *ngIf="metrics.lastUpdated">Updated {{ metrics.lastUpdated | date:'shortTime' }}</p>
+    </article>
+
+    <article class="metric" *ngIf="metrics.topSources.length">
+      <h3 class="metric__value">{{ metrics.topSources[0].name }}</h3>
+      <p class="metric__label">Most active source</p>
+      <p class="metric__helper">
+        {{ metrics.topSources[0].count }} mentions across national coverage
+      </p>
+    </article>
+
+    <article class="metric" *ngIf="metrics.trendingIssues.length">
+      <h3 class="metric__value">Trending issues</h3>
+      <ul class="metric__list">
+        <li *ngFor="let issue of metrics.trendingIssues">{{ issue | titlecase }}</li>
+      </ul>
+    </article>
+  </div>
+</section>
+
+<ng-template #loadingValue>
+  <span class="metric__loading">...</span>
+</ng-template>
