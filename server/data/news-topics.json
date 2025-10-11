@@ -1,0 +1,295 @@
+{
+  "lastUpdated": "2024-09-30T18:30:00.000Z",
+  "topics": [
+    {
+      "slug": "legal-battles",
+      "title": "Legal Battles and Court Strategy",
+      "summary": "Tracking how Trump's campaign weaponizes ongoing court fights to energize supporters and drive fundraising.",
+      "curatedCopy": "## Courtroom vs. Campaign\nThe campaign treats every filing and hearing as a two-for-one opportunity: legal defense by day, campaign rallying cry by night. Fundraising texts reference each development within minutes, and surrogates translate legal jargon into a persecution narrative built for cable hits.\n\n### Messaging pillars\n- Portray restrictions as election interference.\n- Tie prosecutors to Democratic leaders by name.\n- Pledge to overhaul the justice system on day one.",
+      "callouts": [
+        {
+          "title": "Why it matters",
+          "markdown": "- Legal updates regularly spike small-dollar donations.\n- Base voters cite legal fights as proof the movement is under attack."
+        },
+        {
+          "title": "Watch the calendar",
+          "markdown": "Sentencing and pre-trial hearings align with key fundraising deadlines, giving the campaign recurring content moments."
+        }
+      ],
+      "spotlightIds": ["article-1"],
+      "momentumSeries": [
+        { "date": "2024-09-18", "value": 38 },
+        { "date": "2024-09-22", "value": 47 },
+        { "date": "2024-09-25", "value": 56 },
+        { "date": "2024-09-27", "value": 59 },
+        { "date": "2024-09-30", "value": 61 }
+      ],
+      "events": [
+        {
+          "slug": "georgia-ruling",
+          "title": "Georgia racketeering ruling resets the clock",
+          "date": "2024-09-23T10:00:00.000Z",
+          "description": "A Fulton County judge delays proceedings into 2025. The campaign frames the pause as proof the case is collapsing and uses the reprieve to claim momentum in swing states.",
+          "momentum": 58,
+          "relatedItemIds": ["article-1", "article-2"]
+        },
+        {
+          "slug": "gag-order-fight",
+          "title": "New York gag order fight becomes a censorship narrative",
+          "date": "2024-09-27T18:00:00.000Z",
+          "description": "Surrogates argue that limits on Trump's speech are an attack on supporters, driving sympathetic coverage and op-eds from allies.",
+          "momentum": 62,
+          "relatedItemIds": ["article-3"]
+        },
+        {
+          "slug": "immunity-appeal",
+          "title": "Supreme Court appeal teasers revive immunity storyline",
+          "date": "2024-09-29T14:30:00.000Z",
+          "description": "Campaign lawyers preview new filings that they say will shield Trump from future prosecutions, reinforcing the promise of a second-term crackdown on DOJ critics.",
+          "momentum": 64,
+          "relatedItemIds": ["article-4"]
+        }
+      ]
+    },
+    {
+      "slug": "ground-game",
+      "title": "Swing-State Ground Game",
+      "summary": "Field organizing pushes in the Rust Belt and Sun Belt aimed at closing the early-vote gap.",
+      "curatedCopy": "## Organizing Infrastructure\nField staff are leaning on county GOP offices, faith leaders, and a revived \"Trump Force 47\" volunteer portal. The campaign highlights door-knocking stats at every rally to signal professionalization while maintaining the outsider vibe.\n\n### Key tactics\n1. Overlapping bus tours in Pennsylvania, Michigan, and Georgia.\n2. Micro-targeted radio ads focused on energy costs and border security.\n3. Faith outreach breakfasts that double as data collection events.",
+      "callouts": [
+        {
+          "title": "Staffing snapshot",
+          "markdown": "- 48 paid staffers announced across four battleground states.\n- County captains recruited from 2020 stop-the-steal networks."
+        }
+      ],
+      "spotlightIds": ["article-5"],
+      "momentumSeries": [
+        { "date": "2024-09-18", "value": 32 },
+        { "date": "2024-09-22", "value": 36 },
+        { "date": "2024-09-25", "value": 40 },
+        { "date": "2024-09-27", "value": 44 },
+        { "date": "2024-09-30", "value": 49 }
+      ],
+      "events": [
+        {
+          "slug": "pennsylvania-field-offices",
+          "title": "Six new Pennsylvania field offices open ahead of mail voting",
+          "date": "2024-09-24T15:00:00.000Z",
+          "description": "Campaign claims 8,000 volunteers signed up after the openings, using live streams from each ribbon cutting.",
+          "momentum": 46,
+          "relatedItemIds": ["article-5", "article-6"]
+        },
+        {
+          "slug": "rural-bus-tour",
+          "title": "Rural bus tour spotlights energy message",
+          "date": "2024-09-26T20:00:00.000Z",
+          "description": "Surrogates barnstorm rural Ohio and Michigan touting drilling permits and farmers' fuel costs, capturing local TV coverage.",
+          "momentum": 48,
+          "relatedItemIds": ["article-7"]
+        },
+        {
+          "slug": "latino-faith-outreach",
+          "title": "Latino faith outreach adds bilingual voter guides",
+          "date": "2024-09-28T17:00:00.000Z",
+          "description": "Church partnerships distribute Spanish-language voter packets, part of a broader move to chip into Biden's coalition.",
+          "momentum": 50,
+          "relatedItemIds": ["article-8"]
+        }
+      ]
+    },
+    {
+      "slug": "issue-messaging",
+      "title": "Issue Messaging & Narrative Testing",
+      "summary": "Rapid-response talking points on immigration, inflation, and foreign policy tested across conservative media.",
+      "curatedCopy": "## Narrative Testing\nCampaign pollsters feed nightly findings into surrogate briefings. Messaging pivots quickly to keep the news cycle on favorable terrain, often marrying immigration with inflation to hold focus.\n\n#### Channels\n- Late-night Truth Social posts.\n- Podcast blitzes hosted by allied influencers.\n- Geo-targeted pre-roll ads that shift by state.",
+      "callouts": [
+        {
+          "title": "Rapid-response cadence",
+          "markdown": "Clip packages are cut within 45 minutes of any major Biden gaffe and sent to a 2,000-person surrogate list."
+        }
+      ],
+      "spotlightIds": ["article-9"],
+      "momentumSeries": [
+        { "date": "2024-09-18", "value": 41 },
+        { "date": "2024-09-22", "value": 43 },
+        { "date": "2024-09-25", "value": 47 },
+        { "date": "2024-09-27", "value": 52 },
+        { "date": "2024-09-30", "value": 55 }
+      ],
+      "events": [
+        {
+          "slug": "immigration-ad-blitz",
+          "title": "Immigration ad blitz ties border to inflation",
+          "date": "2024-09-25T12:00:00.000Z",
+          "description": "A wave of digital ads claims rising grocery prices stem from federal spending on migrants, a talking point echoed by surrogates on radio.",
+          "momentum": 53,
+          "relatedItemIds": ["article-9", "article-10"]
+        },
+        {
+          "slug": "debate-prep-messaging",
+          "title": "Debate prep memos leak to conservative outlets",
+          "date": "2024-09-29T11:00:00.000Z",
+          "description": "Selective leaks preview attacks on Biden's foreign policy, keeping the focus on Afghanistan while framing Trump as steady on world affairs.",
+          "momentum": 57,
+          "relatedItemIds": ["article-11"]
+        }
+      ]
+    }
+  ],
+  "items": [
+    {
+      "id": "article-1",
+      "title": "Trump campaign blasts Georgia prosecutors after trial delay",
+      "link": "https://example.com/trump-georgia-delay",
+      "pubDate": "2024-09-23T15:45:00.000Z",
+      "content": "Senior aides told reporters the delay proves the case is political, urging supporters to donate to \"finish the fight\".",
+      "source": "Politico",
+      "category": "Legal",
+      "imageUrl": "https://images.example.com/trump-court.jpg",
+      "topics": ["legal-battles"],
+      "eventSlug": "georgia-ruling",
+      "sentiment": "positive",
+      "momentumScore": 58
+    },
+    {
+      "id": "article-2",
+      "title": "Fundraising text blitz follows Georgia ruling",
+      "link": "https://example.com/fundraising-texts",
+      "pubDate": "2024-09-24T02:30:00.000Z",
+      "content": "Within hours of the judge's order, the campaign sent seven fundraising texts referencing \"witch hunt delays\".",
+      "source": "Axios",
+      "category": "Campaign Finance",
+      "imageUrl": "https://images.example.com/text-blitz.jpg",
+      "topics": ["legal-battles", "ground-game"],
+      "eventSlug": "georgia-ruling",
+      "sentiment": "positive",
+      "momentumScore": 57
+    },
+    {
+      "id": "article-3",
+      "title": "Trump allies decry gag order on conservative media",
+      "link": "https://example.com/gag-order-response",
+      "pubDate": "2024-09-27T22:10:00.000Z",
+      "content": "Surrogates lined up on talk radio to argue that the gag order is really aimed at silencing supporters.",
+      "source": "Fox News",
+      "category": "Media",
+      "imageUrl": "https://images.example.com/gag-order.jpg",
+      "topics": ["legal-battles", "issue-messaging"],
+      "eventSlug": "gag-order-fight",
+      "sentiment": "positive",
+      "momentumScore": 62
+    },
+    {
+      "id": "article-4",
+      "title": "Campaign previews Supreme Court immunity appeal",
+      "link": "https://example.com/immunity-appeal",
+      "pubDate": "2024-09-29T16:05:00.000Z",
+      "content": "Advisers say a conservative majority will rein in the Department of Justice, promising day-one reforms.",
+      "source": "Wall Street Journal",
+      "category": "Legal",
+      "imageUrl": "https://images.example.com/supreme-court.jpg",
+      "topics": ["legal-battles", "issue-messaging"],
+      "eventSlug": "immunity-appeal",
+      "sentiment": "positive",
+      "momentumScore": 64
+    },
+    {
+      "id": "article-5",
+      "title": "Trump opens six field offices across Pennsylvania",
+      "link": "https://example.com/pennsylvania-field",
+      "pubDate": "2024-09-24T18:30:00.000Z",
+      "content": "Ribbon cuttings featured local lawmakers and targeted messages about energy prices.",
+      "source": "Philadelphia Inquirer",
+      "category": "Ground Game",
+      "imageUrl": "https://images.example.com/field-office.jpg",
+      "topics": ["ground-game"],
+      "eventSlug": "pennsylvania-field-offices",
+      "sentiment": "positive",
+      "momentumScore": 46
+    },
+    {
+      "id": "article-6",
+      "title": "Volunteer sign-ups surge after field office blitz",
+      "link": "https://example.com/volunteer-surge",
+      "pubDate": "2024-09-25T14:20:00.000Z",
+      "content": "Campaign claims 8,000 new volunteers, though Democrats dispute the number.",
+      "source": "NBC News",
+      "category": "Ground Game",
+      "imageUrl": "https://images.example.com/volunteers.jpg",
+      "topics": ["ground-game"],
+      "eventSlug": "pennsylvania-field-offices",
+      "sentiment": "neutral",
+      "momentumScore": 44
+    },
+    {
+      "id": "article-7",
+      "title": "Rural bus tour amplifies energy message",
+      "link": "https://example.com/rural-bus",
+      "pubDate": "2024-09-26T22:40:00.000Z",
+      "content": "The bus tour stops at small-town diners with local radio hits about drilling and inflation.",
+      "source": "Cleveland Plain Dealer",
+      "category": "Ground Game",
+      "imageUrl": "https://images.example.com/bus-tour.jpg",
+      "topics": ["ground-game", "issue-messaging"],
+      "eventSlug": "rural-bus-tour",
+      "sentiment": "positive",
+      "momentumScore": 48
+    },
+    {
+      "id": "article-8",
+      "title": "Latino pastors partner with Trump team on voter guides",
+      "link": "https://example.com/latino-voter-guides",
+      "pubDate": "2024-09-28T19:15:00.000Z",
+      "content": "Spanish-language voter packets are distributed alongside food drives in Phoenix and Orlando.",
+      "source": "Univision",
+      "category": "Outreach",
+      "imageUrl": "https://images.example.com/latino-outreach.jpg",
+      "topics": ["ground-game"],
+      "eventSlug": "latino-faith-outreach",
+      "sentiment": "positive",
+      "momentumScore": 50
+    },
+    {
+      "id": "article-9",
+      "title": "Immigration ad blitz links border to inflation",
+      "link": "https://example.com/immigration-ads",
+      "pubDate": "2024-09-25T13:10:00.000Z",
+      "content": "Ads feature grocery carts and Border Patrol footage, testing a new hybrid message.",
+      "source": "Washington Post",
+      "category": "Advertising",
+      "imageUrl": "https://images.example.com/immigration-ads.jpg",
+      "topics": ["issue-messaging"],
+      "eventSlug": "immigration-ad-blitz",
+      "sentiment": "positive",
+      "momentumScore": 53
+    },
+    {
+      "id": "article-10",
+      "title": "Fact-checkers push back on ad claims about migrant spending",
+      "link": "https://example.com/fact-check",
+      "pubDate": "2024-09-26T09:00:00.000Z",
+      "content": "Independent fact-checkers say the numbers are exaggerated, but the campaign doubles down in response videos.",
+      "source": "AP",
+      "category": "Fact Check",
+      "imageUrl": "https://images.example.com/fact-check.jpg",
+      "topics": ["issue-messaging", "legal-battles"],
+      "eventSlug": "immigration-ad-blitz",
+      "sentiment": "negative",
+      "momentumScore": 48
+    },
+    {
+      "id": "article-11",
+      "title": "Debate prep memo outlines foreign policy attacks",
+      "link": "https://example.com/debate-memo",
+      "pubDate": "2024-09-29T13:55:00.000Z",
+      "content": "Leaked slides suggest a focus on Afghanistan, arguing Biden cannot handle crises abroad.",
+      "source": "Bloomberg",
+      "category": "Debate",
+      "imageUrl": "https://images.example.com/debate-prep.jpg",
+      "topics": ["issue-messaging", "legal-battles"],
+      "eventSlug": "debate-prep-messaging",
+      "sentiment": "positive",
+      "momentumScore": 57
+    }
+  ]
+}
