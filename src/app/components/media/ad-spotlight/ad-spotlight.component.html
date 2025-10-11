@@ -1,0 +1,56 @@
+<section class="ad-spotlight" aria-labelledby="ad-spotlight-heading">
+  <ng-container *ngIf="ad$ | async as vm">
+    <header class="ad-spotlight__header">
+      <h2 id="ad-spotlight-heading">Ad Spotlight</h2>
+      <span class="ad-spotlight__advertiser" *ngIf="vm.ad as ad">{{ ad.advertiser }}</span>
+    </header>
+
+    <ng-container *ngIf="vm.ad as ad; else adFallback">
+      <div class="ad-spotlight__body">
+        <div class="ad-spotlight__media">
+          <picture>
+            <source
+              *ngFor="let source of ad.image.sources ?? []; trackBy: trackSource"
+              [attr.srcset]="source.url"
+              [attr.media]="'(min-width: ' + source.width + 'px)'"
+            />
+            <img
+              [src]="ad.image.fallback"
+              [alt]="ad.image.alt"
+              loading="lazy"
+              decoding="async"
+            />
+          </picture>
+        </div>
+        <div class="ad-spotlight__copy">
+          <p class="ad-spotlight__eyebrow">Featured Message</p>
+          <h3>{{ ad.headline }}</h3>
+          <p class="ad-spotlight__description" *ngIf="ad.copy">{{ ad.copy }}</p>
+          <dl class="ad-spotlight__metrics" *ngIf="ad.metrics">
+            <div *ngIf="ad.metrics.impressions">
+              <dt>Impressions</dt>
+              <dd>{{ ad.metrics.impressions | number }}</dd>
+            </div>
+            <div *ngIf="ad.metrics.clicks">
+              <dt>Clicks</dt>
+              <dd>{{ ad.metrics.clicks | number }}</dd>
+            </div>
+          </dl>
+          <a class="ad-spotlight__cta" [href]="ad.targetUrl" rel="noopener" target="_blank">
+            {{ ad.callToAction }}
+          </a>
+        </div>
+      </div>
+    </ng-container>
+  </ng-container>
+
+  <ng-template #adFallback>
+    <div class="ad-spotlight__placeholder" *ngIf="!error && loading">
+      <p>Loading the latest campaign ad…</p>
+    </div>
+    <div class="ad-spotlight__placeholder" *ngIf="!loading && !error">
+      <p>No featured advertisement at this time.</p>
+    </div>
+    <p class="ad-spotlight__error" *ngIf="error">{{ error }}</p>
+  </ng-template>
+</section>

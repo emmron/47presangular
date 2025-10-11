@@ -1,0 +1,70 @@
+<section class="live-stream" aria-labelledby="live-stream-heading">
+  <ng-container *ngIf="liveStream$ | async as vm">
+    <header class="live-stream__header">
+      <div class="live-indicator">
+        <span class="status" [class.status--live]="vm.stream?.isLive">
+          {{ loading ? 'Checking live status' : vm.stream?.isLive ? 'Live now' : 'Off-air' }}
+        </span>
+        <h2 id="live-stream-heading">Campaign Live Stream</h2>
+      </div>
+    </header>
+
+    <ng-container *ngIf="vm.stream as stream; else fallback">
+      <div class="live-stream__content" [class.live-stream__content--active]="stream.isLive">
+        <div class="live-stream__media" *ngIf="stream.thumbnail as image">
+          <picture>
+            <source
+              *ngFor="let source of image.sources ?? []; trackBy: trackSource"
+              [attr.srcset]="source.url"
+              [attr.media]="'(min-width: ' + source.width + 'px)'"
+            />
+            <img
+              [src]="image.fallback"
+              [alt]="image.alt"
+              loading="lazy"
+              decoding="async"
+            />
+          </picture>
+        </div>
+
+        <div class="live-stream__details">
+          <p class="live-stream__meta" *ngIf="stream.startedAt">
+            Started {{ stream.startedAt | date: 'shortTime' }} · {{ stream.startedAt | date: 'mediumDate' }}
+          </p>
+          <h3>{{ stream.title }}</h3>
+          <p class="live-stream__description" *ngIf="stream.description">{{ stream.description }}</p>
+          <div class="live-stream__actions">
+            <a
+              class="watch-button"
+              [href]="stream.streamUrl"
+              target="_blank"
+              rel="noopener"
+            >
+              {{ stream.isLive ? 'Watch live' : 'View details' }}
+            </a>
+            <iframe
+              *ngIf="stream.isLive"
+              class="live-stream__embed"
+              title="Live stream"
+              [src]="vm.safeStreamUrl"
+              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+              loading="lazy"
+              (load)="onStreamLoaded()"
+              (error)="onStreamFallback()"
+            ></iframe>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+    <ng-template #fallback>
+      <div class="live-stream__placeholder" *ngIf="!error && loading">
+        <p>Checking for a live broadcast…</p>
+      </div>
+      <div class="live-stream__placeholder" *ngIf="!loading && !error">
+        <p>No live stream is currently scheduled. Check back soon for the next rally.</p>
+      </div>
+      <p class="live-stream__error" *ngIf="error">{{ error }}</p>
+    </ng-template>
+  </ng-container>
+</section>

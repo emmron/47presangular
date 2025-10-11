@@ -1,0 +1,31 @@
+.footer {
+  background: #f4f6fb;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  padding: 1.5rem 0;
+  color: #3a3a3a;
+}
+
+.footer__inner {
+  margin: 0 auto;
+  width: min(1200px, 100%);
+  padding: 0 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.footer__cta {
+  color: #001233;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+  background: rgba(0, 18, 51, 0.08);
+  transition: background 0.2s ease;
+}
+
+.footer__cta:hover {
+  background: rgba(0, 18, 51, 0.15);
+}

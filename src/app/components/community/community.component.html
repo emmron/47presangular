@@ -1,0 +1,28 @@
+<section class="community" aria-labelledby="community-title">
+  <header>
+    <h1 id="community-title">Community War Room</h1>
+    <p>Official forums plus the best conversations from Reddit, all moderated for actionability.</p>
+  </header>
+
+  <div class="thread-grid">
+    <article *ngFor="let thread of featuredThreads" class="thread" [attr.data-platform]="thread.platform">
+      <h2>{{ thread.title }}</h2>
+      <p>{{ thread.description }}</p>
+
+      <div class="meta">
+        <span class="platform">{{ thread.platform | titlecase }}</span>
+        <span class="moderation">Moderation: {{ thread.moderationLevel | titlecase }}</span>
+      </div>
+
+      <a
+        class="join"
+        [href]="thread.link"
+        target="_blank"
+        rel="noopener noreferrer"
+        (click)="onJoin(thread.link, thread.platform)"
+      >
+        Join the conversation
+      </a>
+    </article>
+  </div>
+</section>

@@ -1,0 +1,36 @@
+@use 'sass:map';
+@use './tokens' as tokens;
+
+@mixin respond($breakpoint) {
+  $size: tokens.breakpoint($breakpoint);
+  @if $size {
+    @media (max-width: $size) {
+      @content;
+    }
+  } @else {
+    @warn 'Unknown breakpoint `#{$breakpoint}`';
+  }
+}
+
+@mixin respond-above($breakpoint) {
+  $size: tokens.breakpoint($breakpoint);
+  @if $size {
+    @media (min-width: calc(#{$size} + 0.0625rem)) {
+      @content;
+    }
+  } @else {
+    @warn 'Unknown breakpoint `#{$breakpoint}`';
+  }
+}
+
+@mixin focus-ring($color: tokens.color('primary')) {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba($color, 0.18);
+}
+
+@mixin card-surface {
+  background-color: tokens.color('surface');
+  border: 1px solid tokens.color('border');
+  border-radius: tokens.radius('lg');
+  box-shadow: var(--shadow);
+}
