@@ -80,7 +80,7 @@ export class NewsFeedComponent implements OnInit, OnDestroy {
   clearFilters(): void {
     this.searchTerm = '';
     this.selectedSource = '';
-    this.updateFilters({});
+    this.stateService.resetFilters();
   }
 
   get availableSources(): string[] {
