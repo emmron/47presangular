@@ -19,22 +19,22 @@ type FeaturedStory = {
 export class FeaturedStoriesComponent {
   readonly stories: FeaturedStory[] = [
     {
-      title: 'Ground Game Intensifies in Swing States',
-      excerpt: 'Organizers ramp up door-to-door outreach in Pennsylvania and Arizona as polling margins tighten.',
-      topic: 'Field Operations',
-      url: 'https://www.donaldjtrump.com/news/'
+      title: 'Shield final locked in at the SCG',
+      excerpt: 'New South Wales return to the Sheffield Shield decider with a pace-heavy attack after topping the table.',
+      topic: 'Sheffield Shield',
+      url: 'https://www.cricket.com.au/news/sheffield-shield-final-preview-nsw-tasmania/2024-03-18'
     },
     {
-      title: 'Fundraising Push Sets New Monthly Record',
-      excerpt: 'Digital campaigns and grassroots donations combine for a historic funding surge across small-dollar donors.',
-      topic: 'Fundraising',
-      url: 'https://www.donaldjtrump.com/news/'
+      title: 'Strikers reload for WBBL title defence',
+      excerpt: 'Adelaide confirm marquee re-signings while scouting emerging quicks from the WNCL.',
+      topic: 'WBBL',
+      url: 'https://www.cricket.com.au/news/adelaide-strikers-wbbl-list-signings-wncl-form/2024-03-14'
     },
     {
-      title: 'Policy Rollout Focuses on Energy Independence',
-      excerpt: 'The campaign outlines a renewed strategy for domestic energy production aimed at lowering costs for families.',
-      topic: 'Policy',
-      url: 'https://www.donaldjtrump.com/news/'
+      title: 'Aussies eye spin options for India tour',
+      excerpt: 'National selectors monitor Shield spinners with subcontinent tours looming later in the year.',
+      topic: 'National Teams',
+      url: 'https://www.cricket.com.au/news/australia-test-tour-india-selection-watch-spin-options/2024-03-12'
     }
   ];
 }

@@ -7,7 +7,7 @@ interface CommunityThread {
   description: string;
   link: string;
   platform: 'reddit' | 'official';
-  moderationLevel: 'community' | 'campaign';
+  moderationLevel: 'community' | 'official';
 }
 
 @Component({
@@ -20,25 +20,25 @@ interface CommunityThread {
 export class CommunityComponent {
   readonly featuredThreads: CommunityThread[] = [
     {
-      title: 'Strategy AMA with campaign leadership',
-      description: 'Bring your questions for the digital, field, and finance directors. Moderated by the official campaign team.',
-      link: 'https://community.trump47.com/threads/strategy-ama',
+      title: 'Selector chat: Who tours Sri Lanka?',
+      description: 'National selectors join to field questions on spin depth and allrounder balance.',
+      link: 'https://www.cricket.com.au/news/australia-fan-forum-selector-chat',
       platform: 'official',
-      moderationLevel: 'campaign',
+      moderationLevel: 'official',
     },
     {
-      title: 'Grassroots organizing toolkit',
-      description: 'Volunteer leaders share the scripts and materials that are working in their counties.',
-      link: 'https://www.reddit.com/r/Conservative/comments/toolkit',
+      title: 'Grade cricket hot streaks',
+      description: 'Fans share clips and stats from Premier Cricket across the states each weekend.',
+      link: 'https://www.reddit.com/r/Cricket/comments/premier_cricket_wrap/',
       platform: 'reddit',
       moderationLevel: 'community',
     },
     {
-      title: 'Digital rapid response room',
-      description: 'Coordinate social media pushes in real time. Official moderators surface priority narratives.',
-      link: 'https://community.trump47.com/threads/digital-war-room',
+      title: 'BBL fan tactics board',
+      description: 'Debate batting orders and power surge strategies before the next double-header.',
+      link: 'https://www.bigbash.com.au/fans/forum',
       platform: 'official',
-      moderationLevel: 'campaign',
+      moderationLevel: 'official',
     },
   ];
 

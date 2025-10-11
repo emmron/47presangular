@@ -11,11 +11,12 @@ import { RouterLink } from '@angular/router';
 })
 export class FooterComponent {
   readonly navLinks = [
-    { label: 'News', route: '/news' },
-    { label: 'Dashboard', route: '/dashboard' },
-    { label: 'Issues', route: '/issues' },
-    { label: 'Events', route: '/events' },
-    { label: 'Get Involved', route: '/get-involved' }
+    { label: 'Latest News', route: '/news' },
+    { label: 'Storylines', route: '/timeline' },
+    { label: 'League Guides', route: '/issues' },
+    { label: 'Stats Hub', route: '/dashboard' },
+    { label: 'Fixtures', route: '/events' },
+    { label: 'Fan Zone', route: '/get-involved' }
   ];
 
   currentYear = new Date().getFullYear();

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-interface CampaignEvent {
+interface CricketFixture {
   title: string;
   location: string;
   date: string;
@@ -17,27 +17,27 @@ interface CampaignEvent {
   styleUrls: ['./events.component.scss']
 })
 export class EventsComponent {
-  readonly events: CampaignEvent[] = [
+  readonly events: CricketFixture[] = [
     {
-      title: 'Rust Belt Jobs Rally',
-      location: 'Erie, Pennsylvania',
-      date: 'June 22, 2024',
-      description: 'Manufacturing workers and small business owners share testimonies on economic revival.',
-      rsvpUrl: 'https://www.donaldjtrump.com/events/'
+      title: 'Australia vs Sri Lanka 2nd ODI',
+      location: 'Blundstone Arena, Hobart',
+      date: 'November 17, 2024',
+      description: 'Day-night clash with World Cup qualification points on the line and a potential debut for Jake Fraser-McGurk.',
+      rsvpUrl: 'https://www.cricket.com.au/series/aus-v-sl-2024-fixtures'
     },
     {
-      title: 'Border Security Town Hall',
-      location: 'Yuma, Arizona',
-      date: 'June 24, 2024',
-      description: 'Policy roundtable featuring sheriffs, border agents, and Angel families.',
-      rsvpUrl: 'https://www.donaldjtrump.com/events/'
+      title: 'BBL|14 Opening Night: Sixers v Heat',
+      location: 'Sydney Cricket Ground',
+      date: 'December 7, 2024',
+      description: 'The defending champions face Brisbane under lights to launch the summer with fireworks and a new power surge rule tweak.',
+      rsvpUrl: 'https://www.bigbash.com.au/match/1'
     },
     {
-      title: 'Faith & Freedom Summit',
-      location: 'Greenville, South Carolina',
-      date: 'June 27, 2024',
-      description: 'Pastors, faith leaders, and youth ministries coordinating voter outreach.',
-      rsvpUrl: 'https://www.donaldjtrump.com/events/'
+      title: 'Sheffield Shield Final',
+      location: 'Sydney Cricket Ground',
+      date: 'March 24, 2025',
+      description: 'Five-day decider featuring NSW and Tasmania with Test spots up for grabs ahead of the Ashes.',
+      rsvpUrl: 'https://www.cricket.com.au/series/sheffield-shield-2024-25/fixtures'
     }
   ];
 }

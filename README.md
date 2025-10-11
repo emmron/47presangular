@@ -1,6 +1,6 @@
-# TrumpTracker
+# Aussie Cricket Central
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.3.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.3 and rethemed to provide news, context, and fixtures for Australian cricket across every major league.
 
 ## Development server
 
@@ -8,7 +8,7 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The appli
 
 ## Aggregated news backend
 
-The Angular client now delegates all third-party API requests to a NestJS service located under [`server/`](server/). Start it locally with:
+The Angular client delegates third-party API requests to a NestJS service located under [`server/`](server/). Start it locally with:
 
 ```bash
 cd server
@@ -60,7 +60,7 @@ Pushing to the `main` branch automatically builds and publishes the static site 
 
 1. Installs dependencies with `npm ci` using Node.js 20.
 2. Builds the Angular app with a repository-aware `base-href` so assets resolve correctly at `https://<user>.github.io/<repo>/`.
-3. Uploads `dist/trump-tracker/browser` as the static artifact and deploys it to GitHub Pages.
+3. Uploads `dist/aussie-cricket-central/browser` as the static artifact and deploys it to GitHub Pages.
 
 After the first successful run, enable GitHub Pages in the repository settings and choose the "GitHub Actions" source. Subsequent pushes to `main` will update the live site automatically.
 

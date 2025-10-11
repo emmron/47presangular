@@ -2,54 +2,54 @@ import { Injectable } from '@angular/core';
 import { TrackingService, TrackingParams } from './tracking.service';
 
 export interface EngagementAction {
-  id: 'donate' | 'volunteer';
+  id: 'stream' | 'tickets';
   label: string;
   description: string;
   url: string;
-  platform: 'winRed' | 'actBlue' | 'custom';
+  platform: 'kayo' | 'ticketek' | 'custom';
 }
 
 @Injectable({ providedIn: 'root' })
 export class EngagementService {
-  private readonly donationBaseUrl = 'https://secure.winred.com/trump47/donate';
-  private readonly volunteerBaseUrl = 'https://action.ngpvan.com/trump47/volunteer';
+  private readonly streamBaseUrl = 'https://www.kayosports.com.au/';
+  private readonly ticketsBaseUrl = 'https://www.ticketek.com.au/cricket-australia';
 
   constructor(private tracking: TrackingService) {}
 
   getInlineActions(referralCode?: string): EngagementAction[] {
     return [
-      this.buildAction('donate', {
+      this.buildAction('stream', {
         source: 'site',
         medium: 'inline_cta',
-        campaign: 'daily_engagement',
-        content: 'donation_banner',
+        campaign: 'cricket_engagement',
+        content: 'stream_banner',
         referralCode,
       }),
-      this.buildAction('volunteer', {
+      this.buildAction('tickets', {
         source: 'site',
         medium: 'inline_cta',
-        campaign: 'daily_engagement',
-        content: 'volunteer_banner',
+        campaign: 'cricket_engagement',
+        content: 'tickets_banner',
         referralCode,
       }),
     ];
   }
 
-  private buildAction(id: 'donate' | 'volunteer', params: TrackingParams): EngagementAction {
-    const isDonate = id === 'donate';
+  private buildAction(id: EngagementAction['id'], params: TrackingParams): EngagementAction {
+    const isStream = id === 'stream';
     const url = this.tracking.buildTrackedUrl(
-      isDonate ? this.donationBaseUrl : this.volunteerBaseUrl,
+      isStream ? this.streamBaseUrl : this.ticketsBaseUrl,
       params
     );
 
     return {
       id,
-      label: isDonate ? 'Donate Now' : 'Volunteer Today',
-      description: isDonate
-        ? 'Fuel the ground game with a rapid contribution via WinRed-style checkout.'
-        : 'Join the field team, phone bank, or host events synced to NGP VAN.',
+      label: isStream ? 'Stream live' : 'Buy tickets',
+      description: isStream
+        ? 'Watch internationals, Big Bash, and domestic cricket live on Kayo.'
+        : 'Lock in seats for internationals and Big Bash double-headers via Ticketek.',
       url,
-      platform: isDonate ? 'winRed' : 'actBlue',
+      platform: isStream ? 'kayo' : 'ticketek',
     };
   }
 }

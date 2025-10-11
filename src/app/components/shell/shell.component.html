@@ -2,10 +2,10 @@
 <div class="shell">
   <header class="shell__header" role="banner">
     <div class="shell__branding">
-      <span class="shell__logo" aria-hidden="true">47</span>
+      <span class="shell__logo" aria-hidden="true">AC</span>
       <div>
-        <p class="shell__title">Trump 47 Campaign Tracker</p>
-        <p class="shell__subtitle">Real-time updates from across the campaign trail</p>
+        <p class="shell__title">Aussie Cricket Central</p>
+        <p class="shell__subtitle">Real-time updates from internationals to grade cricket</p>
       </div>
     </div>
 
@@ -39,7 +39,7 @@
           [routerLinkActiveOptions]="{ exact: true }"
           [attr.aria-current]="rla.isActive ? 'page' : null"
         >
-          Campaign Feed
+          Home Feed
         </a>
       </li>
       <li>
@@ -52,9 +52,9 @@
   </nav>
 
   <main id="main-content" class="shell__main" role="main" tabindex="-1">
-    <div class="shell__grid" aria-label="Campaign dashboard layout">
-      <section class="shell__content" aria-labelledby="campaign-feed-heading">
-        <h2 id="campaign-feed-heading" class="visually-hidden">Campaign news feed</h2>
+    <div class="shell__grid" aria-label="Cricket coverage layout">
+      <section class="shell__content" aria-labelledby="coverage-feed-heading">
+        <h2 id="coverage-feed-heading" class="visually-hidden">Cricket news feed</h2>
         <router-outlet></router-outlet>
       </section>
       <app-featured-stories class="shell__featured"></app-featured-stories>
@@ -63,7 +63,7 @@
   </main>
 
   <footer class="shell__footer" role="contentinfo">
-    <p>Built for accessibility and real-time insight into the 2024 campaign.</p>
-    <a class="footer__feedback" href="mailto:feedback@trump47tracker.com">Share feedback</a>
+    <p>Built for accessibility and all-of-cricket coverage in Australia.</p>
+    <a class="footer__feedback" href="mailto:desk@aussiecricketcentral.com">Share feedback</a>
   </footer>
 </div>

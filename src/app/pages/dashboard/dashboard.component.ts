@@ -11,19 +11,19 @@ import { CommonModule } from '@angular/common';
 export class DashboardComponent {
   readonly metrics = [
     {
-      label: 'Battleground events this week',
-      value: 18,
-      change: '+4 vs. last week'
+      label: 'International matches this month',
+      value: 9,
+      change: 'Aussies 4 wins in last 5'
     },
     {
-      label: 'Grassroots captains onboarded',
-      value: 312,
-      change: '+28 in the last 24 hours'
+      label: 'BBL leading run-scorer',
+      value: 'Matt Short – 512',
+      change: '+54 from last outing'
     },
     {
-      label: 'Digital impressions YTD',
-      value: '47M',
-      change: '+8% month over month'
+      label: 'Shield table points gap',
+      value: 'NSW +6',
+      change: 'Tasmania close behind on 38'
     }
   ];
 }

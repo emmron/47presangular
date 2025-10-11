@@ -18,63 +18,63 @@ interface IssueSection {
 export class IssuesComponent {
   readonly sections: IssueSection[] = [
     {
-      id: 'economy',
-      title: 'Economy first agenda',
-      summary: 'Tax relief for working families, energy dominance, and small business expansion.',
+      id: 'australia-men',
+      title: 'Australian men’s teams',
+      summary: 'Tests in New Zealand, ODIs v Sri Lanka, and a T20 build-up to the Champions Trophy.',
       bullets: [
-        'Pledge to extend middle-class tax cuts and expand opportunity zones.',
-        'Reinvest in American energy with new drilling permits and refining capacity.',
-        'Launch apprenticeship partnerships with community colleges.'
+        'Mitchell Marsh leads the white-ball squads with Travis Head rested for parts of the tour.',
+        'Spin depth monitored closely with Kuhnemann and Murphy sharing Shield overs.',
+        'World Test Championship standings tighten ahead of the 2025 Ashes trip.'
       ]
     },
     {
-      id: 'security',
-      title: 'Border & national security',
-      summary: 'Finish the wall, restore remain-in-Mexico, and boost law enforcement resources.',
+      id: 'australia-women',
+      title: 'Australian women’s teams',
+      summary: 'Southern Stars juggle multi-format series against India and England while integrating youth.',
       bullets: [
-        'Deploy additional border agents and accelerate asylum processing reforms.',
-        'Block fentanyl trafficking with new technology at ports of entry.',
-        'Back the blue with federal support for local task forces.'
+        'Phoebe Litchfield locks in the opener role alongside Alyssa Healy.',
+        'Annabel Sutherland’s allround brilliance keeps her central to every XI.',
+        'WNCL form from Lauren Smith and Tess Flintoff pushing for national call-ups.'
       ]
     },
     {
-      id: 'healthcare',
-      title: 'Healthcare & social supports',
-      summary: 'Lower costs, protect seniors, and expand rural care access.',
+      id: 'big-bash',
+      title: 'Big Bash League & WBBL',
+      summary: 'List lodgements, draft chatter, and coaching moves ahead of summer.',
       bullets: [
-        'Drive price transparency across hospitals and insurers.',
-        'Expand telehealth waivers for rural clinics and veteran care.',
-        'Protect Medicare and Social Security with fiscal discipline.'
+        'Sydney Sixers and Adelaide Strikers headline retention picks after finals runs.',
+        'Melbourne Stars chase marquee internationals with a focus on leg-spin options.',
+        'WBBL expansion squads target rising teenage pace bowlers from Premier Cricket.'
       ]
     },
     {
-      id: 'elections',
-      title: 'Election integrity',
-      summary: 'Secure ballots, clean voter rolls, and restore confidence in elections.',
+      id: 'sheffield-shield',
+      title: 'Sheffield Shield spotlight',
+      summary: 'Shield finals race heats up with NSW and Tasmania separating from the pack.',
       bullets: [
-        'Advance voter ID standards with state partners.',
-        'Invest in poll watcher training and legal rapid response teams.',
-        'Modernize election systems with paper backups and audits.'
+        'Tasmania banking on Jordan Silk’s consistency and a rejuvenated Jackson Bird.',
+        'NSW fast-bowling cartel rotated to manage workloads before the ODI series.',
+        'Queensland bloods teen leggie to fast-track spin experience.'
       ]
     },
     {
-      id: 'grassroots',
-      title: 'Grassroots spotlights',
-      summary: 'Stories from volunteers building the movement at the local level.',
+      id: 'state-competitions',
+      title: 'Marsh Cup & WNCL',
+      summary: 'One-day formats providing selection stories and breakout performers.',
       bullets: [
-        'Faith coalition in Georgia registering new voters weekly.',
-        'Small business owners hosting roundtables on regulatory reform.',
-        'College chapters leading campus debate nights.'
+        'Western Australia closing in on another Marsh Cup finals berth.',
+        'WNCL batting charts dominated by Elyse Villani and Katie Mack.',
+        'Emerging quicks like Liam Haskett and Milly Illingworth impressing scouts.'
       ]
     },
     {
-      id: 'media',
-      title: 'Media statements',
-      summary: 'Official campaign messaging and fact checks in response to breaking news.',
+      id: 'fan-stories',
+      title: 'Supporter & club cricket stories',
+      summary: 'Grassroots tales and initiatives from across the states.',
       bullets: [
-        'Weekly talking points for surrogate interviews.',
-        'Shareable graphics for social platforms.',
-        'Rapid rebuttal briefs for newsroom outreach.'
+        'Night matches in Darwin’s Strike League drawing record crowds.',
+        'Community clubs trial inclusive programs for neurodiverse players.',
+        'Fan podcasts breaking down BBL analytics and Premier Cricket nuggets.'
       ]
     }
   ];

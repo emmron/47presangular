@@ -107,9 +107,9 @@ export class NewsService {
   }
 
   private async fetchReddit(): Promise<NewsItemDto[]> {
-    const subredditQuery = 'politics+news+worldnews';
+    const subredditQuery = 'Cricket+CricketAustralia';
     const searchParams = new URLSearchParams({
-      q: 'trump 2024 campaign',
+      q: '"Australia cricket" OR "Big Bash" OR "Sheffield Shield"',
       restrict_sr: '1',
       sort: 'new',
       limit: '100'
@@ -147,7 +147,7 @@ export class NewsService {
     }
 
     const params = new URLSearchParams({
-      q: 'Trump AND (campaign OR election OR 2024)',
+      q: '"Australia cricket" OR "Big Bash" OR "Sheffield Shield" OR WBBL OR WNCL',
       language: 'en',
       sortBy: 'publishedAt',
       apiKey
@@ -182,7 +182,7 @@ export class NewsService {
     }
 
     const params = new URLSearchParams({
-      q: 'Trump presidential campaign 2024',
+      q: '"Australia cricket" OR "Big Bash"',
       sort: 'newest',
       'api-key': apiKey
     });
@@ -247,7 +247,7 @@ export class NewsService {
   private async safeFetch(url: string, source: string): Promise<Response> {
     const response = await fetch(url, {
       headers: {
-        'User-Agent': '47presangular-news-aggregator/1.0'
+        'User-Agent': 'aussie-cricket-central/1.0'
       }
     });
 

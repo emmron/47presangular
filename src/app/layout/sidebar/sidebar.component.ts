@@ -18,37 +18,37 @@ interface SidebarCta {
 export class SidebarComponent {
   readonly takeActionCtas: SidebarCta[] = [
     {
-      label: 'Chip in $20.24',
-      description: 'Donate to accelerate key battleground operations.',
-      href: 'https://www.donaldjtrump.com/',
-      ariaLabel: 'Donate twenty dollars and twenty four cents'
+      label: 'Live scores',
+      description: 'Track every Aussie innings via cricket.com.au.',
+      href: 'https://www.cricket.com.au/matches/live',
+      ariaLabel: 'Open live scores on cricket dot com dot au'
     },
     {
-      label: 'Become a Captain',
-      description: 'Lead local volunteer teams and coordinate canvasses.',
-      href: 'https://www.donaldjtrump.com/join/',
-      ariaLabel: 'Sign up to become a neighborhood captain'
+      label: 'Memberships',
+      description: 'Explore Cricket Australia supporter memberships.',
+      href: 'https://www.cricket.com.au/membership',
+      ariaLabel: 'Browse Cricket Australia membership options'
     },
     {
-      label: 'Rapid Response List',
-      description: 'Get SMS alerts for breaking news and key votes.',
-      href: 'https://www.donaldjtrump.com/subscribe/',
-      ariaLabel: 'Subscribe to the Trump rapid response list'
+      label: 'Fan newsletter',
+      description: 'Sign up for weekly highlights from every league.',
+      href: 'https://www.cricket.com.au/email-newsletters',
+      ariaLabel: 'Subscribe to the Cricket Australia email newsletter'
     }
   ];
 
   readonly resourceLinks: SidebarCta[] = [
     {
-      label: 'State Leadership',
-      description: 'Find your state director and field staff.',
-      href: 'https://www.donaldjtrump.com/states/',
-      ariaLabel: 'Explore state leadership contacts'
+      label: 'Domestic fixtures',
+      description: 'Sheffield Shield, Marsh Cup, and WNCL schedules.',
+      href: 'https://www.cricket.com.au/series',
+      ariaLabel: 'View domestic cricket fixtures'
     },
     {
-      label: 'Events Calendar',
-      description: 'See rallies, town halls, and digital events near you.',
-      href: 'https://www.donaldjtrump.com/events/',
-      ariaLabel: 'Open the campaign events calendar'
+      label: 'Big Bash tickets',
+      description: 'Secure seats for BBL and WBBL double-headers.',
+      href: 'https://www.bigbash.com.au/tickets',
+      ariaLabel: 'Open the Big Bash League ticket portal'
     }
   ];
 }

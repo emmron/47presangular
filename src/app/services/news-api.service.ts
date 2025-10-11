@@ -81,7 +81,7 @@ export class NewsApiService {
           .filter((event: any) => event)
           .map((event: any) => ({
             date: event.date ?? event.timestamp ?? '',
-            headline: event.headline ?? event.title ?? 'Campaign milestone',
+            headline: event.headline ?? event.title ?? 'Cricket milestone',
             description: event.description ?? event.summary
           }))
           .filter((event: TimelineEvent) => !!event.date && !!event.headline)
@@ -89,11 +89,11 @@ export class NewsApiService {
 
     return {
       id: response.id ?? response.articleId ?? '',
-      title: response.title ?? 'Campaign story',
+      title: response.title ?? 'Cricket story',
       link: response.link ?? response.url ?? '',
       pubDate: response.pubDate ? new Date(response.pubDate) : new Date(),
       content: response.content ?? response.summary ?? '',
-      source: response.source ?? response.primarySource ?? 'Campaign coverage',
+      source: response.source ?? response.primarySource ?? 'Cricket coverage',
       category: response.category,
       imageUrl: response.imageUrl ?? response.image,
       summary,

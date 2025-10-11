@@ -14,11 +14,11 @@ interface NavLink {
 })
 export class LayoutNavComponent {
   links: NavLink[] = [
-    { path: '', label: 'Overview', icon: 'dashboard' },
-    { path: 'latest', label: 'Latest', icon: 'flash_on' },
-    { path: 'timeline', label: 'Timeline', icon: 'timeline' },
-    { path: 'issues', label: 'Issues', icon: 'forum' },
-    { path: 'media', label: 'Media', icon: 'play_circle' }
+    { path: '', label: 'Home', icon: 'dashboard' },
+    { path: 'latest', label: 'Latest news', icon: 'flash_on' },
+    { path: 'timeline', label: 'Storylines', icon: 'timeline' },
+    { path: 'issues', label: 'League guides', icon: 'forum' },
+    { path: 'media', label: 'Media hub', icon: 'play_circle' }
   ];
 
   constructor(private router: Router) {}

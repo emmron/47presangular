@@ -19,28 +19,28 @@ type Insight = {
 export class InsightsSidebarComponent {
   readonly insights: Insight[] = [
     {
-      label: 'Digital reach',
-      value: '2.1M',
+      label: 'International form',
+      value: '4-1',
       trend: 'up',
-      description: 'Impressions across official channels in the last 48 hours'
+      description: 'Australia’s win-loss record across the last five internationals'
     },
     {
-      label: 'Grassroots events',
-      value: '38',
+      label: 'BBL ladder leaders',
+      value: 'Sixers',
       trend: 'steady',
-      description: 'Scheduled rallies and town halls this week'
+      description: 'Sydney Sixers hold top spot with a 1.22 net run rate'
     },
     {
-      label: 'Volunteer signups',
-      value: '+14%',
+      label: 'Shield centuries',
+      value: '3 this week',
       trend: 'up',
-      description: 'Week-over-week increase in new volunteers'
+      description: 'Number of Aussie batters raising the bat in the latest round'
     }
   ];
 
   readonly keyActions: string[] = [
-    'Track upcoming debate preparation milestones',
-    'Highlight localized policy rollouts for supporters',
-    'Coordinate regional press availability with rapid response team'
+    'Monitor selection battles ahead of the winter tours',
+    'Track BBL draft rumours and overseas signings',
+    'Highlight standout performances from Premier Cricket'
   ];
 }
