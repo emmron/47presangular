@@ -3,7 +3,12 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError, timer, forkJoin } from 'rxjs';
 import { catchError, map, retryWhen, delay, take, tap } from 'rxjs/operators';
 import { MediaAsset, NewsItem, NewsResponse, SourceType } from '../models/news.model';
+import { Observable } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
+import { NewsItem } from '../models/news.model';
+import { NewsApiService } from './news-api.service';
 import { NewsStateService } from './news-state.service';
+import { LoadingState } from '../models/loading-state.model';
 
 interface ExternalMediaAsset extends MediaAsset {
   width?: number | null;
@@ -14,32 +19,8 @@ interface ExternalMediaAsset extends MediaAsset {
   providedIn: 'root'
 })
 export class NewsService {
-  private readonly CACHE_TIME = 5 * 60 * 1000; // 5 minutes
-  private readonly MAX_RETRIES = 3;
-  private readonly RETRY_DELAY = 2000; // 2 seconds
-
-  private newsApis = [
-    {
-      url: 'https://newsapi.org/v2/everything',
-      params: {
-        q: 'Trump AND (campaign OR election OR 2024)',
-        language: 'en',
-        sortBy: 'publishedAt',
-        apiKey: 'YOUR_API_KEY' // Replace with your NewsAPI key
-      }
-    },
-    {
-      url: 'https://api.nytimes.com/svc/search/v2/articlesearch.json',
-      params: {
-        q: 'Trump presidential campaign 2024',
-        sort: 'newest',
-        'api-key': 'YOUR_API_KEY' // Replace with your NYTimes API key
-      }
-    }
-  ];
-
   constructor(
-    private http: HttpClient,
+    private newsApiService: NewsApiService,
     private stateService: NewsStateService
   ) {
     this.setupAutoRefresh();
@@ -63,21 +44,19 @@ export class NewsService {
         };
         this.stateService.setItems(response);
         this.stateService.setLoading(false);
-      }),
-      catchError(error => this.handleError(error))
-    );
-  }
+  ) {}
 
-  private fetchFromApi(url: string, params: any): Observable<any> {
-    return this.http.get(url, { params }).pipe(
-      retryWhen(errors =>
-        errors.pipe(
-          delay(this.RETRY_DELAY),
-          take(this.MAX_RETRIES),
-          tap(() => console.log('Retrying API request...'))
-        )
+  fetchNews(forceRefresh = false): Observable<NewsItem[]> {
+    return this.newsApiService.getNews(forceRefresh).pipe(
+      map((state) => {
+        this.handleStateTransition(state);
+        return state;
+      }),
+      filter(
+        (state): state is LoadingState<NewsItem[]> & { state: 'loaded' } =>
+          state.state === 'loaded'
       ),
-      catchError(error => this.handleError(error))
+      map((state) => state.data)
     );
   }
 
@@ -199,18 +178,20 @@ export class NewsService {
       errorMessage = error.error.message;
     } else {
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+  private handleStateTransition(loadingState: LoadingState<NewsItem[]>): void {
+    switch (loadingState.state) {
+      case 'loading':
+        this.stateService.setLoading(true);
+        this.stateService.setError(null);
+        break;
+      case 'loaded':
+        this.stateService.setItems(loadingState.data);
+        this.stateService.setLoading(false);
+        break;
+      case 'error':
+        this.stateService.setError(loadingState.error.message);
+        this.stateService.setLoading(false);
+        break;
     }
-
-    this.stateService.setError(errorMessage);
-    this.stateService.setLoading(false);
-    return throwError(() => new Error(errorMessage));
-  }
-
-  private setupAutoRefresh(): void {
-    timer(this.CACHE_TIME, this.CACHE_TIME).subscribe(() => {
-      if (!this.stateService.currentState.loading) {
-        this.fetchNews().subscribe();
-      }
-    });
   }
 }

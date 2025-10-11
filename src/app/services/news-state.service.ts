@@ -109,6 +109,26 @@ export class NewsStateService implements OnDestroy {
             error: loadingState.error.message,
           });
           break;
+  // Data Operations
+  fetchNews(forceRefresh = false): void {
+    this.newsApiService.getNews(forceRefresh).subscribe({
+      next: (loadingState) => {
+        switch (loadingState.state) {
+          case 'loading':
+            this.updateState({ loading: true, error: null });
+            break;
+          case 'loaded':
+            this.updateState({
+              items: this.enrichItems(loadingState.data),
+              loading: false,
+              error: null,
+              lastUpdated: new Date()
+            });
+            break;
+          case 'error':
+            this.handleBackendError(loadingState.error);
+            break;
+        }
       }
     });
   }
@@ -151,6 +171,22 @@ export class NewsStateService implements OnDestroy {
       ...this.currentState,
       ...newState,
     });
+  }
+
+  private handleBackendError(error: Error): void {
+    const friendlyMessage = error.message || 'The news feed is currently unavailable.';
+    this.updateState({
+      loading: false,
+      error: friendlyMessage
+    });
+  }
+
+  private enrichItems(items: NewsItem[]): NewsItem[] {
+    return items.map(item => ({
+      ...item,
+      content: item.content ?? '',
+      category: item.category ?? 'News'
+    }));
   }
 
   private setupAutoRefresh(): void {

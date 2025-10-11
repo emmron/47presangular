@@ -1,0 +1,65 @@
+<section class="event-map" aria-labelledby="event-map-heading">
+  <header class="event-map__header">
+    <div>
+      <p class="event-map__eyebrow">On the trail</p>
+      <h2 id="event-map-heading">Upcoming Rallies & Events</h2>
+    </div>
+    <p class="event-map__subhead">Explore where the campaign is heading next.</p>
+  </header>
+
+  <div class="event-map__content">
+    <div
+      #mapContainer
+      class="event-map__map"
+      [class.event-map__map--inactive]="loading || !!error || !events.length"
+      role="application"
+      aria-label="Campaign events map"
+    ></div>
+
+    <ng-container *ngIf="!loading && !error && events.length">
+      <ul class="event-map__list">
+        <li *ngFor="let event of events; trackBy: trackByEventId">
+          <article>
+            <div class="event-map__card">
+              <div class="event-map__card-media" *ngIf="event.heroImage as image">
+                <picture>
+                  <source
+                    *ngFor="let source of image.sources ?? []"
+                    [attr.srcset]="source.url"
+                    [attr.media]="'(min-width: ' + source.width + 'px)'"
+                  />
+                  <img
+                    [src]="image.fallback"
+                    [alt]="image.alt"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </picture>
+              </div>
+              <div class="event-map__card-content">
+                <h3>{{ event.title }}</h3>
+                <p class="event-map__card-date">
+                  {{ event.startDate | date: 'fullDate' }}
+                  <span *ngIf="event.endDate"> – {{ event.endDate | date: 'fullDate' }}</span>
+                </p>
+                <p class="event-map__card-location">
+                  <span *ngIf="event.venue">{{ event.venue }}, </span>
+                  {{ event.city }}, {{ event.state }}
+                </p>
+                <p class="event-map__card-description" *ngIf="event.description">{{ event.description }}</p>
+              </div>
+            </div>
+          </article>
+        </li>
+      </ul>
+    </ng-container>
+  </div>
+
+  <div class="event-map__state" *ngIf="loading && !error">
+    <p>Loading the latest rally map…</p>
+  </div>
+  <div class="event-map__state" *ngIf="!loading && !error && !events.length">
+    <p>No public campaign events have been announced yet.</p>
+  </div>
+  <p class="event-map__error" *ngIf="error">{{ error }}</p>
+</section>

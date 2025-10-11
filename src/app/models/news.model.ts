@@ -34,6 +34,34 @@ export interface NewsResponse {
   total: number;
   page: number;
   pageSize: number;
+  pubDate: Date;
+  content: string;
+  source: string;
+  category?: string;
+  imageUrl?: string;
+  topics?: string[];
+  eventSlug?: string;
+  sentiment?: 'positive' | 'negative' | 'neutral' | 'unknown';
+  momentumScore?: number;
+}
+
+export interface StorySource {
+  name: string;
+  url: string;
+  type?: string;
+  summary?: string;
+}
+
+export interface TimelineEvent {
+  date: string;
+  headline: string;
+  description?: string;
+}
+
+export interface StoryDetail extends NewsItem {
+  summary: string[];
+  sources: StorySource[];
+  timelineEvents: TimelineEvent[];
 }
 
 export interface NewsState {
@@ -60,4 +88,45 @@ export interface NewsQueryOptions {
   sources?: string[];
   topics?: string[];
   search?: string;
+export interface MomentumPoint {
+  date: Date;
+  value: number;
+}
+
+export interface TopicCallout {
+  title: string;
+  markdown: string;
+}
+
+export interface TopicEvent {
+  slug: string;
+  title: string;
+  date: Date;
+  description: string;
+  momentum: number;
+  relatedItemIds: string[];
+}
+
+export interface Topic {
+  slug: string;
+  title: string;
+  summary: string;
+  curatedCopy: string;
+  callouts?: TopicCallout[];
+  heroImage?: string;
+  spotlightIds?: string[];
+  momentumSeries: MomentumPoint[];
+  events: TopicEvent[];
+}
+
+export interface TopicDataset {
+  lastUpdated: Date;
+  topics: Topic[];
+  items: NewsItem[];
+}
+
+export interface TopicDetail {
+  lastUpdated: Date;
+  topic: Topic;
+  items: NewsItem[];
 }
