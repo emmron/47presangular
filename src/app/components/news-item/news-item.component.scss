@@ -1,122 +1,142 @@
+@use '../../shared/styles/tokens';
+@use '../../shared/styles/mixins';
+
 .news-item {
-  background: var(--surface-card);
-  border-radius: var(--radius-xl);
+  background: tokens.color('surface');
+  border-radius: var(--radius-lg);
+  border: 1px solid tokens.color('border');
+  box-shadow: var(--shadow-sm);
   overflow: hidden;
-  box-shadow: var(--shadow-md);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  border: 1px solid var(--border-subtle);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 
   &:hover,
   &:focus-within {
     transform: translateY(-4px);
-    box-shadow: var(--shadow-elevated);
+    box-shadow: var(--shadow);
   }
 
   .news-content {
-    padding: clamp(1.5rem, 3vw, 2.25rem);
+    padding: var(--space-4);
+    display: grid;
+    gap: var(--space-4);
+  }
 
-    header {
-      margin-bottom: var(--space-md);
+  header {
+    display: grid;
+    gap: var(--space-3);
 
-      h2 {
-        margin: 0 0 var(--space-sm);
-        font-size: clamp(1.5rem, 2vw, 1.85rem);
-        line-height: 1.3;
-        font-weight: 700;
-        letter-spacing: -0.015em;
+    h2 {
+      margin: 0;
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      line-height: 1.3;
 
-        .story-link {
-          color: #111827;
-          text-decoration: none;
-          background: linear-gradient(to right, var(--accent), var(--accent));
-          background-size: 0% 2px;
-          background-position: 0 100%;
-          background-repeat: no-repeat;
-          transition: background-size 0.3s ease, color 0.3s ease;
+      a {
+        color: tokens.color('text-primary');
+        text-decoration: none;
+        background-image: linear-gradient(90deg, tokens.color('primary'), tokens.color('primary'));
+        background-size: 0% 2px;
+        background-repeat: no-repeat;
+        background-position: 0 100%;
+        transition: color 0.2s ease, background-size 0.2s ease;
 
-          &:hover,
-          &:focus {
-            color: var(--accent);
-            background-size: 100% 2px;
-            outline: none;
-          }
+        &:hover,
+        &:focus {
+          color: tokens.color('primary');
+          background-size: 100% 2px;
         }
       }
+    }
 
-      .meta {
-        font-size: 0.95rem;
-        display: flex;
-        flex-wrap: wrap;
-        gap: var(--space-sm);
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-3);
+      font-size: 0.95rem;
+      color: tokens.color('text-secondary');
+
+      .source {
+        font-weight: var(--font-weight-semibold);
+        color: tokens.color('primary');
+        display: inline-flex;
         align-items: center;
+        gap: var(--space-2);
 
-        .source {
-          font-weight: 600;
-          color: var(--accent);
-          position: relative;
-          padding-left: 1.75rem;
-
-          &::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 1rem;
-            height: 1rem;
-            border-radius: 50%;
-            background: var(--accent);
-            box-shadow: 0 0 0 4px var(--accent-muted);
-          }
+        &::before {
+          content: '';
+          width: 1rem;
+          height: 1rem;
+          border-radius: 999px;
+          background: tokens.color('primary');
+          box-shadow: 0 0 0 0.2rem rgba(tokens.color('primary'), 0.2);
         }
+      }
 
-        .category {
-          background: var(--surface-muted);
-          padding: 0.35rem 0.9rem;
-          border-radius: var(--radius-pill);
-          font-size: 0.85rem;
-          font-weight: 600;
-          color: var(--text-muted);
-          border: 1px solid var(--border-subtle);
-        }
+      .category {
+        padding: var(--space-2) var(--space-3);
+        border-radius: 999px;
+        background: tokens.color('surface-muted');
+        border: 1px solid tokens.color('border');
+        font-weight: var(--font-weight-medium);
+      }
 
-        .date {
-          color: var(--text-muted);
-          font-size: 0.95rem;
-          font-weight: 500;
-        }
+      .date {
+        color: tokens.color('text-tertiary');
       }
     }
+  }
 
-    .content {
-      position: relative;
-      margin-bottom: var(--space-md);
-      color: var(--text-muted);
-      line-height: 1.7;
-      font-size: 1.05rem;
+  .content {
+    color: tokens.color('text-secondary');
+    line-height: 1.7;
+    font-size: 1rem;
+    display: grid;
+    gap: var(--space-3);
 
-      .thumbnail {
-        float: left;
-        max-width: 240px;
-        margin: 0 var(--space-md) var(--space-sm) 0;
-        border-radius: var(--radius-lg);
-        box-shadow: var(--shadow-sm);
-        transition: transform 0.3s ease;
-
-        &:hover {
-          transform: scale(1.02);
-        }
-      }
-
-      p {
-        margin: 0;
-        overflow: hidden;
-        display: -webkit-box;
-        -webkit-line-clamp: 4;
-        -webkit-box-orient: vertical;
-      }
+    .thumbnail {
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      max-height: 200px;
     }
 
+    p {
+      margin: 0;
+      display: -webkit-box;
+      -webkit-line-clamp: 4;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+  }
+
+  footer.actions {
+    border-top: 1px solid tokens.color('border');
+    padding-top: var(--space-3);
+    display: flex;
+    justify-content: flex-end;
+
+    .read-more {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: var(--space-2) var(--space-4);
+      border-radius: 999px;
+      background: tokens.color('primary');
+      color: #fff;
+      font-weight: var(--font-weight-semibold);
+      text-decoration: none;
+      transition: background 0.2s ease, transform 0.2s ease;
+
+      svg {
+        transition: transform 0.2s ease;
+      }
+
+      &:hover,
+      &:focus {
+        background: tokens.color('primary-hover');
+        transform: translateX(2px);
+
+        svg {
+          transform: translateX(2px);
     footer.actions {
       margin-top: var(--space-md);
       padding-top: 20px;
@@ -222,6 +242,9 @@
   }
 }
 
+@include mixins.respond('sm') {
+  .news-item .news-content {
+    padding: var(--space-3);
 @media (max-width: 640px) {
   .news-item .news-content .content .thumbnail {
     float: none;

@@ -1,9 +1,13 @@
 import { Component } from '@angular/core';
+import { ShellComponent } from './layout/shell/shell.component';
 import { LayoutModule } from './layout/layout.module';
 
 @Component({
   selector: 'app-root',
   standalone: true,
+  imports: [ShellComponent],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss']
   imports: [RouterOutlet, RouterLink, RouterLinkActive],
   template: `
     <main class="app-shell">

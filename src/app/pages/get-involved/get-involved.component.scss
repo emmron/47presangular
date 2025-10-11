@@ -1,0 +1,105 @@
+@use '../../shared/styles/tokens';
+@use '../../shared/styles/mixins';
+
+.get-involved {
+  display: grid;
+  gap: var(--space-6);
+
+  &__intro {
+    display: grid;
+    gap: var(--space-3);
+    max-width: 48rem;
+  }
+
+  &__eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.75rem;
+    color: tokens.color('text-tertiary');
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: var(--space-4);
+  }
+
+  &__card {
+    padding: var(--space-4);
+    border-radius: var(--radius-lg);
+    background: tokens.color('surface-muted');
+    border: 1px solid tokens.color('border');
+    box-shadow: var(--shadow-sm);
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  &__link {
+    justify-self: flex-start;
+    font-weight: var(--font-weight-semibold);
+    color: tokens.color('primary');
+
+    &:hover,
+    &:focus {
+      text-decoration: underline;
+    }
+  }
+
+  &__newsletter {
+    padding: var(--space-5);
+    border-radius: var(--radius-xl);
+    border: 1px solid tokens.color('border');
+    background: linear-gradient(120deg, rgba(tokens.color('primary-light'), 0.9), tokens.color('surface'));
+    box-shadow: var(--shadow);
+    display: grid;
+    gap: var(--space-3);
+  }
+
+  &__form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+
+    input {
+      flex: 1 1 220px;
+      padding: var(--space-3);
+      border-radius: var(--radius-md);
+      border: 1px solid tokens.color('border');
+      font-size: 1rem;
+    }
+
+    button {
+      padding: var(--space-3) var(--space-4);
+      border-radius: var(--radius-md);
+      border: none;
+      background: tokens.color('primary');
+      color: #fff;
+      font-weight: var(--font-weight-semibold);
+      cursor: pointer;
+
+      &:hover,
+      &:focus {
+        background: tokens.color('primary-hover');
+      }
+    }
+  }
+
+  &__disclaimer {
+    color: tokens.color('text-tertiary');
+    font-size: 0.85rem;
+  }
+}
+
+@include mixins.respond('sm') {
+  .get-involved__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .get-involved__form {
+    flex-direction: column;
+
+    button {
+      width: 100%;
+    }
+  }
+}
