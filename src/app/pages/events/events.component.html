@@ -1,0 +1,16 @@
+<section class="events" aria-labelledby="events-heading">
+  <header class="events__intro">
+    <p class="events__eyebrow">Around the grounds</p>
+    <h1 id="events-heading">Upcoming fixtures &amp; moments</h1>
+    <p>Bookmark the key matches, finals, and milestone announcements across Australian cricket.</p>
+  </header>
+  <div class="events__list" role="list">
+    <article class="events__card" role="listitem" *ngFor="let event of events">
+      <p class="events__date">{{ event.date }}</p>
+      <h2>{{ event.title }}</h2>
+      <p class="events__location">{{ event.location }}</p>
+      <p>{{ event.description }}</p>
+      <a class="events__cta" [href]="event.rsvpUrl" target="_blank" rel="noopener noreferrer">RSVP &rsaquo;</a>
+    </article>
+  </div>
+</section>

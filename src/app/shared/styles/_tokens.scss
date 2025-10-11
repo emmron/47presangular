@@ -1,0 +1,93 @@
+@use 'sass:map';
+
+$colors: (
+  'primary': #ff4500,
+  'primary-hover': #ff3d00,
+  'primary-light': #fff0eb,
+  'background': #f5f7fb,
+  'surface': #ffffff,
+  'surface-muted': #f9fafb,
+  'border': #e5e7eb,
+  'border-strong': #d1d5db,
+  'text-primary': #111827,
+  'text-secondary': #4b5563,
+  'text-tertiary': #6b7280,
+  'success': #22c55e,
+  'error': #ef4444,
+  'link': #1d4ed8
+);
+
+$spacing-scale: (
+  '0': 0,
+  '1': 0.25rem,
+  '2': 0.5rem,
+  '3': 0.75rem,
+  '4': 1rem,
+  '5': 1.5rem,
+  '6': 2rem,
+  '7': 2.5rem,
+  '8': 3rem,
+  '9': 4rem
+);
+
+$breakpoints: (
+  'sm': 36rem,
+  'md': 48rem,
+  'lg': 62rem,
+  'xl': 75rem,
+  'xxl': 90rem
+);
+
+$radius: (
+  'sm': 0.5rem,
+  'md': 0.75rem,
+  'lg': 1.25rem,
+  'xl': 1.75rem
+);
+
+$shadows: (
+  'sm': 0 1px 2px rgba(15, 23, 42, 0.08),
+  'md': 0 10px 25px -10px rgba(15, 23, 42, 0.2),
+  'lg': 0 25px 50px -12px rgba(15, 23, 42, 0.25)
+);
+
+:root {
+  --font-family-base: 'Inter', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-family-accent: 'Playfair Display', 'Times New Roman', serif;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  @each $name, $value in $colors {
+    --color-#{$name}: #{$value};
+  }
+
+  @each $step, $value in $spacing-scale {
+    --space-#{$step}: #{$value};
+  }
+
+  @each $name, $value in $radius {
+    --radius-#{$name}: #{$value};
+  }
+
+  --shadow-sm: #{map.get($shadows, 'sm')};
+  --shadow: #{map.get($shadows, 'md')};
+  --shadow-lg: #{map.get($shadows, 'lg')};
+}
+
+@function color($name) {
+  @return map.get($colors, $name);
+}
+
+@function space($step) {
+  @return map.get($spacing-scale, $step);
+}
+
+@function radius($name) {
+  @return map.get($radius, $name);
+}
+
+@function breakpoint($name) {
+  @return map.get($breakpoints, $name);
+}

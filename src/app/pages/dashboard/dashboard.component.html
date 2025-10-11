@@ -1,0 +1,33 @@
+<section class="dashboard" aria-labelledby="dashboard-heading">
+  <header class="dashboard__header">
+    <p class="dashboard__eyebrow">National coverage</p>
+    <h1 id="dashboard-heading">Cricket pulse dashboard</h1>
+    <p class="dashboard__lede">
+      Quick-glance metrics on the Australian sides and domestic competitions to guide your week of coverage.
+    </p>
+  </header>
+  <div class="dashboard__metrics" role="list">
+    <article class="dashboard__metric" role="listitem" *ngFor="let metric of metrics">
+      <p class="dashboard__metric-value">{{ metric.value }}</p>
+      <p class="dashboard__metric-label">{{ metric.label }}</p>
+      <p class="dashboard__metric-change">{{ metric.change }}</p>
+    </article>
+  </div>
+  <section class="dashboard__updates" aria-label="Latest updates">
+    <article class="dashboard__card">
+      <h2>High performance brief</h2>
+      <p>
+        Pat Cummins confirms the pace trio for Wellington with Hazlewood rested and Scott Boland on standby. Nathan Lyon
+        stays with the squad as subcontinental prep ramps up.
+      </p>
+    </article>
+    <article class="dashboard__card">
+      <h2>Domestic watchlist</h2>
+      <ul>
+        <li>Shield leaders WA meet Victoria at the WACA — streaming from 10:00 AWST.</li>
+        <li>WNCL final tickets now limited; coverage on ABC Grandstand and Kayo.</li>
+        <li>Hobart Hurricanes targeting marquee overseas signing before list deadline.</li>
+      </ul>
+    </article>
+  </section>
+</section>

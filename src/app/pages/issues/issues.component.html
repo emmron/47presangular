@@ -1,0 +1,18 @@
+<section class="issues" aria-labelledby="issues-heading">
+  <header class="issues__intro">
+    <p class="issues__eyebrow">Coverage pillars</p>
+    <h1 id="issues-heading">What we're tracking across Australian cricket</h1>
+    <p class="issues__lede">
+      Deep dives into national teams, domestic leagues, and the pathways powering the next wave of Australian stars.
+    </p>
+  </header>
+  <div class="issues__grid">
+    <article *ngFor="let section of sections" class="issues__card" [attr.id]="section.id">
+      <h2>{{ section.title }}</h2>
+      <p>{{ section.summary }}</p>
+      <ul>
+        <li *ngFor="let bullet of section.bullets">{{ bullet }}</li>
+      </ul>
+    </article>
+  </div>
+</section>

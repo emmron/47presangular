@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { ShellComponent } from './layout/shell/shell.component';
 
 @Component({
   selector: 'app-root',
@@ -107,5 +108,8 @@ import { RouterOutlet } from '@angular/router';
       }
     `
   ]
+  imports: [ShellComponent],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {}

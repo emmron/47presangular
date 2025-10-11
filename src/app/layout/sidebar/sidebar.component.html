@@ -1,0 +1,27 @@
+<aside class="cricket-sidebar" aria-labelledby="sidebar-title">
+  <div class="cricket-sidebar__section">
+    <h2 id="sidebar-title">Stay engaged</h2>
+    <p>Support Aussie cricket pathways with official programs and fan perks.</p>
+    <ul class="cricket-sidebar__list">
+      <li *ngFor="let cta of takeActionCtas">
+        <a class="cricket-sidebar__card" [href]="cta.href" target="_blank" rel="noopener noreferrer"
+          [attr.aria-label]="cta.ariaLabel">
+          <span class="cricket-sidebar__card-label">{{ cta.label }}</span>
+          <span class="cricket-sidebar__card-description">{{ cta.description }}</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div class="cricket-sidebar__section">
+    <h3>Additional resources</h3>
+    <ul class="cricket-sidebar__list cricket-sidebar__list--compact">
+      <li *ngFor="let link of resourceLinks">
+        <a class="cricket-sidebar__link" [href]="link.href" target="_blank" rel="noopener noreferrer"
+          [attr.aria-label]="link.ariaLabel">
+          <span class="cricket-sidebar__card-label">{{ link.label }}</span>
+          <span class="cricket-sidebar__card-description">{{ link.description }}</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</aside>

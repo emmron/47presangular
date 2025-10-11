@@ -1,7 +1,7 @@
 {
   "name": "news-aggregator-server",
   "version": "1.0.0",
-  "description": "Aggregated news backend for 47presangular",
+  "description": "Aggregated news backend for Aussie Cricket Pulse",
   "scripts": {
     "start": "node dist/main.js",
     "start:dev": "ts-node-dev --respawn --transpile-only src/main.ts",
