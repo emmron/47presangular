@@ -1,4 +1,5 @@
 import { TestBed } from '@angular/core/testing';
+import { provideRouter } from '@angular/router';
 import { AppComponent } from './app.component';
 import { ExperimentService, ExperimentVariant } from './services/experiment.service';
 import { ReferralService } from './services/referral.service';
@@ -20,6 +21,7 @@ describe('AppComponent', () => {
     await TestBed.configureTestingModule({
       imports: [AppComponent]
       imports: [AppComponent],
+      providers: [provideRouter([])]
       providers: [
         { provide: ExperimentService, useClass: ExperimentServiceStub },
         { provide: ReferralService, useClass: ReferralServiceStub },
@@ -39,10 +41,11 @@ describe('AppComponent', () => {
     expect(app.title).toEqual('Trump 47 Campaign Tracker');
   });
 
-  it('should render title', () => {
+  it('should render the layout header title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.querySelector('h1')?.textContent).toContain('Trump 47 Campaign Tracker');
     expect(compiled.querySelector('.brand')?.textContent).toContain('Trump 47 Campaign Tracker');
   });
 });

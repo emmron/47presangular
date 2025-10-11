@@ -1,0 +1,19 @@
+.landing {
+  display: grid;
+  gap: 2.5rem;
+}
+
+.landing__news {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.landing__news-header h2 {
+  margin: 0;
+  font-size: 1.75rem;
+}
+
+.landing__news-header p {
+  margin: 0.35rem 0 0;
+  color: #444;
+}

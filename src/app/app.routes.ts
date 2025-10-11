@@ -1,10 +1,23 @@
 import { Routes } from '@angular/router';
+import { LayoutComponent } from './layout/layout.component';
+import { LandingComponent } from './layout/pages/landing/landing.component';
+import { LatestComponent } from './layout/pages/latest/latest.component';
+import { TimelineComponent } from './layout/pages/timeline/timeline.component';
+import { IssuesComponent } from './layout/pages/issues/issues.component';
+import { MediaComponent } from './layout/pages/media/media.component';
 import { ShellComponent } from './components/shell/shell.component';
 import { NewsFeedComponent } from './components/news-feed/news-feed.component';
 
 export const routes: Routes = [
   {
     path: '',
+    component: LayoutComponent,
+    children: [
+      { path: '', component: LandingComponent },
+      { path: 'latest', component: LatestComponent },
+      { path: 'timeline', component: TimelineComponent },
+      { path: 'issues', component: IssuesComponent },
+      { path: 'media', component: MediaComponent }
     component: ShellComponent,
     children: [
       {

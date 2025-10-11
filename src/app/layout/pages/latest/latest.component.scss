@@ -1,0 +1,55 @@
+.latest {
+  display: grid;
+  gap: 1.75rem;
+}
+
+.latest__header h2 {
+  margin: 0;
+  font-size: 1.75rem;
+}
+
+.latest__header p {
+  margin: 0.35rem 0 0;
+  color: #444;
+}
+
+.latest__grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.latest__card {
+  padding: 1.5rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.04);
+  display: grid;
+  gap: 0.75rem;
+}
+
+.latest__meta {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.latest__summary {
+  margin: 0;
+  color: #2d2d2d;
+}
+
+.latest__link {
+  justify-self: flex-start;
+  text-decoration: none;
+  color: #1c50ae;
+  font-weight: 600;
+}
+
+.latest__loading,
+.latest__empty {
+  text-align: center;
+  padding: 2rem;
+  border-radius: 1rem;
+  background: rgba(0, 0, 0, 0.03);
+}

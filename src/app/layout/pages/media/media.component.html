@@ -1,0 +1,17 @@
+<section class="media" *ngIf="media$ | async as media">
+  <header class="media__header">
+    <h2>Campaign media spotlight</h2>
+    <p>Visual coverage from national outlets and on-the-ground reporting.</p>
+  </header>
+
+  <div class="media__grid">
+    <article class="media__card" *ngFor="let item of media">
+      <img *ngIf="item.imageUrl" [src]="item.imageUrl" [alt]="item.title" loading="lazy" />
+      <div class="media__content">
+        <h3>{{ item.title }}</h3>
+        <p class="media__meta">{{ item.source }} &middot; {{ item.pubDate | date:'shortDate' }}</p>
+        <a [href]="item.link" target="_blank" rel="noopener" class="media__link">Watch / Read</a>
+      </div>
+    </article>
+  </div>
+</section>

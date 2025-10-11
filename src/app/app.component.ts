@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { LayoutModule } from './layout/layout.module';
 
 @Component({
   selector: 'app-root',
