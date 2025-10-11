@@ -65,6 +65,10 @@ export class NewsStateService {
     });
   }
 
+  resetFilters(): void {
+    this.filters.next({});
+  }
+
   // Data Operations
   fetchNews(): void {
     this.newsApiService.getNews().subscribe({
