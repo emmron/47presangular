@@ -1,3 +1,14 @@
+export type MediaType = 'article' | 'video' | 'audio' | 'gallery' | 'social';
+
+export interface MediaCaption {
+  text: string;
+  url?: string;
+  language?: string;
+}
+
+export interface GalleryItem {
+  url: string;
+  caption?: string;
 export type SourceType = 'OFFICIAL' | 'LICENSED' | 'SOCIAL';
 export type MediaType = 'IMAGE' | 'VIDEO' | 'AUDIO';
 
@@ -39,6 +50,13 @@ export interface NewsResponse {
   source: string;
   category?: string;
   imageUrl?: string;
+  mediaType?: MediaType;
+  mediaDurationSeconds?: number | null;
+  embedUrl?: string;
+  captions?: MediaCaption[];
+  transcriptUrl?: string;
+  transcriptText?: string;
+  galleryItems?: GalleryItem[];
   topics?: string[];
   eventSlug?: string;
   sentiment?: 'positive' | 'negative' | 'neutral' | 'unknown';
