@@ -18,63 +18,63 @@ interface IssueSection {
 export class IssuesComponent {
   readonly sections: IssueSection[] = [
     {
-      id: 'economy',
-      title: 'Economy first agenda',
-      summary: 'Tax relief for working families, energy dominance, and small business expansion.',
+      id: 'international-men',
+      title: "Men's internationals",
+      summary: 'Tour news, selection calls, and form lines for the Baggy Greens across Test, ODI, and T20 formats.',
       bullets: [
-        'Pledge to extend middle-class tax cuts and expand opportunity zones.',
-        'Reinvest in American energy with new drilling permits and refining capacity.',
-        'Launch apprenticeship partnerships with community colleges.'
+        'Monitor the New Zealand Test tour with focus on the pace attack rotation.',
+        'Track ODI squad refresh ahead of the Champions Trophy qualification window.',
+        'Analyse David Warner succession planning for the next home summer.'
       ]
     },
     {
-      id: 'security',
-      title: 'Border & national security',
-      summary: 'Finish the wall, restore remain-in-Mexico, and boost law enforcement resources.',
+      id: 'international-women',
+      title: "Women's internationals",
+      summary: 'Southern Stars scheduling, squad depth, and World Cup defence storylines.',
       bullets: [
-        'Deploy additional border agents and accelerate asylum processing reforms.',
-        'Block fentanyl trafficking with new technology at ports of entry.',
-        'Back the blue with federal support for local task forces.'
+        'Selection squeeze with Kim Garth, Darcie Brown, and Tayla Vlaeminck returning from injury.',
+        'Spin tandem of Alana King and Ash Gardner prepping for subcontinental tours.',
+        'Multi-format captaincy balance for Meg Lanning successors and leadership group.'
       ]
     },
     {
-      id: 'healthcare',
-      title: 'Healthcare & social supports',
-      summary: 'Lower costs, protect seniors, and expand rural care access.',
+      id: 'domestic-red-ball',
+      title: 'Sheffield Shield & Marsh Cup',
+      summary: 'State cricket trends that influence national call-ups and contract decisions.',
       bullets: [
-        'Drive price transparency across hospitals and insurers.',
-        'Expand telehealth waivers for rural clinics and veteran care.',
-        'Protect Medicare and Social Security with fiscal discipline.'
+        'Western Australia pushing for a three-peat with Cameron Bancroft in prolific form.',
+        'Victorian quicks vying for Australia A selection through strong Shield returns.',
+        'Marsh Cup final permutations as Queensland chase net run rate boosts.'
       ]
     },
     {
-      id: 'elections',
-      title: 'Election integrity',
-      summary: 'Secure ballots, clean voter rolls, and restore confidence in elections.',
+      id: 'big-bash',
+      title: 'Big Bash spotlight',
+      summary: 'BBL and WBBL recruitment moves, tactical shifts, and broadcast innovations.',
       bullets: [
-        'Advance voter ID standards with state partners.',
-        'Invest in poll watcher training and legal rapid response teams.',
-        'Modernize election systems with paper backups and audits.'
+        'Hurricanes and Renegades in market for marquee overseas finishers.',
+        'New power surge strategies and analytics-led fielding alignments.',
+        'Negotiations underway for expanded WBBL regional festival rounds.'
       ]
     },
     {
-      id: 'grassroots',
-      title: 'Grassroots spotlights',
-      summary: 'Stories from volunteers building the movement at the local level.',
+      id: 'pathways',
+      title: 'Emerging talent pipeline',
+      summary: 'Pathway programs fueling the next generation of Australian stars.',
       bullets: [
-        'Faith coalition in Georgia registering new voters weekly.',
-        'Small business owners hosting roundtables on regulatory reform.',
-        'College chapters leading campus debate nights.'
+        'National Performance Squad camp at Allan Border Field focused on fast bowling loads.',
+        'Australia A to tour England in July with an eye on Ashes depth.',
+        'Under-19 world cup recap spotlighting MVP Kate Pelle and Harry Dixon.'
       ]
     },
     {
-      id: 'media',
-      title: 'Media statements',
-      summary: 'Official campaign messaging and fact checks in response to breaking news.',
+      id: 'community-media',
+      title: 'Community & media',
+      summary: 'Grassroots initiatives and coverage shifts keeping fans connected.',
       bullets: [
-        'Weekly talking points for surrogate interviews.',
-        'Shareable graphics for social platforms.',
-        'Rapid rebuttal briefs for newsroom outreach.'
+        'Cricket Australia rolling out PlayHQ upgrades for live scoring at grade level.',
+        'ABC confirms expanded digital radio rights for WBBL and WNCL.',
+        'Indigenous cricket programs delivering combined youth carnivals in Alice Springs.'
       ]
     }
   ];

@@ -1,137 +1,145 @@
 {
-  "lastUpdated": "2024-09-30T18:30:00.000Z",
+  "lastUpdated": "2024-02-20T08:00:00.000Z",
   "topics": [
     {
-      "slug": "legal-battles",
-      "title": "Legal Battles and Court Strategy",
-      "summary": "Tracking how Trump's campaign weaponizes ongoing court fights to energize supporters and drive fundraising.",
-      "curatedCopy": "## Courtroom vs. Campaign\nThe campaign treats every filing and hearing as a two-for-one opportunity: legal defense by day, campaign rallying cry by night. Fundraising texts reference each development within minutes, and surrogates translate legal jargon into a persecution narrative built for cable hits.\n\n### Messaging pillars\n- Portray restrictions as election interference.\n- Tie prosecutors to Democratic leaders by name.\n- Pledge to overhaul the justice system on day one.",
+      "slug": "black-caps-tour",
+      "title": "Trans-Tasman Test Tour",
+      "summary": "Australia finalises plans for the two-Test swing through Wellington and Christchurch with selection intrigue across the pace ranks.",
+      "curatedCopy": "## Selection calls and conditions\nSelectors have opted to rest Josh Hazlewood for the opener, elevating Lance Morris after his Shield heroics. Scott Boland stays on standby as conditions at the Basin Reserve hint at seam movement early before flattening out.\n\n### Key talking points\n- Who partners Marnus Labuschagne at first drop if Steven Smith remains as makeshift opener.\n- Balance of the attack with Nathan Lyon backed for long spells.\n- Cameron Green's dual role covering middle-order stability and fourth seamer duties.",
       "callouts": [
         {
-          "title": "Why it matters",
-          "markdown": "- Legal updates regularly spike small-dollar donations.\n- Base voters cite legal fights as proof the movement is under attack."
+          "title": "Weather watch",
+          "markdown": "Wellington forecast suggests showers on days two and three — reserve day contingencies already flagged."
         },
         {
-          "title": "Watch the calendar",
-          "markdown": "Sentencing and pre-trial hearings align with key fundraising deadlines, giving the campaign recurring content moments."
+          "title": "Broadcast guide",
+          "markdown": "Fox Cricket and Kayo to simulcast from 9:30am AEDT with SEN radio syndicating ball-by-ball commentary."
         }
       ],
       "spotlightIds": ["article-1"],
       "momentumSeries": [
-        { "date": "2024-09-18", "value": 38 },
-        { "date": "2024-09-22", "value": 47 },
-        { "date": "2024-09-25", "value": 56 },
-        { "date": "2024-09-27", "value": 59 },
-        { "date": "2024-09-30", "value": 61 }
+        { "date": "2024-02-12", "value": 42 },
+        { "date": "2024-02-15", "value": 48 },
+        { "date": "2024-02-17", "value": 55 },
+        { "date": "2024-02-18", "value": 58 },
+        { "date": "2024-02-20", "value": 62 }
       ],
       "events": [
         {
-          "slug": "georgia-ruling",
-          "title": "Georgia racketeering ruling resets the clock",
-          "date": "2024-09-23T10:00:00.000Z",
-          "description": "A Fulton County judge delays proceedings into 2025. The campaign frames the pause as proof the case is collapsing and uses the reprieve to claim momentum in swing states.",
-          "momentum": 58,
+          "slug": "warm-up-clash",
+          "title": "Aussies dominate Lincoln warm-up",
+          "date": "2024-02-18T01:00:00.000Z",
+          "description": "Practice match sees Lance Morris clock 150kph while Cameron Bancroft posts a rapid 80, nudging selection conversations.",
+          "momentum": 60,
           "relatedItemIds": ["article-1", "article-2"]
         },
         {
-          "slug": "gag-order-fight",
-          "title": "New York gag order fight becomes a censorship narrative",
-          "date": "2024-09-27T18:00:00.000Z",
-          "description": "Surrogates argue that limits on Trump's speech are an attack on supporters, driving sympathetic coverage and op-eds from allies.",
-          "momentum": 62,
+          "slug": "hazlewood-rested",
+          "title": "Hazlewood rested, Boland flies in",
+          "date": "2024-02-19T06:00:00.000Z",
+          "description": "Australia shuffle the pace stocks with workload management in mind ahead of a packed winter schedule.",
+          "momentum": 63,
           "relatedItemIds": ["article-3"]
         },
         {
-          "slug": "immunity-appeal",
-          "title": "Supreme Court appeal teasers revive immunity storyline",
-          "date": "2024-09-29T14:30:00.000Z",
-          "description": "Campaign lawyers preview new filings that they say will shield Trump from future prosecutions, reinforcing the promise of a second-term crackdown on DOJ critics.",
+          "slug": "smith-opening-call",
+          "title": "Smith to continue as Test opener",
+          "date": "2024-02-20T04:30:00.000Z",
+          "description": "Head coach Andrew McDonald backs Steven Smith to open alongside Usman Khawaja with Labuschagne locked at three.",
           "momentum": 64,
           "relatedItemIds": ["article-4"]
         }
       ]
     },
     {
-      "slug": "ground-game",
-      "title": "Swing-State Ground Game",
-      "summary": "Field organizing pushes in the Rust Belt and Sun Belt aimed at closing the early-vote gap.",
-      "curatedCopy": "## Organizing Infrastructure\nField staff are leaning on county GOP offices, faith leaders, and a revived \"Trump Force 47\" volunteer portal. The campaign highlights door-knocking stats at every rally to signal professionalization while maintaining the outsider vibe.\n\n### Key tactics\n1. Overlapping bus tours in Pennsylvania, Michigan, and Georgia.\n2. Micro-targeted radio ads focused on energy costs and border security.\n3. Faith outreach breakfasts that double as data collection events.",
+      "slug": "wncl-championship",
+      "title": "WNCL Final Countdown",
+      "summary": "Breakers and Tigers renew their rivalry in a North Sydney Oval finale with star-studded line-ups and sell-out momentum.",
+      "curatedCopy": "## Finals fever\nNSW regain Alyssa Healy while Elyse Villani returns for Tasmania after hamstring tightness. Both camps emphasise powerplay match-ups with cross-breeze expected to favour attacking stroke-play.\n\n### Tactical trends\n1. How Belinda Vakarewa and Lauren Cheatle manage new-ball overs.\n2. Middle-order acceleration with Phoebe Litchfield floating to exploit match-ups.\n3. Fielding units rehearsing aerial catching under lights for a twilight finish.",
       "callouts": [
         {
-          "title": "Staffing snapshot",
-          "markdown": "- 48 paid staffers announced across four battleground states.\n- County captains recruited from 2020 stop-the-steal networks."
+          "title": "Ticket pulse",
+          "markdown": "Only 1,200 general admission seats remain with family bays nearly exhausted."
         }
       ],
       "spotlightIds": ["article-5"],
       "momentumSeries": [
-        { "date": "2024-09-18", "value": 32 },
-        { "date": "2024-09-22", "value": 36 },
-        { "date": "2024-09-25", "value": 40 },
-        { "date": "2024-09-27", "value": 44 },
-        { "date": "2024-09-30", "value": 49 }
+        { "date": "2024-02-12", "value": 34 },
+        { "date": "2024-02-15", "value": 37 },
+        { "date": "2024-02-17", "value": 41 },
+        { "date": "2024-02-19", "value": 47 },
+        { "date": "2024-02-20", "value": 52 }
       ],
       "events": [
         {
-          "slug": "pennsylvania-field-offices",
-          "title": "Six new Pennsylvania field offices open ahead of mail voting",
-          "date": "2024-09-24T15:00:00.000Z",
-          "description": "Campaign claims 8,000 volunteers signed up after the openings, using live streams from each ribbon cutting.",
-          "momentum": 46,
-          "relatedItemIds": ["article-5", "article-6"]
-        },
-        {
-          "slug": "rural-bus-tour",
-          "title": "Rural bus tour spotlights energy message",
-          "date": "2024-09-26T20:00:00.000Z",
-          "description": "Surrogates barnstorm rural Ohio and Michigan touting drilling permits and farmers' fuel costs, capturing local TV coverage.",
-          "momentum": 48,
-          "relatedItemIds": ["article-7"]
-        },
-        {
-          "slug": "latino-faith-outreach",
-          "title": "Latino faith outreach adds bilingual voter guides",
-          "date": "2024-09-28T17:00:00.000Z",
-          "description": "Church partnerships distribute Spanish-language voter packets, part of a broader move to chip into Biden's coalition.",
+          "slug": "healy-cleared",
+          "title": "Healy cleared for WNCL decider",
+          "date": "2024-02-18T21:00:00.000Z",
+          "description": "NSW medical staff confirm Healy's return, giving the Breakers a top-order boost.",
           "momentum": 50,
-          "relatedItemIds": ["article-8"]
+          "relatedItemIds": ["article-5"]
+        },
+        {
+          "slug": "villani-fitness-test",
+          "title": "Villani passes late fitness test",
+          "date": "2024-02-19T08:30:00.000Z",
+          "description": "Tasmania's skipper declared ready after clearing match-eve mobility drills.",
+          "momentum": 52,
+          "relatedItemIds": ["article-6"]
+        },
+        {
+          "slug": "broadcast-upgrade",
+          "title": "Broadcast upgrade adds spidercam",
+          "date": "2024-02-20T02:15:00.000Z",
+          "description": "Cricket Australia and Fox confirm enhanced coverage elements including spidercam and player mic-ups.",
+          "momentum": 54,
+          "relatedItemIds": ["article-7"]
         }
       ]
     },
     {
-      "slug": "issue-messaging",
-      "title": "Issue Messaging & Narrative Testing",
-      "summary": "Rapid-response talking points on immigration, inflation, and foreign policy tested across conservative media.",
-      "curatedCopy": "## Narrative Testing\nCampaign pollsters feed nightly findings into surrogate briefings. Messaging pivots quickly to keep the news cycle on favorable terrain, often marrying immigration with inflation to hold focus.\n\n#### Channels\n- Late-night Truth Social posts.\n- Podcast blitzes hosted by allied influencers.\n- Geo-targeted pre-roll ads that shift by state.",
+      "slug": "big-bash-retool",
+      "title": "Big Bash List Shuffle",
+      "summary": "BBL and WBBL clubs begin list management with marquee targets, trade whispers, and coaching moves shaping the off-season.",
+      "curatedCopy": "## Contract window opens\nClubs have two weeks to finalise retentions before marquee offers to overseas stars go live. Brisbane Heat and Hobart Hurricanes head the queue for top-order finishers, while Melbourne Stars search for a frontline spinner.\n\n### Moves to monitor\n- Heat plotting a multi-year offer to English powerhouse Liam Livingstone.\n- Hurricanes sounding out South African quick Shabnim Ismail for dual WBBL duties.\n- Cricket Australia canvassing fans on expanded regional festival rounds.",
       "callouts": [
         {
-          "title": "Rapid-response cadence",
-          "markdown": "Clip packages are cut within 45 minutes of any major Biden gaffe and sent to a 2,000-person surrogate list."
+          "title": "Regulation refresh",
+          "markdown": "Revised contracting rules allow one additional overseas replacement slot subject to CA approval."
         }
       ],
-      "spotlightIds": ["article-9"],
+      "spotlightIds": ["article-8"],
       "momentumSeries": [
-        { "date": "2024-09-18", "value": 41 },
-        { "date": "2024-09-22", "value": 43 },
-        { "date": "2024-09-25", "value": 47 },
-        { "date": "2024-09-27", "value": 52 },
-        { "date": "2024-09-30", "value": 55 }
+        { "date": "2024-02-12", "value": 29 },
+        { "date": "2024-02-15", "value": 33 },
+        { "date": "2024-02-17", "value": 38 },
+        { "date": "2024-02-19", "value": 44 },
+        { "date": "2024-02-20", "value": 49 }
       ],
       "events": [
         {
-          "slug": "immigration-ad-blitz",
-          "title": "Immigration ad blitz ties border to inflation",
-          "date": "2024-09-25T12:00:00.000Z",
-          "description": "A wave of digital ads claims rising grocery prices stem from federal spending on migrants, a talking point echoed by surrogates on radio.",
-          "momentum": 53,
-          "relatedItemIds": ["article-9", "article-10"]
+          "slug": "heat-coaching-call",
+          "title": "Heat confirm Wade Seccombe extension",
+          "date": "2024-02-17T05:00:00.000Z",
+          "description": "Brisbane extend their coach through BBL|15, reinforcing stability ahead of contracting announcements.",
+          "momentum": 45,
+          "relatedItemIds": ["article-8"]
         },
         {
-          "slug": "debate-prep-messaging",
-          "title": "Debate prep memos leak to conservative outlets",
-          "date": "2024-09-29T11:00:00.000Z",
-          "description": "Selective leaks preview attacks on Biden's foreign policy, keeping the focus on Afghanistan while framing Trump as steady on world affairs.",
-          "momentum": 57,
-          "relatedItemIds": ["article-11"]
+          "slug": "hurricanes-targets",
+          "title": "Hurricanes narrow marquee shortlist",
+          "date": "2024-02-19T09:45:00.000Z",
+          "description": "Hobart open talks with two overseas finishers while eyeing a local quick through trade mechanisms.",
+          "momentum": 47,
+          "relatedItemIds": ["article-9"]
+        },
+        {
+          "slug": "festival-round-pilot",
+          "title": "Regional festival round pitched",
+          "date": "2024-02-20T07:20:00.000Z",
+          "description": "Cricket Australia surveys fans on taking WBBL double-headers to Launceston and Cairns.",
+          "momentum": 50,
+          "relatedItemIds": ["article-10"]
         }
       ]
     }
@@ -139,157 +147,143 @@
   "items": [
     {
       "id": "article-1",
-      "title": "Trump campaign blasts Georgia prosecutors after trial delay",
-      "link": "https://example.com/trump-georgia-delay",
-      "pubDate": "2024-09-23T15:45:00.000Z",
-      "content": "Senior aides told reporters the delay proves the case is political, urging supporters to donate to \"finish the fight\".",
-      "source": "Politico",
-      "category": "Legal",
-      "imageUrl": "https://images.example.com/trump-court.jpg",
-      "topics": ["legal-battles"],
-      "eventSlug": "georgia-ruling",
+      "title": "Morris and Bancroft star in Lincoln tour match",
+      "link": "https://www.cricket.com.au/news/morris-bancroft-tour-match-lincoln/",
+      "pubDate": "2024-02-18T05:45:00.000Z",
+      "content": "Fast bowler Lance Morris and opener Cameron Bancroft press their claims as Australia cruise through their New Zealand hit-out.",
+      "source": "cricket.com.au",
+      "category": "International",
+      "imageUrl": "https://images.cricket.com.au/morris-lincoln.jpg",
+      "topics": ["black-caps-tour"],
+      "eventSlug": "warm-up-clash",
+      "sentiment": "positive",
+      "momentumScore": 60
+    },
+    {
+      "id": "article-2",
+      "title": "Bancroft firms for Test recall after NZ warm-up",
+      "link": "https://www.foxsports.com.au/cricket/bancroft-test-recall-new-zealand/",
+      "pubDate": "2024-02-18T08:30:00.000Z",
+      "content": "Selectors hint that Bancroft could slot in should Australia reshuffle the top order in Wellington.",
+      "source": "Fox Sports",
+      "category": "Analysis",
+      "imageUrl": "https://images.foxsports.com.au/bancroft-celebrate.jpg",
+      "topics": ["black-caps-tour"],
+      "eventSlug": "warm-up-clash",
       "sentiment": "positive",
       "momentumScore": 58
     },
     {
-      "id": "article-2",
-      "title": "Fundraising text blitz follows Georgia ruling",
-      "link": "https://example.com/fundraising-texts",
-      "pubDate": "2024-09-24T02:30:00.000Z",
-      "content": "Within hours of the judge's order, the campaign sent seven fundraising texts referencing \"witch hunt delays\".",
-      "source": "Axios",
-      "category": "Campaign Finance",
-      "imageUrl": "https://images.example.com/text-blitz.jpg",
-      "topics": ["legal-battles", "ground-game"],
-      "eventSlug": "georgia-ruling",
-      "sentiment": "positive",
-      "momentumScore": 57
-    },
-    {
       "id": "article-3",
-      "title": "Trump allies decry gag order on conservative media",
-      "link": "https://example.com/gag-order-response",
-      "pubDate": "2024-09-27T22:10:00.000Z",
-      "content": "Surrogates lined up on talk radio to argue that the gag order is really aimed at silencing supporters.",
-      "source": "Fox News",
-      "category": "Media",
-      "imageUrl": "https://images.example.com/gag-order.jpg",
-      "topics": ["legal-battles", "issue-messaging"],
-      "eventSlug": "gag-order-fight",
-      "sentiment": "positive",
-      "momentumScore": 62
+      "title": "Hazlewood rested for opener as Boland called in",
+      "link": "https://www.smh.com.au/sport/cricket/hazlewood-rested-boland-flies-in-20240219-p5f2z7.html",
+      "pubDate": "2024-02-19T06:30:00.000Z",
+      "content": "Workload management sees Hazlewood miss Wellington with Boland linking with the squad as cover.",
+      "source": "Sydney Morning Herald",
+      "category": "Team News",
+      "imageUrl": "https://images.smh.com.au/hazlewood-rest.jpg",
+      "topics": ["black-caps-tour"],
+      "eventSlug": "hazlewood-rested",
+      "sentiment": "neutral",
+      "momentumScore": 63
     },
     {
       "id": "article-4",
-      "title": "Campaign previews Supreme Court immunity appeal",
-      "link": "https://example.com/immunity-appeal",
-      "pubDate": "2024-09-29T16:05:00.000Z",
-      "content": "Advisers say a conservative majority will rein in the Department of Justice, promising day-one reforms.",
-      "source": "Wall Street Journal",
-      "category": "Legal",
-      "imageUrl": "https://images.example.com/supreme-court.jpg",
-      "topics": ["legal-battles", "issue-messaging"],
-      "eventSlug": "immunity-appeal",
+      "title": "Smith to persist as opener for Kiwi Tests",
+      "link": "https://www.espncricinfo.com/story/australia-commit-to-steven-smith-as-test-opener-1423456",
+      "pubDate": "2024-02-20T05:10:00.000Z",
+      "content": "Coach Andrew McDonald says the Smith-Khawaja partnership will open in Wellington with Labuschagne anchored at three.",
+      "source": "ESPNcricinfo",
+      "category": "Strategy",
+      "imageUrl": "https://img.espncricinfo.com/smith-training.jpg",
+      "topics": ["black-caps-tour"],
+      "eventSlug": "smith-opening-call",
       "sentiment": "positive",
       "momentumScore": 64
     },
     {
       "id": "article-5",
-      "title": "Trump opens six field offices across Pennsylvania",
-      "link": "https://example.com/pennsylvania-field",
-      "pubDate": "2024-09-24T18:30:00.000Z",
-      "content": "Ribbon cuttings featured local lawmakers and targeted messages about energy prices.",
-      "source": "Philadelphia Inquirer",
-      "category": "Ground Game",
-      "imageUrl": "https://images.example.com/field-office.jpg",
-      "topics": ["ground-game"],
-      "eventSlug": "pennsylvania-field-offices",
-      "sentiment": "positive",
-      "momentumScore": 46
-    },
-    {
-      "id": "article-6",
-      "title": "Volunteer sign-ups surge after field office blitz",
-      "link": "https://example.com/volunteer-surge",
-      "pubDate": "2024-09-25T14:20:00.000Z",
-      "content": "Campaign claims 8,000 new volunteers, though Democrats dispute the number.",
-      "source": "NBC News",
-      "category": "Ground Game",
-      "imageUrl": "https://images.example.com/volunteers.jpg",
-      "topics": ["ground-game"],
-      "eventSlug": "pennsylvania-field-offices",
-      "sentiment": "neutral",
-      "momentumScore": 44
-    },
-    {
-      "id": "article-7",
-      "title": "Rural bus tour amplifies energy message",
-      "link": "https://example.com/rural-bus",
-      "pubDate": "2024-09-26T22:40:00.000Z",
-      "content": "The bus tour stops at small-town diners with local radio hits about drilling and inflation.",
-      "source": "Cleveland Plain Dealer",
-      "category": "Ground Game",
-      "imageUrl": "https://images.example.com/bus-tour.jpg",
-      "topics": ["ground-game", "issue-messaging"],
-      "eventSlug": "rural-bus-tour",
-      "sentiment": "positive",
-      "momentumScore": 48
-    },
-    {
-      "id": "article-8",
-      "title": "Latino pastors partner with Trump team on voter guides",
-      "link": "https://example.com/latino-voter-guides",
-      "pubDate": "2024-09-28T19:15:00.000Z",
-      "content": "Spanish-language voter packets are distributed alongside food drives in Phoenix and Orlando.",
-      "source": "Univision",
-      "category": "Outreach",
-      "imageUrl": "https://images.example.com/latino-outreach.jpg",
-      "topics": ["ground-game"],
-      "eventSlug": "latino-faith-outreach",
+      "title": "Healy cleared to lead Breakers in WNCL final",
+      "link": "https://www.cricket.com.au/news/healy-returns-wncl-final-breakers-tigers/",
+      "pubDate": "2024-02-18T22:00:00.000Z",
+      "content": "NSW confirm Alyssa Healy will take the gloves after clearing concussion protocols ahead of the decider.",
+      "source": "cricket.com.au",
+      "category": "WNCL",
+      "imageUrl": "https://images.cricket.com.au/healy-return.jpg",
+      "topics": ["wncl-championship"],
+      "eventSlug": "healy-cleared",
       "sentiment": "positive",
       "momentumScore": 50
     },
     {
-      "id": "article-9",
-      "title": "Immigration ad blitz links border to inflation",
-      "link": "https://example.com/immigration-ads",
-      "pubDate": "2024-09-25T13:10:00.000Z",
-      "content": "Ads feature grocery carts and Border Patrol footage, testing a new hybrid message.",
-      "source": "Washington Post",
-      "category": "Advertising",
-      "imageUrl": "https://images.example.com/immigration-ads.jpg",
-      "topics": ["issue-messaging"],
-      "eventSlug": "immigration-ad-blitz",
+      "id": "article-6",
+      "title": "Villani fitness tick boosts Tigers hopes",
+      "link": "https://www.themercury.com.au/sport/cricket/villani-cleared-for-wncl-final/news-story",
+      "pubDate": "2024-02-19T09:00:00.000Z",
+      "content": "Tasmania captain Elyse Villani wins her race against time to feature in Saturday's showdown.",
+      "source": "The Mercury",
+      "category": "WNCL",
+      "imageUrl": "https://images.themercury.com.au/villani-training.jpg",
+      "topics": ["wncl-championship"],
+      "eventSlug": "villani-fitness-test",
       "sentiment": "positive",
-      "momentumScore": 53
+      "momentumScore": 52
+    },
+    {
+      "id": "article-7",
+      "title": "Spidercam to debut for women's domestic final",
+      "link": "https://www.abc.net.au/news/spidercam-wncl-final-broadcast-upgrade/",
+      "pubDate": "2024-02-20T02:45:00.000Z",
+      "content": "Enhanced broadcast coverage promised as Cricket Australia invests in elevated production for the women's final.",
+      "source": "ABC News",
+      "category": "Broadcast",
+      "imageUrl": "https://live-production.wcms.abc-cdn.net.au/spidercam.jpg",
+      "topics": ["wncl-championship", "big-bash-retool"],
+      "eventSlug": "broadcast-upgrade",
+      "sentiment": "positive",
+      "momentumScore": 54
+    },
+    {
+      "id": "article-8",
+      "title": "Heat lock in coach Wade Seccombe through 2026",
+      "link": "https://www.brisbaneheat.com.au/news/heat-coach-extension/",
+      "pubDate": "2024-02-17T05:30:00.000Z",
+      "content": "Brisbane Heat extend their head coach as they eye marquee signings in the opening of the contracting window.",
+      "source": "Brisbane Heat",
+      "category": "BBL",
+      "imageUrl": "https://images.brisbaneheat.com.au/seccombe.jpg",
+      "topics": ["big-bash-retool"],
+      "eventSlug": "heat-coaching-call",
+      "sentiment": "positive",
+      "momentumScore": 45
+    },
+    {
+      "id": "article-9",
+      "title": "Hurricanes hunt finisher as contracting window opens",
+      "link": "https://www.theage.com.au/sport/cricket/hurricanes-marquee-targets-20240219-p5f30a.html",
+      "pubDate": "2024-02-19T10:00:00.000Z",
+      "content": "Hobart Hurricanes zero in on overseas finisher options while canvassing a local quick via trade.",
+      "source": "The Age",
+      "category": "BBL",
+      "imageUrl": "https://images.theage.com.au/hurricanes-coach.jpg",
+      "topics": ["big-bash-retool"],
+      "eventSlug": "hurricanes-targets",
+      "sentiment": "neutral",
+      "momentumScore": 47
     },
     {
       "id": "article-10",
-      "title": "Fact-checkers push back on ad claims about migrant spending",
-      "link": "https://example.com/fact-check",
-      "pubDate": "2024-09-26T09:00:00.000Z",
-      "content": "Independent fact-checkers say the numbers are exaggerated, but the campaign doubles down in response videos.",
-      "source": "AP",
-      "category": "Fact Check",
-      "imageUrl": "https://images.example.com/fact-check.jpg",
-      "topics": ["issue-messaging", "legal-battles"],
-      "eventSlug": "immigration-ad-blitz",
-      "sentiment": "negative",
-      "momentumScore": 48
-    },
-    {
-      "id": "article-11",
-      "title": "Debate prep memo outlines foreign policy attacks",
-      "link": "https://example.com/debate-memo",
-      "pubDate": "2024-09-29T13:55:00.000Z",
-      "content": "Leaked slides suggest a focus on Afghanistan, arguing Biden cannot handle crises abroad.",
-      "source": "Bloomberg",
-      "category": "Debate",
-      "imageUrl": "https://images.example.com/debate-prep.jpg",
-      "topics": ["issue-messaging", "legal-battles"],
-      "eventSlug": "debate-prep-messaging",
+      "title": "Fans asked to vote on WBBL festival rounds",
+      "link": "https://www.cricket.com.au/news/wbbl-festival-rounds-survey/",
+      "pubDate": "2024-02-20T07:30:00.000Z",
+      "content": "Cricket Australia surveys supporters on potential regional festival weekends in Launceston and Cairns.",
+      "source": "cricket.com.au",
+      "category": "WBBL",
+      "imageUrl": "https://images.cricket.com.au/wbbl-fans.jpg",
+      "topics": ["big-bash-retool", "wncl-championship"],
+      "eventSlug": "festival-round-pilot",
       "sentiment": "positive",
-      "momentumScore": 57
+      "momentumScore": 50
     }
   ]
 }

@@ -7,8 +7,8 @@
 
   <ng-template #emptyState>
     <div class="hero__headline">
-      <p class="hero__eyebrow">Campaign insights</p>
-      <h2 class="hero__title">Tracking breaking news, policy shifts, and campaign moments</h2>
+      <p class="hero__eyebrow">Cricket insights</p>
+      <h2 class="hero__title">Tracking breaking news, squad changes, and match-day storylines</h2>
     </div>
   </ng-template>
 
@@ -30,7 +30,7 @@
     </article>
 
     <article class="metric" *ngIf="metrics.trendingIssues.length">
-      <h3 class="metric__value">Trending issues</h3>
+      <h3 class="metric__value">Trending topics</h3>
       <ul class="metric__list">
         <li *ngFor="let issue of metrics.trendingIssues">{{ issue | titlecase }}</li>
       </ul>

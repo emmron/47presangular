@@ -1,25 +1,25 @@
-<aside class="campaign-sidebar" aria-labelledby="sidebar-title">
-  <div class="campaign-sidebar__section">
+<aside class="cricket-sidebar" aria-labelledby="sidebar-title">
+  <div class="cricket-sidebar__section">
     <h2 id="sidebar-title">Stay engaged</h2>
-    <p>Key actions and resources to keep the campaign momentum moving.</p>
-    <ul class="campaign-sidebar__list">
+    <p>Support Aussie cricket pathways with official programs and fan perks.</p>
+    <ul class="cricket-sidebar__list">
       <li *ngFor="let cta of takeActionCtas">
-        <a class="campaign-sidebar__card" [href]="cta.href" target="_blank" rel="noopener noreferrer"
+        <a class="cricket-sidebar__card" [href]="cta.href" target="_blank" rel="noopener noreferrer"
           [attr.aria-label]="cta.ariaLabel">
-          <span class="campaign-sidebar__card-label">{{ cta.label }}</span>
-          <span class="campaign-sidebar__card-description">{{ cta.description }}</span>
+          <span class="cricket-sidebar__card-label">{{ cta.label }}</span>
+          <span class="cricket-sidebar__card-description">{{ cta.description }}</span>
         </a>
       </li>
     </ul>
   </div>
-  <div class="campaign-sidebar__section">
+  <div class="cricket-sidebar__section">
     <h3>Additional resources</h3>
-    <ul class="campaign-sidebar__list campaign-sidebar__list--compact">
+    <ul class="cricket-sidebar__list cricket-sidebar__list--compact">
       <li *ngFor="let link of resourceLinks">
-        <a class="campaign-sidebar__link" [href]="link.href" target="_blank" rel="noopener noreferrer"
+        <a class="cricket-sidebar__link" [href]="link.href" target="_blank" rel="noopener noreferrer"
           [attr.aria-label]="link.ariaLabel">
-          <span class="campaign-sidebar__card-label">{{ link.label }}</span>
-          <span class="campaign-sidebar__card-description">{{ link.description }}</span>
+          <span class="cricket-sidebar__card-label">{{ link.label }}</span>
+          <span class="cricket-sidebar__card-description">{{ link.description }}</span>
         </a>
       </li>
     </ul>
