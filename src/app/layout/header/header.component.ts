@@ -38,61 +38,61 @@ export class HeaderComponent {
   megaMenuOpen = false;
 
   readonly navLinks: NavLink[] = [
-    { label: 'News', route: '/news' },
-    { label: 'Dashboard', route: '/dashboard' },
-    { label: 'Events', route: '/events' },
-    { label: 'Get Involved', route: '/get-involved' }
+    { label: 'Latest News', route: '/news' },
+    { label: 'Match Centre', route: '/dashboard' },
+    { label: 'Fixtures', route: '/events' },
+    { label: 'Fan Hub', route: '/get-involved' }
   ];
 
   readonly megaMenuSections: MegaMenuSection[] = [
     {
-      heading: 'Top Priorities',
+      heading: 'National Teams',
       items: [
         {
-          label: 'Economic Agenda',
-          description: 'Jobs, inflation, and trade policy priorities.',
+          label: "Men's Internationals",
+          description: 'Test, ODI, and T20 squads, selections, and injury updates.',
           route: '/issues',
-          fragment: 'economy'
+          fragment: 'mens-australia'
         },
         {
-          label: 'Border & Security',
-          description: 'Immigration, national defense, and public safety.',
+          label: "Women's Internationals",
+          description: 'Southern Stars touring news, selection calls, and form guide.',
           route: '/issues',
-          fragment: 'security'
+          fragment: 'womens-australia'
         }
       ]
     },
     {
-      heading: 'Policy Pillars',
+      heading: 'Domestic Leagues',
       items: [
         {
-          label: 'Healthcare & Social',
-          description: 'Healthcare access, veteran services, and family support.',
+          label: 'Big Bash League',
+          description: 'BBL and WBBL squad moves, draft coverage, and marquee moments.',
           route: '/issues',
-          fragment: 'healthcare'
+          fragment: 'big-bash'
         },
         {
-          label: 'Election Integrity',
-          description: 'Voting reforms and oversight initiatives.',
+          label: 'Sheffield Shield & Marsh Cup',
+          description: 'Red-ball form lines and one-day ladder implications for selectors.',
           route: '/issues',
-          fragment: 'elections'
+          fragment: 'sheffield-shield'
         }
       ]
     },
     {
-      heading: 'Movement Voices',
+      heading: 'Pathways & Community',
       items: [
         {
-          label: 'Grassroots Spotlights',
-          description: 'Community stories and volunteer organizing.',
+          label: 'Premier Cricket',
+          description: 'Club cricket standouts and NextGen prospects to keep an eye on.',
           route: '/issues',
-          fragment: 'grassroots'
+          fragment: 'premier-cricket'
         },
         {
-          label: 'Media Statements',
-          description: 'Campaign press releases and official responses.',
+          label: 'Participation & Grassroots',
+          description: 'Participation programs, community grants, and inclusion initiatives.',
           route: '/issues',
-          fragment: 'media'
+          fragment: 'community-cricket'
         }
       ]
     }
@@ -100,21 +100,21 @@ export class HeaderComponent {
 
   readonly ctas: CtaLink[] = [
     {
-      label: 'Donate',
-      description: 'Power the movement with a contribution.',
-      href: 'https://www.donaldjtrump.com/',
+      label: 'Subscribe',
+      description: 'Weekly digest direct from Aussie Cricket Pulse editors.',
+      href: 'https://www.cricket.com.au/newsletters',
       style: 'primary'
     },
     {
-      label: 'Volunteer',
-      description: 'Host events or knock doors in your community.',
-      href: 'https://www.donaldjtrump.com/join/',
+      label: 'Buy Tickets',
+      description: 'Secure seats for internationals and Big Bash blockbusters.',
+      href: 'https://www.cricket.com.au/tickets',
       style: 'outline'
     },
     {
-      label: 'Subscribe',
-      description: 'Get rapid response alerts from campaign HQ.',
-      href: 'https://www.donaldjtrump.com/subscribe/',
+      label: 'Find a Club',
+      description: 'Join a local side through the national PlayCricket directory.',
+      href: 'https://www.playcricket.com.au/club-finder',
       style: 'ghost'
     }
   ];

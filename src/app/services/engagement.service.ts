@@ -2,54 +2,54 @@ import { Injectable } from '@angular/core';
 import { TrackingService, TrackingParams } from './tracking.service';
 
 export interface EngagementAction {
-  id: 'donate' | 'volunteer';
+  id: 'tickets' | 'club';
   label: string;
   description: string;
   url: string;
-  platform: 'winRed' | 'actBlue' | 'custom';
+  platform: 'cricket.com.au' | 'playcricket';
 }
 
 @Injectable({ providedIn: 'root' })
 export class EngagementService {
-  private readonly donationBaseUrl = 'https://secure.winred.com/trump47/donate';
-  private readonly volunteerBaseUrl = 'https://action.ngpvan.com/trump47/volunteer';
+  private readonly ticketBaseUrl = 'https://www.cricket.com.au/tickets';
+  private readonly clubFinderUrl = 'https://www.playcricket.com.au/club-finder';
 
   constructor(private tracking: TrackingService) {}
 
   getInlineActions(referralCode?: string): EngagementAction[] {
     return [
-      this.buildAction('donate', {
+      this.buildAction('tickets', {
         source: 'site',
         medium: 'inline_cta',
-        campaign: 'daily_engagement',
-        content: 'donation_banner',
+        initiative: 'aussie_cricket_pulse',
+        content: 'ticket_banner',
         referralCode,
       }),
-      this.buildAction('volunteer', {
+      this.buildAction('club', {
         source: 'site',
         medium: 'inline_cta',
-        campaign: 'daily_engagement',
-        content: 'volunteer_banner',
+        initiative: 'aussie_cricket_pulse',
+        content: 'club_banner',
         referralCode,
       }),
     ];
   }
 
-  private buildAction(id: 'donate' | 'volunteer', params: TrackingParams): EngagementAction {
-    const isDonate = id === 'donate';
+  private buildAction(id: EngagementAction['id'], params: TrackingParams): EngagementAction {
+    const isTicket = id === 'tickets';
     const url = this.tracking.buildTrackedUrl(
-      isDonate ? this.donationBaseUrl : this.volunteerBaseUrl,
+      isTicket ? this.ticketBaseUrl : this.clubFinderUrl,
       params
     );
 
     return {
       id,
-      label: isDonate ? 'Donate Now' : 'Volunteer Today',
-      description: isDonate
-        ? 'Fuel the ground game with a rapid contribution via WinRed-style checkout.'
-        : 'Join the field team, phone bank, or host events synced to NGP VAN.',
+      label: isTicket ? 'Buy match tickets' : 'Find a club',
+      description: isTicket
+        ? 'Reserve seats for internationals, WBBL, and Big Bash fixtures.'
+        : 'Connect with junior and senior teams across Australia.',
       url,
-      platform: isDonate ? 'winRed' : 'actBlue',
+      platform: isTicket ? 'cricket.com.au' : 'playcricket',
     };
   }
 }

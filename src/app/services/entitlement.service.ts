@@ -9,6 +9,7 @@ export interface EntitlementState {
 
 @Injectable({ providedIn: 'root' })
 export class EntitlementService {
+  private readonly storageKey = 'acp_entitlement';
   private readonly state$ = new BehaviorSubject<EntitlementState>({
     isAuthenticated: false,
     plan: 'free',
@@ -21,7 +22,7 @@ export class EntitlementService {
       return;
     }
 
-    const raw = localStorage.getItem('trump47_entitlement');
+    const raw = localStorage.getItem(this.storageKey);
     if (raw) {
       const parsed = JSON.parse(raw) as EntitlementState;
       if (parsed.expiresAt) {
@@ -68,6 +69,6 @@ export class EntitlementService {
     }
 
     const state = this.state$.value;
-    localStorage.setItem('trump47_entitlement', JSON.stringify(state));
+    localStorage.setItem(this.storageKey, JSON.stringify(state));
   }
 }

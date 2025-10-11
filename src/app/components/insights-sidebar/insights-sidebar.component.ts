@@ -19,28 +19,28 @@ type Insight = {
 export class InsightsSidebarComponent {
   readonly insights: Insight[] = [
     {
-      label: 'Digital reach',
-      value: '2.1M',
+      label: 'Home summer form',
+      value: '3-0',
       trend: 'up',
-      description: 'Impressions across official channels in the last 48 hours'
+      description: 'Men’s ODI and T20 series wins to start the season'
     },
     {
-      label: 'Grassroots events',
-      value: '38',
+      label: 'BBL run rate',
+      value: '8.6',
+      trend: 'up',
+      description: 'League-wide scoring rate through week three'
+    },
+    {
+      label: 'WBBL attendance',
+      value: '41K',
       trend: 'steady',
-      description: 'Scheduled rallies and town halls this week'
-    },
-    {
-      label: 'Volunteer signups',
-      value: '+14%',
-      trend: 'up',
-      description: 'Week-over-week increase in new volunteers'
+      description: 'Fans through the gates across the most recent round'
     }
   ];
 
   readonly keyActions: string[] = [
-    'Track upcoming debate preparation milestones',
-    'Highlight localized policy rollouts for supporters',
-    'Coordinate regional press availability with rapid response team'
+    'Track Marsh Cup ladder movement each weekend',
+    'Monitor selection whispers ahead of the Perth Test',
+    'Spotlight junior nationals prospects pushing for contracts'
   ];
 }

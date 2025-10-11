@@ -19,22 +19,22 @@ type FeaturedStory = {
 export class FeaturedStoriesComponent {
   readonly stories: FeaturedStory[] = [
     {
-      title: 'Ground Game Intensifies in Swing States',
-      excerpt: 'Organizers ramp up door-to-door outreach in Pennsylvania and Arizona as polling margins tighten.',
-      topic: 'Field Operations',
-      url: 'https://www.donaldjtrump.com/news/'
+      title: 'Marsh steadies Australia in Brisbane day-night Test',
+      excerpt: 'The stand-in skipper produced an unbeaten 96 to guide Australia past Pakistan under lights at the Gabba.',
+      topic: 'International',
+      url: 'https://www.cricket.com.au/news/mitchell-marsh-australia-pakistan-gabba-test-highlights/2024-11-08'
     },
     {
-      title: 'Fundraising Push Sets New Monthly Record',
-      excerpt: 'Digital campaigns and grassroots donations combine for a historic funding surge across small-dollar donors.',
-      topic: 'Fundraising',
-      url: 'https://www.donaldjtrump.com/news/'
+      title: 'Heat unveil fearless brand ahead of BBL|14 opener',
+      excerpt: 'Coach Wade Seccombe explains the aggressive blueprint built around young quicks and power hitters.',
+      topic: 'BBL',
+      url: 'https://www.cricket.com.au/news/brisbane-heat-big-bash-league-season-preview-wade-seccombe/2024-11-06'
     },
     {
-      title: 'Policy Rollout Focuses on Energy Independence',
-      excerpt: 'The campaign outlines a renewed strategy for domestic energy production aimed at lowering costs for families.',
-      topic: 'Policy',
-      url: 'https://www.donaldjtrump.com/news/'
+      title: 'WNCL pipeline delivering stars for Southern Stars',
+      excerpt: 'National selectors outline how domestic standouts Phoebe Litchfield and Tess Flintoff forced their way in.',
+      topic: 'Pathways',
+      url: 'https://www.espncricinfo.com/story/how-australia-s-domestic-cricket-is-powering-the-women-s-team-1423897'
     }
   ];
 }

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 export interface TrackingParams {
   source: string;
   medium: string;
-  campaign: string;
+  initiative: string;
   content?: string;
   referralCode?: string;
   [key: string]: string | undefined;
@@ -11,8 +11,8 @@ export interface TrackingParams {
 
 @Injectable({ providedIn: 'root' })
 export class TrackingService {
-  private readonly hubspotPortalId = 'HUBSPOT_PORTAL_ID';
-  private readonly ngpVANCommitteeId = 'NGP_VAN_COMMITTEE_ID';
+  private readonly analyticsPartnerId = 'SPORTS_HUB_ID';
+  private readonly participationPartnerId = 'PLAYCRICKET_PARTNER_ID';
 
   buildTrackedUrl(baseUrl: string, params: TrackingParams): string {
     const url = new URL(baseUrl);
@@ -22,16 +22,16 @@ export class TrackingService {
       }
     });
 
-    // Attach CRM references so the links can be ingested downstream.
-    url.searchParams.set('hubspot_portal_id', this.hubspotPortalId);
-    url.searchParams.set('ngp_van_committee_id', this.ngpVANCommitteeId);
+    // Attach analytics references used by partner dashboards.
+    url.searchParams.set('analytics_partner_id', this.analyticsPartnerId);
+    url.searchParams.set('participation_partner_id', this.participationPartnerId);
 
     return url.toString();
   }
 
   emitEvent(eventName: string, payload: Record<string, unknown> = {}): void {
-    // In a real deployment this would forward to Google Analytics, HubSpot, and NGP VAN.
-    // For now we log to the console so the data pipeline can be validated in QA.
+    // In a real deployment this would forward to GA4, Adobe Analytics, or partner data pipelines.
+    // For now we log to the console so the instrumentation can be validated in QA environments.
     console.debug('[tracking]', eventName, payload);
   }
 }

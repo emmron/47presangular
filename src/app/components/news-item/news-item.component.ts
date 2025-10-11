@@ -53,7 +53,7 @@ export class NewsItemComponent {
     const params = {
       source: 'news_card',
       medium: 'social_share',
-      campaign: 'news_distribution',
+      initiative: 'news_distribution',
       content: this.item.id,
       referralCode
     } as const;

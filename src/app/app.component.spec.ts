@@ -12,20 +12,19 @@ class ExperimentServiceStub {
 
 class ReferralServiceStub {
   getReferralCode(): string {
-    return 'T47-TEST';
+    return 'ACP-TEST';
   }
 }
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AppComponent]
       imports: [AppComponent],
-      providers: [provideRouter([])]
       providers: [
+        provideRouter([]),
         { provide: ExperimentService, useClass: ExperimentServiceStub },
-        { provide: ReferralService, useClass: ReferralServiceStub },
-      ],
+        { provide: ReferralService, useClass: ReferralServiceStub }
+      ]
     }).compileComponents();
   });
 
@@ -35,11 +34,10 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it('should have the campaign tracker title', () => {
-  it('should have the tracker title', () => {
+  it('should expose the site title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('Trump 47 Campaign Tracker');
+    expect(app.title).toEqual('Aussie Cricket Pulse');
   });
 
   it('should render a skip link for accessibility', () => {
@@ -47,11 +45,12 @@ describe('AppComponent', () => {
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.querySelector('.skip-link')?.textContent?.trim()).toBe('Skip to main content');
-  it('should render the layout header title', () => {
+  });
+
+  it('should render the brand in the shell header', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Trump 47 Campaign Tracker');
-    expect(compiled.querySelector('.brand')?.textContent).toContain('Trump 47 Campaign Tracker');
+    expect(compiled.querySelector('.shell__title')?.textContent).toContain('Aussie Cricket Pulse');
   });
 });

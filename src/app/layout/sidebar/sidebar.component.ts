@@ -18,37 +18,37 @@ interface SidebarCta {
 export class SidebarComponent {
   readonly takeActionCtas: SidebarCta[] = [
     {
-      label: 'Chip in $20.24',
-      description: 'Donate to accelerate key battleground operations.',
-      href: 'https://www.donaldjtrump.com/',
-      ariaLabel: 'Donate twenty dollars and twenty four cents'
+      label: 'Stream the action',
+      description: 'Watch internationals and Big Bash via Kayo Sports or Foxtel.',
+      href: 'https://help.kayosports.com.au/s/article/Where-can-I-watch-Cricket-Australia',
+      ariaLabel: 'Find where to stream Australian cricket'
     },
     {
-      label: 'Become a Captain',
-      description: 'Lead local volunteer teams and coordinate canvasses.',
-      href: 'https://www.donaldjtrump.com/join/',
-      ariaLabel: 'Sign up to become a neighborhood captain'
+      label: 'Ticket hub',
+      description: 'Secure seats for internationals, WBBL, and domestic finals.',
+      href: 'https://www.cricket.com.au/tickets',
+      ariaLabel: 'Open the Cricket Australia ticket hub'
     },
     {
-      label: 'Rapid Response List',
-      description: 'Get SMS alerts for breaking news and key votes.',
-      href: 'https://www.donaldjtrump.com/subscribe/',
-      ariaLabel: 'Subscribe to the Trump rapid response list'
+      label: 'Join a local club',
+      description: 'Use PlayCricket to discover junior and senior clubs near you.',
+      href: 'https://www.playcricket.com.au/club-finder',
+      ariaLabel: 'Find a local cricket club via PlayCricket'
     }
   ];
 
   readonly resourceLinks: SidebarCta[] = [
     {
-      label: 'State Leadership',
-      description: 'Find your state director and field staff.',
-      href: 'https://www.donaldjtrump.com/states/',
-      ariaLabel: 'Explore state leadership contacts'
+      label: 'Domestic ladders',
+      description: 'Follow Sheffield Shield, WNCL, and Premier Cricket tables.',
+      href: 'https://www.cricket.com.au/matches/domestic',
+      ariaLabel: 'View domestic cricket ladders'
     },
     {
-      label: 'Events Calendar',
-      description: 'See rallies, town halls, and digital events near you.',
-      href: 'https://www.donaldjtrump.com/events/',
-      ariaLabel: 'Open the campaign events calendar'
+      label: 'High Performance Centre',
+      description: 'Insights from the National Cricket Centre and pathway squads.',
+      href: 'https://www.cricket.com.au/high-performance',
+      ariaLabel: 'Learn about Cricket Australia high performance programs'
     }
   ];
 }

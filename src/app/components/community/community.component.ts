@@ -7,7 +7,7 @@ interface CommunityThread {
   description: string;
   link: string;
   platform: 'reddit' | 'official';
-  moderationLevel: 'community' | 'campaign';
+  moderationLevel: 'community' | 'editorial';
 }
 
 @Component({
@@ -20,25 +20,25 @@ interface CommunityThread {
 export class CommunityComponent {
   readonly featuredThreads: CommunityThread[] = [
     {
-      title: 'Strategy AMA with campaign leadership',
-      description: 'Bring your questions for the digital, field, and finance directors. Moderated by the official campaign team.',
-      link: 'https://community.trump47.com/threads/strategy-ama',
-      platform: 'official',
-      moderationLevel: 'campaign',
-    },
-    {
-      title: 'Grassroots organizing toolkit',
-      description: 'Volunteer leaders share the scripts and materials that are working in their counties.',
-      link: 'https://www.reddit.com/r/Conservative/comments/toolkit',
+      title: 'Selection chat: Who opens in Perth?',
+      description: 'Fans debate whether Harris or Renshaw should partner Khawaja in the first Test against India.',
+      link: 'https://www.reddit.com/r/Cricket/comments/selection_chat_first_test_openers/',
       platform: 'reddit',
       moderationLevel: 'community',
     },
     {
-      title: 'Digital rapid response room',
-      description: 'Coordinate social media pushes in real time. Official moderators surface priority narratives.',
-      link: 'https://community.trump47.com/threads/digital-war-room',
+      title: 'Coach forum: WBBL tactics live session',
+      description: 'Brisbane Heat staff share powerplay plans and invite junior coaches to ask questions.',
+      link: 'https://www.cricket.com.au/news/wbbl-coaching-forum-registration/2024-11-05',
       platform: 'official',
-      moderationLevel: 'campaign',
+      moderationLevel: 'editorial',
+    },
+    {
+      title: 'Grassroots grants AMA',
+      description: 'Cricket Australia participation managers outline funding options for clubs upgrading facilities.',
+      link: 'https://www.playcricket.com.au/community/news/club-grants-ama',
+      platform: 'official',
+      moderationLevel: 'editorial',
     },
   ];
 

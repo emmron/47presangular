@@ -8,4 +8,6 @@ import { ShellComponent } from './layout/shell/shell.component';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {}
+export class AppComponent {
+  readonly title = 'Aussie Cricket Pulse';
+}
