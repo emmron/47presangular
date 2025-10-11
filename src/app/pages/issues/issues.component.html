@@ -1,0 +1,18 @@
+<section class="issues" aria-labelledby="issues-heading">
+  <header class="issues__intro">
+    <p class="issues__eyebrow">Policy agenda</p>
+    <h1 id="issues-heading">Where the campaign is focused</h1>
+    <p class="issues__lede">
+      Explore core priorities shaping the movement and dive into highlight reels pulled from the campaign trail.
+    </p>
+  </header>
+  <div class="issues__grid">
+    <article *ngFor="let section of sections" class="issues__card" [attr.id]="section.id">
+      <h2>{{ section.title }}</h2>
+      <p>{{ section.summary }}</p>
+      <ul>
+        <li *ngFor="let bullet of section.bullets">{{ bullet }}</li>
+      </ul>
+    </article>
+  </div>
+</section>

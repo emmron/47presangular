@@ -1,0 +1,67 @@
+@use '../../shared/styles/tokens';
+@use '../../shared/styles/mixins';
+
+.app-shell {
+  margin: 0 auto;
+  width: min(100%, 1280px);
+  padding: var(--space-6) var(--space-5) var(--space-8);
+
+  &__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 320px;
+    gap: var(--space-6);
+    align-items: flex-start;
+  }
+
+  &__main {
+    display: block;
+    min-height: 60vh;
+    background: tokens.color('surface');
+    border-radius: var(--radius-xl);
+    padding: var(--space-6);
+    border: 1px solid tokens.color('border');
+    box-shadow: var(--shadow);
+    position: relative;
+    isolation: isolate;
+  }
+
+  &__sidebar {
+    position: sticky;
+    top: var(--space-9);
+  }
+}
+
+@include mixins.respond('lg') {
+  .app-shell {
+    padding: var(--space-5) var(--space-4) var(--space-6);
+
+    &__grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    &__sidebar {
+      position: static;
+      order: 2;
+    }
+
+    &__main {
+      order: 1;
+    }
+  }
+}
+
+@include mixins.respond('md') {
+  .app-shell {
+    padding-inline: var(--space-3);
+
+    &__main {
+      padding: var(--space-4);
+    }
+  }
+}
+
+@include mixins.respond('sm') {
+  .app-shell__main {
+    padding: var(--space-3);
+  }
+}
