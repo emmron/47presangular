@@ -49,4 +49,76 @@
   border-radius: 1rem;
   box-shadow: var(--shadow-md);
   padding: 1.5rem;
+main {
+  min-height: 100vh;
+  background: #f0f2f5;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.site-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1.5rem;
+  align-items: center;
+
+  .branding {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+
+    .logo {
+      display: grid;
+      place-items: center;
+      width: 3.5rem;
+      height: 3.5rem;
+      border-radius: 1rem;
+      background: linear-gradient(135deg, #0a2a5b, #c41230);
+      color: #fff;
+      font-weight: 800;
+      font-size: 1.75rem;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 2rem;
+      color: #0a2a5b;
+    }
+
+    p {
+      margin: 0;
+      color: #4f5b75;
+    }
+  }
+
+  nav {
+    display: inline-flex;
+    gap: 1rem;
+
+    a {
+      text-decoration: none;
+      font-weight: 600;
+      color: #0a2a5b;
+      padding: 0.5rem 1rem;
+      border-radius: 999px;
+      transition: background 0.2s ease, color 0.2s ease;
+
+      &.active,
+      &:hover {
+        background: #0a2a5b;
+        color: #fff;
+      }
+    }
+  }
+}
+
+.global-cta {
+  width: 100%;
+}
+
+.content {
+  flex: 1;
 }

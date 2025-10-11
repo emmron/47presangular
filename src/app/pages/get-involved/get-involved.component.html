@@ -1,0 +1,24 @@
+<section class="get-involved" aria-labelledby="get-involved-heading">
+  <header class="get-involved__intro">
+    <p class="get-involved__eyebrow">Take action</p>
+    <h1 id="get-involved-heading">Get involved today</h1>
+    <p>Choose a pathway to contribute your time, talent, or resources to the movement.</p>
+  </header>
+  <div class="get-involved__grid">
+    <article class="get-involved__card" *ngFor="let step of steps">
+      <h2>{{ step.title }}</h2>
+      <p>{{ step.description }}</p>
+      <a class="get-involved__link" [href]="step.link" target="_blank" rel="noopener noreferrer">Sign up</a>
+    </article>
+  </div>
+  <section class="get-involved__newsletter" aria-label="Newsletter signup">
+    <h2>Stay informed</h2>
+    <p>Subscribe to get the daily briefing and volunteer opportunities in your inbox.</p>
+    <form class="get-involved__form" aria-label="Subscribe to campaign updates" (submit)="onSubmit($event)" novalidate>
+      <label class="visually-hidden" for="newsletter-email">Email address</label>
+      <input id="newsletter-email" type="email" placeholder="you@example.com" required />
+      <button type="submit">Subscribe</button>
+    </form>
+    <p class="get-involved__disclaimer">We respect your privacy. Opt out anytime.</p>
+  </section>
+</section>
