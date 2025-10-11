@@ -1,0 +1,170 @@
+.issues {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 1.5rem 2rem 3rem;
+
+  .intro {
+    h1 {
+      margin: 0 0 0.75rem 0;
+      font-size: 1.8rem;
+    }
+
+    p {
+      margin: 0;
+      max-width: 720px;
+      color: #546e7a;
+    }
+  }
+
+  .issues-grid {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+
+    .issue-card {
+      display: flex;
+      flex-direction: column;
+      background: #ffffff;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid rgba(84, 110, 122, 0.18);
+      box-shadow: 0 14px 32px rgba(15, 23, 42, 0.1);
+
+      .issue-content {
+        padding: 1.75rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+
+        header {
+          h2 {
+            margin: 0;
+            font-size: 1.35rem;
+          }
+
+          p {
+            margin: 0.75rem 0 0 0;
+            color: #455a64;
+          }
+        }
+
+        .pillars {
+          h3 {
+            margin: 0 0 0.5rem 0;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 0.08em;
+            color: #607d8b;
+          }
+
+          ul {
+            margin: 0;
+            padding-left: 1.25rem;
+            display: grid;
+            gap: 0.35rem;
+          }
+        }
+
+        .resources {
+          display: grid;
+          gap: 1rem;
+
+          .resource-link {
+            background: linear-gradient(120deg, #1e88e5, #3949ab);
+            color: #fff;
+            padding: 0.6rem 1.1rem;
+            border-radius: 999px;
+            text-decoration: none;
+            font-weight: 600;
+            justify-self: flex-start;
+          }
+
+          .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 24px rgba(15, 23, 42, 0.2);
+
+            iframe {
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              border: 0;
+            }
+          }
+        }
+
+        .comparison {
+          h3 {
+            margin: 0 0 0.75rem 0;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 0.08em;
+            color: #607d8b;
+          }
+
+          table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+
+            th,
+            td {
+              padding: 0.6rem 0.75rem;
+              border-bottom: 1px solid rgba(176, 190, 197, 0.4);
+              text-align: left;
+            }
+
+            th {
+              font-weight: 700;
+              color: #37474f;
+            }
+          }
+        }
+      }
+
+      .share {
+        background: #f5f8fb;
+        padding: 1.25rem 1.75rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+
+        p {
+          margin: 0;
+          font-weight: 600;
+          color: #455a64;
+          text-transform: uppercase;
+          font-size: 0.75rem;
+          letter-spacing: 0.08em;
+        }
+
+        textarea {
+          resize: none;
+          border-radius: 12px;
+          border: 1px solid rgba(84, 110, 122, 0.32);
+          padding: 0.75rem;
+          background: #ffffff;
+          font-size: 0.9rem;
+          min-height: 120px;
+        }
+
+        button {
+          align-self: flex-start;
+          border-radius: 999px;
+          border: none;
+          padding: 0.55rem 1.4rem;
+          font-weight: 600;
+          color: #ffffff;
+          background: linear-gradient(135deg, #ff7043, #ff1744);
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

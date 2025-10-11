@@ -1,0 +1,52 @@
+<section class="widgets">
+  <header class="widgets-header">
+    <div>
+      <h1>Embeddable Widget SDK</h1>
+      <p>
+        Syndicate live campaign headlines on partner sites with a drop-in JavaScript
+        SDK that consumes the public news API. Choose a preset, copy the snippet, and
+        drop it into any CMS or landing page.
+      </p>
+    </div>
+    <button type="button" (click)="copySnippet()">
+      {{ copied ? 'Snippet Copied!' : 'Copy Embed Snippet' }}
+    </button>
+  </header>
+
+  <div class="widgets-layout">
+    <aside>
+      <h2>Presets</h2>
+      <ul>
+        <li
+          *ngFor="let preset of presets$ | async"
+          (click)="selectPreset(preset)"
+          [class.active]="preset.id === selectedPreset?.id"
+        >
+          <h3>{{ preset.name }}</h3>
+          <p>{{ preset.description }}</p>
+          <small>Sample: {{ preset.exampleHeadline }}</small>
+        </li>
+      </ul>
+    </aside>
+    <section class="preview" *ngIf="selectedPreset as preset">
+      <h2>Implementation</h2>
+      <p>
+        Add the following code where you would like the widget to render. The SDK will
+        hydrate the container and poll the <code>GET /public/news</code> endpoint every
+        5 minutes.
+      </p>
+      <pre><code>{{ getSnippet() }}</code></pre>
+      <h3>API Response Contract</h3>
+      <ul class="contract">
+        <li><strong>title</strong> — Headline text to render</li>
+        <li><strong>url</strong> — Canonical link for click-through</li>
+        <li><strong>timestamp</strong> — ISO timestamp for freshness badges</li>
+      </ul>
+      <div class="cta">
+        <a href="https://api.47campaign.com/docs/widgets" target="_blank" rel="noopener">
+          View API Documentation
+        </a>
+      </div>
+    </section>
+  </div>
+</section>

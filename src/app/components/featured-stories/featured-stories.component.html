@@ -1,0 +1,25 @@
+<section class="featured-stories" aria-labelledby="featured-heading" id="stories">
+  <div class="featured-stories__header">
+    <h2 id="featured-heading">Featured stories</h2>
+    <p class="featured-stories__description">Curated highlights from the campaign trail.</p>
+  </div>
+
+  <ul class="featured-stories__list">
+    <li *ngFor="let story of stories" class="featured-stories__item">
+      <article>
+        <header>
+          <p class="featured-stories__topic">{{ story.topic }}</p>
+          <h3>{{ story.title }}</h3>
+        </header>
+        <p>{{ story.excerpt }}</p>
+        <a
+          class="featured-stories__link"
+          [href]="story.url"
+          target="_blank"
+          rel="noopener noreferrer"
+          >Read the update<span aria-hidden="true"> →</span></a
+        >
+      </article>
+    </li>
+  </ul>
+</section>

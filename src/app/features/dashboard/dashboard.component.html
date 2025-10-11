@@ -1,0 +1,85 @@
+<div class="dashboard" *ngIf="vm$ | async as vm">
+  <section class="summary-grid">
+    <article class="summary-card">
+      <h3>Voters Contacted</h3>
+      <p>{{ vm.snapshot.summary.votersContacted | number }}</p>
+    </article>
+    <article class="summary-card">
+      <h3>Doors Knocked</h3>
+      <p>{{ vm.snapshot.summary.doorsKnocked | number }}</p>
+    </article>
+    <article class="summary-card">
+      <h3>Volunteer Shifts</h3>
+      <p>{{ vm.snapshot.summary.volunteerShifts | number }}</p>
+    </article>
+    <article class="summary-card">
+      <h3>Paid Media Spend</h3>
+      <p>$ {{ vm.snapshot.summary.adSpend | number : '1.0-1' }}M</p>
+    </article>
+  </section>
+
+  <section class="charts-grid">
+    <article class="chart-panel">
+      <header>
+        <h2>Polling Trend</h2>
+        <span>National Tracking</span>
+      </header>
+      <ngx-charts-line-chart
+        [view]="[550, 300]"
+        [scheme]="pollingScheme"
+        [results]="vm.pollingSeries"
+        [autoScale]="true"
+        [timeline]="false"
+        [animations]="true"
+      ></ngx-charts-line-chart>
+    </article>
+
+    <article class="chart-panel">
+      <header>
+        <h2>Fundraising Totals</h2>
+        <span>Quarter-to-Date (Millions)</span>
+      </header>
+      <ngx-charts-bar-vertical
+        [view]="[400, 300]"
+        [scheme]="fundraisingScheme"
+        [results]="vm.fundraisingSeries"
+        [gradient]="false"
+        [xAxis]="true"
+        [yAxis]="true"
+        [roundEdges]="true"
+      ></ngx-charts-bar-vertical>
+    </article>
+
+    <article class="chart-panel">
+      <header>
+        <h2>Sentiment Analysis</h2>
+        <span>Share of mentions</span>
+      </header>
+      <ngx-charts-pie-chart
+        [view]="[400, 300]"
+        [scheme]="sentimentScheme"
+        [results]="vm.sentimentSeries"
+        [labels]="true"
+        [doughnut]="true"
+      ></ngx-charts-pie-chart>
+    </article>
+
+    <article class="chart-panel">
+      <header>
+        <h2>Share of Voice</h2>
+        <span>Mentions by channel</span>
+      </header>
+      <ngx-charts-advanced-pie-chart
+        [view]="[400, 300]"
+        [scheme]="shareOfVoiceScheme"
+        [results]="vm.shareOfVoiceSeries"
+      ></ngx-charts-advanced-pie-chart>
+      <ul class="legend">
+        <li *ngFor="let slice of vm.snapshot.shareOfVoice; trackBy: trackByOutlet">
+          <span class="channel">{{ slice.outlet }}</span>
+          <span class="value">{{ slice.mentions }} mentions</span>
+        </li>
+      </ul>
+    </article>
+  </section>
+</div>

@@ -30,12 +30,20 @@ interface DigestResponse {
   schedule: DigestSchedule | null;
   history: DigestSummary[];
 }
+import { BehaviorSubject, Observable, Subject, Subscription, timer } from 'rxjs';
+import { takeUntil, skip } from 'rxjs/operators';
+import { NewsApiService } from './news-api.service';
+import { NewsFilter, NewsItem, NewsQueryOptions, NewsResponse, NewsState } from '../models/news.model';
+import { LoadingState } from '../models/loading-state.model';
 
 const initialState: NewsState = {
   items: [],
   loading: false,
   error: null,
-  lastUpdated: null
+  lastUpdated: null,
+  total: 0,
+  page: 1,
+  pageSize: 20
 };
 
 @Injectable({
@@ -52,6 +60,7 @@ export class NewsStateService implements OnDestroy {
 
   private readonly REFRESH_INTERVAL = 5 * 60 * 1000; // 5 minutes
   private readonly backendUrl = 'http://localhost:4000/api';
+  private destroy$ = new Subject<void>();
 
   constructor(
     private newsApiService: NewsApiService,
@@ -69,9 +78,13 @@ export class NewsStateService implements OnDestroy {
         this.digestState.next({ schedule: null, history: [] });
       }
     });
+    this.filters
+      .pipe(skip(1), takeUntil(this.destroy$))
+      .subscribe(() => this.fetchNews({ page: 1 }));
+
+    this.fetchNews();
   }
 
-  // State Observables
   get state$(): Observable<NewsState> {
     return this.state.asObservable();
   }
@@ -114,18 +127,22 @@ export class NewsStateService implements OnDestroy {
     this.updateState({ error });
   }
 
-  setItems(items: NewsItem[]): void {
+  setItems(response: NewsResponse): void {
     this.updateState({
-      items,
+      items: response.items,
+      total: response.total,
+      page: response.page,
+      pageSize: response.pageSize,
       lastUpdated: new Date(),
-      error: null
+      error: null,
+      loading: false,
     });
   }
 
   updateFilters(filters: Partial<NewsFilter>): void {
     this.filters.next({
       ...this.currentFilters,
-      ...filters
+      ...filters,
     });
   }
 
@@ -137,9 +154,36 @@ export class NewsStateService implements OnDestroy {
     this.filters.next({ ...preset.filters });
   }
 
+  setPage(page: number): void {
+    this.fetchNews({ page });
+  }
+
+  fetchNews(options: Partial<NewsQueryOptions> = {}): void {
+    const query: NewsQueryOptions = {
+      page: options.page ?? this.currentState.page,
+      pageSize: options.pageSize ?? this.currentState.pageSize,
+      sources: this.currentFilters.sources,
+      topics: this.currentFilters.topics,
+      search: this.currentFilters.searchTerm,
+    };
+
+    this.newsApiService.getNews(query).subscribe((loadingState: LoadingState<NewsResponse>) => {
+      switch (loadingState.state) {
+        case 'loading':
+          this.updateState({ loading: true, error: null });
+          break;
+        case 'loaded':
+          this.setItems(loadingState.data);
+          break;
+        case 'error':
+          this.updateState({
+            loading: false,
+            error: loadingState.error.message,
+          });
+          break;
   // Data Operations
-  fetchNews(): void {
-    this.newsApiService.getNews().subscribe({
+  fetchNews(forceRefresh = false): void {
+    this.newsApiService.getNews(forceRefresh).subscribe({
       next: (loadingState) => {
         switch (loadingState.state) {
           case 'loading':
@@ -147,17 +191,14 @@ export class NewsStateService implements OnDestroy {
             break;
           case 'loaded':
             this.updateState({
-              items: loadingState.data,
+              items: this.enrichItems(loadingState.data),
               loading: false,
               error: null,
               lastUpdated: new Date()
             });
             break;
           case 'error':
-            this.updateState({
-              loading: false,
-              error: loadingState.error.message
-            });
+            this.handleBackendError(loadingState.error);
             break;
         }
       }
@@ -169,11 +210,21 @@ export class NewsStateService implements OnDestroy {
     const filters = this.currentFilters;
 
     return items.filter(item => {
-      if (filters.source && item.source !== filters.source) return false;
-      if (filters.category && item.category !== filters.category) return false;
-      if (filters.dateFrom && new Date(item.pubDate) < filters.dateFrom) return false;
-      if (filters.dateTo && new Date(item.pubDate) > filters.dateTo) return false;
-      if (filters.searchTerm && !this.matchesSearchTerm(item, filters.searchTerm)) return false;
+      if (filters.sources?.length && !filters.sources.includes(item.source.slug)) {
+        return false;
+      }
+      if (filters.topics?.length && !item.topics.some(topic => filters.topics?.includes(topic))) {
+        return false;
+      }
+      if (filters.dateFrom && item.publishedAt < filters.dateFrom) {
+        return false;
+      }
+      if (filters.dateTo && item.publishedAt > filters.dateTo) {
+        return false;
+      }
+      if (filters.searchTerm && !this.matchesSearchTerm(item, filters.searchTerm)) {
+        return false;
+      }
       return true;
     });
   }
@@ -306,15 +357,32 @@ export class NewsStateService implements OnDestroy {
     const searchTerm = term.toLowerCase();
     return (
       item.title.toLowerCase().includes(searchTerm) ||
-      item.content.toLowerCase().includes(searchTerm)
+      (!!item.summary && item.summary.toLowerCase().includes(searchTerm)) ||
+      (!!item.content && item.content.toLowerCase().includes(searchTerm))
     );
   }
 
   private updateState(newState: Partial<NewsState>): void {
     this.state.next({
       ...this.currentState,
-      ...newState
+      ...newState,
     });
+  }
+
+  private handleBackendError(error: Error): void {
+    const friendlyMessage = error.message || 'The news feed is currently unavailable.';
+    this.updateState({
+      loading: false,
+      error: friendlyMessage
+    });
+  }
+
+  private enrichItems(items: NewsItem[]): NewsItem[] {
+    return items.map(item => ({
+      ...item,
+      content: item.content ?? '',
+      category: item.category ?? 'News'
+    }));
   }
 
   private setupAutoRefresh(): void {
@@ -377,6 +445,9 @@ export class NewsStateService implements OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+
     if (this.refreshSubscription) {
       this.refreshSubscription.unsubscribe();
     }

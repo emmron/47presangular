@@ -1,0 +1,45 @@
+<section class="timeline">
+  <header class="timeline-header">
+    <div>
+      <h1>Campaign Timeline</h1>
+      <p>
+        Follow the campaign narrative across earned media, official releases, and
+        defining milestones. Filter by stream, export for briefing decks, or embed
+        directly on partner sites.
+      </p>
+    </div>
+    <div class="timeline-actions">
+      <label>
+        Stream
+        <select [formControl]="filterControl">
+          <option value="all">All</option>
+          <option value="news">News Coverage</option>
+          <option value="release">Official Releases</option>
+          <option value="milestone">Milestones</option>
+        </select>
+      </label>
+      <button type="button" (click)="copyEmbedCode()">
+        {{ copiedEmbed ? 'Embed Copied!' : 'Copy Embed' }}
+      </button>
+    </div>
+  </header>
+
+  <ol class="timeline-list">
+    <ng-container *ngIf="timeline$ | async as entries">
+      <li *ngFor="let entry of entries; trackBy: trackByTimeline" class="timeline-item">
+        <div class="timeline-marker" [attr.data-category]="entry.category"></div>
+        <div class="timeline-content">
+          <span class="timeline-date">{{ entry.date | date: 'MMMM d, y' }}</span>
+          <h2>{{ entry.title }}</h2>
+          <p>{{ entry.description }}</p>
+          <a *ngIf="entry.link" [href]="entry.link" target="_blank" rel="noopener">
+            View Source
+          </a>
+        </div>
+      </li>
+      <div class="export" *ngIf="entries.length">
+        <button type="button" (click)="exportTimeline(entries)">Export JSON</button>
+      </div>
+    </ng-container>
+  </ol>
+</section>

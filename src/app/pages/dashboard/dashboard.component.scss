@@ -1,0 +1,80 @@
+@use '../../shared/styles/tokens';
+@use '../../shared/styles/mixins';
+
+.dashboard {
+  display: grid;
+  gap: var(--space-6);
+
+  &__header {
+    display: grid;
+    gap: var(--space-3);
+  }
+
+  &__eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.75rem;
+    color: tokens.color('text-tertiary');
+  }
+
+  &__lede {
+    max-width: 48rem;
+  }
+
+  &__metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: var(--space-4);
+  }
+
+  &__metric {
+    padding: var(--space-4);
+    border-radius: var(--radius-lg);
+    background: tokens.color('surface-muted');
+    border: 1px solid tokens.color('border');
+    box-shadow: var(--shadow-sm);
+    display: grid;
+    gap: 0.35rem;
+  }
+
+  &__metric-value {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: var(--font-weight-semibold);
+    color: tokens.color('primary');
+  }
+
+  &__metric-label {
+    color: tokens.color('text-secondary');
+  }
+
+  &__metric-change {
+    font-size: 0.9rem;
+    color: tokens.color('text-tertiary');
+  }
+
+  &__updates {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: var(--space-4);
+  }
+
+  &__card {
+    padding: var(--space-4);
+    border-radius: var(--radius-lg);
+    border: 1px solid tokens.color('border');
+    background: tokens.color('surface');
+    box-shadow: var(--shadow-sm);
+
+    ul {
+      margin: 0;
+      padding-left: var(--space-5);
+      color: tokens.color('text-secondary');
+    }
+  }
+}
+
+@include mixins.respond('sm') {
+  .dashboard__metric {
+    text-align: left;
+  }
+}

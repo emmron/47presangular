@@ -1,44 +1,250 @@
+<ng-container *ngIf="item as article">
+  <article class="news-item" [ngClass]="article.mediaType ?? 'article'" aria-live="polite">
+    <div class="news-content">
+      <header>
+        <h2>
+          <a [href]="article.link" target="_blank" rel="noopener noreferrer">
+            {{ article.title }}
+          </a>
+        </h2>
+
+        <div class="meta">
+          <span class="source">{{ article.source }}</span>
+          <span class="category" *ngIf="article.category">{{ article.category }}</span>
+          <time class="date" [dateTime]="toIsoString(article.pubDate)">
+            {{ formatDate(article.pubDate) }}
+          </time>
+        </div>
+      </header>
+
+      <section class="media" [ngSwitch]="article.mediaType || 'article'" aria-label="Media content">
+        <ng-container *ngSwitchCase="'video'">
+          <div class="video-wrapper" *ngIf="getSafeEmbedUrl(article) as embedUrl; else videoFallback">
+            <iframe
+              [src]="embedUrl"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+              referrerpolicy="strict-origin-when-cross-origin"
+              [attr.title]="'Video player for ' + article.title">
+            </iframe>
+          </div>
+          <ng-template #videoFallback>
+            <p class="media-fallback">
+              Video preview unavailable.
+              <a [href]="article.link" target="_blank" rel="noopener noreferrer">Watch on source</a>
+            </p>
+          </ng-template>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="'audio'">
+          <div class="audio-wrapper" *ngIf="getAudioSource(article) as audioSource">
+            <audio
+              controls
+              preload="none"
+              controlsList="nodownload"
+              [attr.aria-label]="'Audio player for ' + article.title">
+              <source [src]="audioSource">
+              Your browser does not support the audio element.
+            </audio>
+          </div>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="'gallery'">
+          <div class="gallery" role="list" *ngIf="article.galleryItems?.length">
+            <figure
+              role="listitem"
+              *ngFor="let galleryItem of article.galleryItems; trackBy: trackByGalleryItem; let index = index">
+              <img
+                [src]="galleryItem.url"
+                [alt]="galleryItem.caption || (article.title + ' image ' + (index + 1))"
+                loading="lazy"
+                decoding="async">
+              <figcaption *ngIf="galleryItem.caption">{{ galleryItem.caption }}</figcaption>
+            </figure>
+          </div>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="'social'">
+          <div class="social-wrapper" *ngIf="getSafeEmbedUrl(article) as embedUrl">
+            <iframe
+              [src]="embedUrl"
+              loading="lazy"
+              title="Embedded social post"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allow="autoplay; clipboard-write">
+            </iframe>
+          </div>
+        </ng-container>
+
+        <ng-container *ngSwitchDefault>
+          <img *ngIf="article.imageUrl"
+            [src]="article.imageUrl"
+            [alt]="'Thumbnail for: ' + article.title"
+            [title]="article.title"
+            class="thumbnail"
+            loading="lazy"
+            decoding="async">
+        </ng-container>
+      </section>
+
+      <div class="content">
+        <p>{{ article.content }}</p>
+      </div>
+
+      <p class="media-duration" *ngIf="formatDuration(article.mediaDurationSeconds) as duration">
+        <span class="visually-hidden">Media duration:</span>
+        <span aria-hidden="true">⏱️ {{ duration }}</span>
+      </p>
+
+      <ul
+        class="captions"
+        *ngIf="article.captions?.length"
+        aria-label="Caption and accessibility resources">
+        <li *ngFor="let caption of article.captions; trackBy: trackByCaption">
+          <a *ngIf="caption.url; else captionText"
+            [href]="caption.url"
+            target="_blank"
+            rel="noopener noreferrer">
+            {{ caption.text }}
+          </a>
+          <ng-template #captionText>
+            <span>{{ caption.text }}</span>
+          </ng-template>
+          <span *ngIf="caption.language" class="caption-language">({{ caption.language | uppercase }})</span>
+        </li>
+      </ul>
+
+      <section class="transcript" *ngIf="article.transcriptUrl || article.transcriptText">
+        <a *ngIf="article.transcriptUrl"
+          [href]="article.transcriptUrl"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="transcript-link">
+          Download transcript
+        </a>
+        <details *ngIf="article.transcriptText">
+          <summary>Read transcript</summary>
+          <p>{{ article.transcriptText }}</p>
+        </details>
+      </section>
+
+      <footer class="actions">
+        <a [href]="article.link"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="read-more"
+          [attr.aria-label]="'Read full post: ' + article.title">
+          <span>Read on Reddit</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+            <polyline points="15 3 21 3 21 9"></polyline>
+            <line x1="10" y1="14" x2="21" y2="3"></line>
+          </svg>
+        </a>
+      </footer>
+    </div>
+  </article>
+</ng-container>
 <article class="news-item">
   <div class="news-content">
     <header>
       <h2>
-        <a [href]="item.link" target="_blank" rel="noopener noreferrer">
+        <a
+          [routerLink]="detailRoute"
+          class="story-link"
+          [attr.aria-label]="'View story details: ' + item.title"
+        >
           {{ item.title }}
         </a>
       </h2>
 
       <div class="meta">
+        <span class="source">{{ item.source.name }}</span>
+        <span class="topics" *ngIf="item.topics.length">
+          <span *ngFor="let topic of item.topics" class="topic-chip">{{ topic }}</span>
+        </span>
+        <time class="date" [dateTime]="item.publishedAt.toISOString()">
+          {{ formatDate(item.publishedAt) }}
         <span class="source">{{ item.source }}</span>
         <span class="category" *ngIf="item.category">{{ item.category }}</span>
-        <time class="date" [dateTime]="item.pubDate.toISOString()">
+        <time class="date" [attr.dateTime]="dateTimeAttr">
           {{ formatDate(item.pubDate) }}
         </time>
       </div>
     </header>
 
     <div class="content">
-      <img *ngIf="item.imageUrl"
+      <img *ngIf="primaryImage"
+        [src]="primaryImage.url"
+        [alt]="primaryImage.caption || item.title"
+        class="thumbnail"
+        loading="lazy">
+      <p *ngIf="item.summary; else fallback">{{ item.summary }}</p>
+      <ng-template #fallback>
+        <p>{{ item.content }}</p>
+      </ng-template>
+      <img
+        *ngIf="item.imageUrl"
         [src]="item.imageUrl"
         [alt]="'Thumbnail for: ' + item.title"
         [title]="item.title"
         class="thumbnail"
-        loading="lazy">
+        loading="lazy"
+      />
       <p>{{ item.content }}</p>
     </div>
 
     <footer class="actions">
-      <a [href]="item.link"
+      <a
+        [routerLink]="detailRoute"
+        class="view-story"
+        [attr.aria-label]="'Read campaign context for: ' + item.title"
+      >
+        View story
+      </a>
+      <a
+        [href]="item.link"
         target="_blank"
         rel="noopener noreferrer"
         class="read-more"
-        [attr.aria-label]="'Read full post: ' + item.title">
-        <span>Read on Reddit</span>
+        [attr.aria-label]="'Read full article: ' + item.title">
+        <span>Read full article</span>
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        [attr.aria-label]="'Read full post on Reddit: ' + item.title"
+      >
+        <span>Read on Reddit</span>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
           <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
           <polyline points="15 3 21 3 21 9"></polyline>
           <line x1="10" y1="14" x2="21" y2="3"></line>
         </svg>
       </a>
+
+      <div class="share">
+        <span>Amplify:</span>
+        <a
+          *ngFor="let share of shareLinks"
+          class="share-link"
+          [href]="share.url"
+          target="_blank"
+          rel="noopener noreferrer"
+          (click)="onShare(share.network)"
+        >
+          <span aria-hidden="true">{{ share.icon }}</span>
+          <span class="sr-only">{{ share.label }}</span>
+        </a>
+      </div>
     </footer>
   </div>
 </article>

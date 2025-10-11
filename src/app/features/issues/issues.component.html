@@ -1,0 +1,72 @@
+<section class="issues">
+  <header class="intro">
+    <div>
+      <h1>Policy Positions & Issue Briefing Hub</h1>
+      <p>
+        Equip surrogates, partners, and supporters with concise messaging, fact sheets,
+        and rapid-response contrasts. Each plank includes share-ready language for
+        social and SMS distribution.
+      </p>
+    </div>
+  </header>
+
+  <div class="issues-grid">
+    <article class="issue-card" *ngFor="let position of positions$ | async">
+      <div class="issue-content">
+        <header>
+          <h2>{{ position.title }}</h2>
+          <p>{{ position.summary }}</p>
+        </header>
+
+        <section class="pillars">
+          <h3>Key Pillars</h3>
+          <ul>
+            <li *ngFor="let pillar of position.pillars">{{ pillar }}</li>
+          </ul>
+        </section>
+
+        <section class="resources">
+          <a [href]="position.factSheetUrl" target="_blank" rel="noopener" class="resource-link">
+            View Fact Sheet
+          </a>
+          <div class="video-wrapper" *ngIf="position.videoUrl">
+            <iframe
+              [src]="position.videoUrl | safeUrl"
+              title="{{ position.title }} video"
+              loading="lazy"
+              allowfullscreen
+            ></iframe>
+          </div>
+        </section>
+
+        <section class="comparison">
+          <h3>Contrast Table</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Opponent</th>
+                <th>Their Stance</th>
+                <th>Trump Contrast</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let row of position.comparison">
+                <td>{{ row.opponent }}</td>
+                <td>{{ row.stance }}</td>
+                <td>{{ row.contrast }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+      </div>
+
+      <footer class="share">
+        <p>Shareable Snippet</p>
+        <textarea readonly>{{ position.shareMessage }}</textarea>
+        <button type="button" (click)="copyShareMessage(position)">
+          {{ copiedId === position.id ? 'Copied!' : 'Copy to Clipboard' }}
+        </button>
+      </footer>
+    </article>
+  </div>
+</section>
