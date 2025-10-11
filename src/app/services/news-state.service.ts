@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, timer, Subscription } from 'rxjs';
 import { NewsState, NewsItem, NewsFilter } from '../models/news.model';
-import { NewsApiService } from './news-api.service';
+import { NewsService } from './news.service';
 
 const initialState: NewsState = {
   items: [],
@@ -19,7 +19,7 @@ export class NewsStateService {
   private refreshSubscription?: Subscription;
   private readonly REFRESH_INTERVAL = 5 * 60 * 1000; // 5 minutes
 
-  constructor(private newsApiService: NewsApiService) {
+  constructor(private newsService: NewsService) {
     this.setupAutoRefresh();
   }
 
@@ -71,7 +71,7 @@ export class NewsStateService {
 
   // Data Operations
   fetchNews(): void {
-    this.newsApiService.getNews().subscribe({
+    this.newsService.fetchNews().subscribe({
       next: (loadingState) => {
         switch (loadingState.state) {
           case 'loading':

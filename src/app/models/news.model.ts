@@ -7,6 +7,9 @@ export interface NewsItem {
   source: string;
   category?: string;
   imageUrl?: string;
+  topics?: string[];
+  relevanceScore?: number;
+  rawSource?: string;
 }
 
 export interface NewsState {
