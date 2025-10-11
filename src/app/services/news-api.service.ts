@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map, retry } from 'rxjs/operators';
-import { NewsItem } from '../models/news.model';
+import { NewsItem, StoryDetail, StorySource, TimelineEvent } from '../models/news.model';
 import { LoadingState, toLoadingState } from '../models/loading-state.model';
 
 @Injectable({
@@ -32,6 +32,13 @@ export class NewsApiService {
     );
   }
 
+  getStoryDetail(id: string): Observable<StoryDetail> {
+    return this.http.get<any>(`/api/news/${id}`).pipe(
+      map(response => this.transformStoryDetail(response)),
+      catchError(this.handleError)
+    );
+  }
+
   private transformRedditResponse(response: any): NewsItem[] {
     if (!response?.data?.children) {
       throw new Error('Invalid Reddit API response format');
@@ -49,6 +56,55 @@ export class NewsApiService {
         imageUrl: this.getPostImage(post.data),
         category: post.data.link_flair_text || 'News'
       }));
+  }
+
+  private transformStoryDetail(response: any): StoryDetail {
+    if (!response) {
+      throw new Error('Invalid story response');
+    }
+
+    const summary = Array.isArray(response.summary)
+      ? response.summary.filter(Boolean)
+      : response.summary
+      ? [response.summary]
+      : [];
+
+    const sources: StorySource[] = Array.isArray(response.sources)
+      ? response.sources
+          .filter((source: any) => source)
+          .map((source: any) => ({
+            name: source.name ?? source.title ?? 'Source',
+            url: source.url ?? source.link ?? '',
+            type: source.type,
+            summary: source.summary ?? source.excerpt
+          }))
+          .filter((source: StorySource) => !!source.url)
+      : [];
+
+    const timelineEvents: TimelineEvent[] = Array.isArray(response.timelineEvents)
+      ? response.timelineEvents
+          .filter((event: any) => event)
+          .map((event: any) => ({
+            date: event.date ?? event.timestamp ?? '',
+            headline: event.headline ?? event.title ?? 'Campaign milestone',
+            description: event.description ?? event.summary
+          }))
+          .filter((event: TimelineEvent) => !!event.date && !!event.headline)
+      : [];
+
+    return {
+      id: response.id ?? response.articleId ?? '',
+      title: response.title ?? 'Campaign story',
+      link: response.link ?? response.url ?? '',
+      pubDate: response.pubDate ? new Date(response.pubDate) : new Date(),
+      content: response.content ?? response.summary ?? '',
+      source: response.source ?? response.primarySource ?? 'Campaign coverage',
+      category: response.category,
+      imageUrl: response.imageUrl ?? response.image,
+      summary,
+      sources,
+      timelineEvents
+    };
   }
 
   private getPostImage(postData: any): string | undefined {

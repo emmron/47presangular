@@ -2,7 +2,11 @@
   <div class="news-content">
     <header>
       <h2>
-        <a [href]="item.link" target="_blank" rel="noopener noreferrer">
+        <a
+          [routerLink]="detailRoute"
+          class="story-link"
+          [attr.aria-label]="'View story details: ' + item.title"
+        >
           {{ item.title }}
         </a>
       </h2>
@@ -10,7 +14,7 @@
       <div class="meta">
         <span class="source">{{ item.source }}</span>
         <span class="category" *ngIf="item.category">{{ item.category }}</span>
-        <time class="date" [dateTime]="item.pubDate.toISOString()">
+        <time class="date" [dateTime]="toIsoString(item.pubDate)">
           {{ formatDate(item.pubDate) }}
         </time>
       </div>
@@ -27,11 +31,18 @@
     </div>
 
     <footer class="actions">
+      <a
+        [routerLink]="detailRoute"
+        class="view-story"
+        [attr.aria-label]="'Read campaign context for: ' + item.title"
+      >
+        View story
+      </a>
       <a [href]="item.link"
         target="_blank"
         rel="noopener noreferrer"
         class="read-more"
-        [attr.aria-label]="'Read full post: ' + item.title">
+        [attr.aria-label]="'Read full post on Reddit: ' + item.title">
         <span>Read on Reddit</span>
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>

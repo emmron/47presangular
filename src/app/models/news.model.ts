@@ -9,6 +9,25 @@ export interface NewsItem {
   imageUrl?: string;
 }
 
+export interface StorySource {
+  name: string;
+  url: string;
+  type?: string;
+  summary?: string;
+}
+
+export interface TimelineEvent {
+  date: string;
+  headline: string;
+  description?: string;
+}
+
+export interface StoryDetail extends NewsItem {
+  summary: string[];
+  sources: StorySource[];
+  timelineEvents: TimelineEvent[];
+}
+
 export interface NewsState {
   items: NewsItem[];
   loading: boolean;
