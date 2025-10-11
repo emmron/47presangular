@@ -17,19 +17,19 @@ interface ActionStep {
 export class GetInvolvedComponent {
   readonly steps: ActionStep[] = [
     {
-      title: 'Join the grassroots team',
-      description: 'Become a neighborhood captain to coordinate phone banks and canvasses.',
-      link: 'https://www.donaldjtrump.com/join/'
+      title: 'Subscribe to match alerts',
+      description: 'Get team lists, weather calls, and score updates for every Aussie XI.',
+      link: 'https://www.cricket.com.au/newsletters'
     },
     {
-      title: 'Host a house meeting',
-      description: 'Download our toolkit and invite supporters for a rapid response briefing.',
-      link: 'https://www.donaldjtrump.com/get-involved/'
+      title: 'Join a supporter club',
+      description: 'Find your local fan base and official watch party partners.',
+      link: 'https://www.cricket.com.au/fans/club-registrations'
     },
     {
-      title: 'Digital rapid responders',
-      description: 'Amplify campaign messaging with social media share kits and daily talking points.',
-      link: 'https://www.donaldjtrump.com/subscribe/'
+      title: 'Volunteer at community cricket',
+      description: 'Help coach, score, or umpire through Cricket Australia pathway programs.',
+      link: 'https://www.community.cricket.com.au/clubs/volunteers'
     }
   ];
 

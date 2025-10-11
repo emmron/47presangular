@@ -19,28 +19,28 @@ type Insight = {
 export class InsightsSidebarComponent {
   readonly insights: Insight[] = [
     {
-      label: 'Digital reach',
-      value: '2.1M',
+      label: 'WTC standings',
+      value: '66 pts',
       trend: 'up',
-      description: 'Impressions across official channels in the last 48 hours'
+      description: 'Australia extend their lead after the SCG Test win'
     },
     {
-      label: 'Grassroots events',
-      value: '38',
+      label: 'BBL net run rate',
+      value: '+0.923',
       trend: 'steady',
-      description: 'Scheduled rallies and town halls this week'
+      description: 'Scorchers hold top spot with consistent margin victories'
     },
     {
-      label: 'Volunteer signups',
-      value: '+14%',
+      label: 'WBBL ladder climb',
+      value: '+2',
       trend: 'up',
-      description: 'Week-over-week increase in new volunteers'
+      description: 'Sydney Sixers jump two places following back-to-back wins'
     }
   ];
 
   readonly keyActions: string[] = [
-    'Track upcoming debate preparation milestones',
-    'Highlight localized policy rollouts for supporters',
-    'Coordinate regional press availability with rapid response team'
+    'Monitor Marsh Cup squad announcements due Friday',
+    'Track injury updates for the New Zealand tour',
+    'Compile broadcast changes for regional WBBL viewers'
   ];
 }

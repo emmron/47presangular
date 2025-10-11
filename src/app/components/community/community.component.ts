@@ -7,7 +7,7 @@ interface CommunityThread {
   description: string;
   link: string;
   platform: 'reddit' | 'official';
-  moderationLevel: 'community' | 'campaign';
+  moderationLevel: 'community' | 'official';
 }
 
 @Component({
@@ -20,25 +20,25 @@ interface CommunityThread {
 export class CommunityComponent {
   readonly featuredThreads: CommunityThread[] = [
     {
-      title: 'Strategy AMA with campaign leadership',
-      description: 'Bring your questions for the digital, field, and finance directors. Moderated by the official campaign team.',
-      link: 'https://community.trump47.com/threads/strategy-ama',
+      title: 'Selector Q&A with national panel',
+      description: 'Submit your Test summer questions for George Bailey and national selectors in a moderated live chat.',
+      link: 'https://community.cricket.com.au/forums/selectors-ama',
       platform: 'official',
-      moderationLevel: 'campaign',
+      moderationLevel: 'official',
     },
     {
-      title: 'Grassroots organizing toolkit',
-      description: 'Volunteer leaders share the scripts and materials that are working in their counties.',
-      link: 'https://www.reddit.com/r/Conservative/comments/toolkit',
+      title: 'Grade cricket tactics thread',
+      description: 'Coaches swap net session drills, fitness plans, and captaincy tips from premier competitions.',
+      link: 'https://www.reddit.com/r/Cricket/comments/grade_cricket_tactics',
       platform: 'reddit',
       moderationLevel: 'community',
     },
     {
-      title: 'Digital rapid response room',
-      description: 'Coordinate social media pushes in real time. Official moderators surface priority narratives.',
-      link: 'https://community.trump47.com/threads/digital-war-room',
+      title: 'WBBL fantasy coaches corner',
+      description: 'Track lineup news and share trades before the next double-header weekend.',
+      link: 'https://community.cricket.com.au/forums/wbbl-fantasy',
       platform: 'official',
-      moderationLevel: 'campaign',
+      moderationLevel: 'official',
     },
   ];
 
