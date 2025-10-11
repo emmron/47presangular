@@ -1,13 +1,9 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { ShellComponent } from './layout/shell/shell.component';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
-  template: `
-    <router-outlet></router-outlet>
   imports: [RouterOutlet, RouterLink, RouterLinkActive],
   template: `
     <main class="app-shell">
@@ -17,7 +13,9 @@ import { ShellComponent } from './layout/shell/shell.component';
           <p class="tagline">Tracking momentum across narratives, events, and daily coverage.</p>
         </div>
         <nav class="primary-nav">
-          <a routerLink="/timeline" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Timeline</a>
+          <a routerLink="/timeline" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+            Timeline
+          </a>
           <a routerLink="/news" routerLinkActive="active">Live feed</a>
         </nav>
       </header>
@@ -106,10 +104,7 @@ import { ShellComponent } from './layout/shell/shell.component';
           max-width: 640px;
         }
       }
-    `
-  ]
-  imports: [ShellComponent],
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+    `,
+  ],
 })
 export class AppComponent {}
