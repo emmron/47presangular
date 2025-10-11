@@ -1,12 +1,8 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, RouterLink, RouterLinkActive],
-  template: `
-    <main class="app-shell">
       <header class="app-header">
         <div class="branding">
           <h1>Trump 47 Campaign Tracker</h1>
@@ -14,6 +10,8 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
         </div>
         <nav class="primary-nav">
           <a routerLink="/timeline" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+            Timeline
+          </a>
             Timeline
           </a>
           <a routerLink="/news" routerLinkActive="active">Live feed</a>
@@ -106,5 +104,3 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
       }
     `,
   ],
-})
-export class AppComponent {}
