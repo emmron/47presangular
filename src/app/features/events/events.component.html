@@ -1,0 +1,70 @@
+<section class="events">
+  <header class="page-header">
+    <div>
+      <h1>Campaign Events & Rally Activity</h1>
+      <p>
+        Official campaign stops and supporter check-ins combined into a single field
+        view. Filter by type or state, explore the map, and RSVP with your account.
+      </p>
+    </div>
+    <form [formGroup]="filterForm" class="filters">
+      <label>
+        Type
+        <select formControlName="type">
+          <option value="all">All</option>
+          <option value="official">Official</option>
+          <option value="rally">Rally</option>
+          <option value="community">Community</option>
+        </select>
+      </label>
+      <label>
+        State
+        <select formControlName="state">
+          <option value="">All</option>
+          <option *ngFor="let state of upcomingStates$ | async" [value]="state">
+            {{ state }}
+          </option>
+        </select>
+      </label>
+    </form>
+  </header>
+
+  <div class="map-wrapper">
+    <div id="events-map" class="map"></div>
+  </div>
+
+  <ul class="event-list">
+    <li *ngFor="let event of events$ | async; trackBy: trackByEvent" class="event-card">
+      <div>
+        <span class="badge" [attr.data-type]="event.type">{{ event.type | titlecase }}</span>
+        <h2>{{ event.name }}</h2>
+        <p>{{ event.description }}</p>
+        <dl>
+          <div>
+            <dt>When</dt>
+            <dd>{{ event.start | date: 'fullDate' }} • {{ event.start | date: 'shortTime' }} local</dd>
+          </div>
+          <div>
+            <dt>Where</dt>
+            <dd>
+              {{ event.location.venue }} — {{ event.location.city }},
+              {{ event.location.state }}
+            </dd>
+          </div>
+          <div *ngIf="event.checkIns">
+            <dt>Grassroots Check-Ins</dt>
+            <dd>{{ event.checkIns | number }}</dd>
+          </div>
+        </dl>
+      </div>
+      <div class="cta">
+        <a *ngIf="event.rsvpUrl" [href]="event.rsvpUrl" target="_blank" rel="noopener" class="btn">
+          RSVP with Team Account
+        </a>
+        <button type="button" class="btn secondary">
+          Sync to Calendar
+        </button>
+      </div>
+    </li>
+  </ul>
+</section>

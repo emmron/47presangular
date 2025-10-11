@@ -1,0 +1,85 @@
+<section class="profile">
+  <header class="profile-header">
+    <div>
+      <h1>My Briefings</h1>
+      <p class="subtitle">Manage your saved filters and control your personalized email digest.</p>
+    </div>
+    <a routerLink="/news" class="link-button">Back to news</a>
+  </header>
+
+  <section class="card">
+    <h2>Saved filter presets</h2>
+    <p *ngIf="presets.length === 0" class="empty-state">No saved briefings yet. Head to the news feed to create one.</p>
+    <ul *ngIf="presets.length > 0" class="preset-list">
+      <li *ngFor="let preset of presets">
+        <div>
+          <h3>{{ preset.name }}</h3>
+          <p>{{ preset.filters | json }}</p>
+        </div>
+        <button type="button" (click)="deletePreset(preset)">Remove</button>
+      </li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <h2>Email digest schedule</h2>
+    <form (ngSubmit)="saveSchedule()" class="schedule-form">
+      <label>
+        Frequency
+        <select [(ngModel)]="scheduleFrequency" name="frequency">
+          <option value="daily">Daily</option>
+          <option value="weekly">Weekly (Mondays)</option>
+        </select>
+      </label>
+
+      <label>
+        Send at (UTC)
+        <input type="time" [(ngModel)]="scheduleTime" name="time" required>
+      </label>
+
+      <label>
+        Timezone
+        <input type="text" [(ngModel)]="scheduleTimezone" name="timezone" placeholder="UTC">
+      </label>
+
+      <div class="actions">
+        <button type="submit" [disabled]="savingSchedule">
+          {{ savingSchedule ? 'Saving...' : 'Save schedule' }}
+        </button>
+        <button type="button" class="secondary" (click)="clearSchedule()">Clear schedule</button>
+      </div>
+    </form>
+
+    <button
+      type="button"
+      class="preview"
+      (click)="sendPreview()"
+      [disabled]="previewLoading || presets.length === 0"
+    >
+      {{ previewLoading ? 'Generating preview...' : 'Generate preview digest' }}
+    </button>
+
+    <p *ngIf="digestSchedule" class="schedule-meta">
+      Next run: {{ digestSchedule.nextRunAt || 'TBD' }}
+      <br>
+      Last run: {{ digestSchedule.lastRunAt || 'Never' }}
+    </p>
+
+    <p *ngIf="scheduleMessage" class="schedule-message">{{ scheduleMessage }}</p>
+    <p *ngIf="previewMessage" class="preview-message">{{ previewMessage }}</p>
+  </section>
+
+  <section class="card">
+    <h2>Recent digest previews</h2>
+    <p *ngIf="digestHistory.length === 0" class="empty-state">No digests generated yet.</p>
+    <ul *ngIf="digestHistory.length > 0" class="digest-history">
+      <li *ngFor="let digest of digestHistory">
+        <header>
+          <strong>{{ digest.generatedAt }}</strong>
+          <span *ngIf="digest.test" class="badge">Test</span>
+        </header>
+        <pre>{{ digest.summary }}</pre>
+      </li>
+    </ul>
+  </section>
+</section>

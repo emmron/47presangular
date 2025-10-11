@@ -1,4 +1,8 @@
 import { TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { of } from 'rxjs';
+import { AppComponent } from './app.component';
+import { AuthService } from './auth/auth.service';
 import { provideRouter } from '@angular/router';
 
 import { AppComponent } from './app.component';
@@ -20,6 +24,16 @@ class ReferralServiceStub {
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [RouterTestingModule, AppComponent],
+      providers: [
+        {
+          provide: AuthService,
+          useValue: {
+            user$: of(null),
+            logout: jasmine.createSpy('logout'),
+          },
+        },
+      imports: [AppComponent]
       imports: [AppComponent],
       providers: [
         provideRouter([]),
@@ -33,6 +47,14 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
     expect(app).toBeTruthy();
+  });
+
+  it('should render the global header', () => {
+  it('should have the campaign tracker title', () => {
+  it('should have the tracker title', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.componentInstance;
+    expect(app.title).toEqual('Trump 47 Campaign Tracker');
   });
 
   it('should render a skip link for accessibility', () => {
