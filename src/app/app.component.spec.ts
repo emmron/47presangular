@@ -1,10 +1,28 @@
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { ExperimentService, ExperimentVariant } from './services/experiment.service';
+import { ReferralService } from './services/referral.service';
+
+class ExperimentServiceStub {
+  assignVariant(_: string, variants: ExperimentVariant[]): ExperimentVariant {
+    return variants[0];
+  }
+}
+
+class ReferralServiceStub {
+  getReferralCode(): string {
+    return 'T47-TEST';
+  }
+}
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [AppComponent],
+      providers: [
+        { provide: ExperimentService, useClass: ExperimentServiceStub },
+        { provide: ReferralService, useClass: ReferralServiceStub },
+      ],
     }).compileComponents();
   });
 

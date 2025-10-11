@@ -15,6 +15,7 @@
         <span class="source">{{ item.source }}</span>
         <span class="category" *ngIf="item.category">{{ item.category }}</span>
         <time class="date" [dateTime]="toIsoString(item.pubDate)">
+        <time class="date" [attr.dateTime]="dateTimeAttr">
           {{ formatDate(item.pubDate) }}
         </time>
       </div>
@@ -50,6 +51,21 @@
           <line x1="10" y1="14" x2="21" y2="3"></line>
         </svg>
       </a>
+
+      <div class="share">
+        <span>Amplify:</span>
+        <a
+          *ngFor="let share of shareLinks"
+          class="share-link"
+          [href]="share.url"
+          target="_blank"
+          rel="noopener noreferrer"
+          (click)="onShare(share.network)"
+        >
+          <span aria-hidden="true">{{ share.icon }}</span>
+          <span class="sr-only">{{ share.label }}</span>
+        </a>
+      </div>
     </footer>
   </div>
 </article>
