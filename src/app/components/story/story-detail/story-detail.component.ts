@@ -72,7 +72,7 @@ export class StoryDetailComponent implements OnInit, OnDestroy {
 
   private updateMeta(detail: StoryDetail): void {
     const summary = detail.summary?.[0] ?? detail.content;
-    const pageTitle = `${detail.title} | Trump 47 Campaign Tracker`;
+    const pageTitle = `${detail.title} | Aussie Cricket Pulse`;
 
     this.title.setTitle(pageTitle);
     this.meta.updateTag({ name: 'description', content: summary });

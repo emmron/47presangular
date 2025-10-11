@@ -199,7 +199,7 @@
       <a
         [routerLink]="detailRoute"
         class="view-story"
-        [attr.aria-label]="'Read campaign context for: ' + item.title"
+        [attr.aria-label]="'Read extended coverage for: ' + item.title"
       >
         View story
       </a>
@@ -212,8 +212,9 @@
         <span>Read full article</span>
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         [attr.aria-label]="'Read full post on Reddit: ' + item.title"
+        [attr.aria-label]="'Read full article: ' + item.title"
       >
-        <span>Read on Reddit</span>
+        <span>Read full article</span>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="16"
@@ -232,7 +233,7 @@
       </a>
 
       <div class="share">
-        <span>Amplify:</span>
+        <span>Share:</span>
         <a
           *ngFor="let share of shareLinks"
           class="share-link"

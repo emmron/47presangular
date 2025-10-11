@@ -9,6 +9,7 @@ import { NewsFeedComponent } from './components/news-feed/news-feed.component';
 import { LiveStreamWidgetComponent } from './components/media/live-stream-widget/live-stream-widget.component';
 import { AdSpotlightComponent } from './components/media/ad-spotlight/ad-spotlight.component';
 import { EventMapComponent } from './components/media/event-map/event-map.component';
+import { ShellComponent } from './layout/shell/shell.component';
 
 @Component({
   selector: 'app-root',

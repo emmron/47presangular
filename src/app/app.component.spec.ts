@@ -4,6 +4,7 @@ import { of } from 'rxjs';
 import { AppComponent } from './app.component';
 import { AuthService } from './auth/auth.service';
 import { provideRouter } from '@angular/router';
+
 import { AppComponent } from './app.component';
 import { ExperimentService, ExperimentVariant } from './services/experiment.service';
 import { ReferralService } from './services/referral.service';
@@ -16,7 +17,7 @@ class ExperimentServiceStub {
 
 class ReferralServiceStub {
   getReferralCode(): string {
-    return 'T47-TEST';
+    return 'ACP-TEST';
   }
 }
 
@@ -34,11 +35,11 @@ describe('AppComponent', () => {
         },
       imports: [AppComponent]
       imports: [AppComponent],
-      providers: [provideRouter([])]
       providers: [
+        provideRouter([]),
         { provide: ExperimentService, useClass: ExperimentServiceStub },
-        { provide: ReferralService, useClass: ReferralServiceStub },
-      ],
+        { provide: ReferralService, useClass: ReferralServiceStub }
+      ]
     }).compileComponents();
   });
 
@@ -61,11 +62,12 @@ describe('AppComponent', () => {
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.querySelector('.skip-link')?.textContent?.trim()).toBe('Skip to main content');
-  it('should render the layout header title', () => {
+  });
+
+  it('should render the Aussie Cricket Pulse title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Trump 47 Campaign Tracker');
-    expect(compiled.querySelector('.brand')?.textContent).toContain('Trump 47 Campaign Tracker');
+    expect(compiled.querySelector('h1')?.textContent).toContain('Aussie Cricket Pulse');
   });
 });

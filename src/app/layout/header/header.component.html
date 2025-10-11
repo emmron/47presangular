@@ -1,11 +1,11 @@
 <header class="site-header" role="banner">
   <div class="site-header__inner">
     <div class="site-header__branding">
-      <a class="site-header__logo" routerLink="/news" aria-label="Trump 47 Tracker home">
-        <span class="site-header__logo-mark" aria-hidden="true">47</span>
+      <a class="site-header__logo" routerLink="/news" aria-label="Aussie Cricket Pulse home">
+        <span class="site-header__logo-mark" aria-hidden="true">AC</span>
         <span class="site-header__logo-text">
-          <span class="site-header__logo-primary">Trump 47</span>
-          <span class="site-header__logo-secondary">Campaign Tracker</span>
+          <span class="site-header__logo-primary">Aussie Cricket</span>
+          <span class="site-header__logo-secondary">Pulse Network</span>
         </span>
       </a>
     </div>
@@ -20,11 +20,11 @@
         </li>
         <li class="primary-nav__item primary-nav__item--mega">
           <button class="primary-nav__link mega-trigger" type="button" aria-haspopup="true"
-            [attr.aria-expanded]="megaMenuOpen" aria-controls="issues-mega" (click)="toggleMegaMenu()">
-            Issues
+            [attr.aria-expanded]="megaMenuOpen" aria-controls="coverage-mega" (click)="toggleMegaMenu()">
+            Coverage
             <span class="chevron" [class.is-open]="megaMenuOpen" aria-hidden="true"></span>
           </button>
-          <div id="issues-mega" class="mega-menu" [class.is-open]="megaMenuOpen" [attr.aria-hidden]="!megaMenuOpen">
+          <div id="coverage-mega" class="mega-menu" [class.is-open]="megaMenuOpen" [attr.aria-hidden]="!megaMenuOpen">
             <div class="mega-menu__inner">
               <div class="mega-menu__section" *ngFor="let section of megaMenuSections">
                 <p class="mega-menu__heading">{{ section.heading }}</p>
@@ -76,7 +76,7 @@
           <li *ngFor="let link of navLinks">
             <a [routerLink]="link.route" routerLinkActive="is-active" (click)="closeMobileMenu()">{{ link.label }}</a>
           </li>
-          <li class="mobile-drawer__section-label">Issues</li>
+          <li class="mobile-drawer__section-label">Coverage</li>
           <li class="mobile-drawer__mega" *ngFor="let section of megaMenuSections">
             <p class="mobile-drawer__heading">{{ section.heading }}</p>
             <ul>

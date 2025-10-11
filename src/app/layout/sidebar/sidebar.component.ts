@@ -18,37 +18,37 @@ interface SidebarCta {
 export class SidebarComponent {
   readonly takeActionCtas: SidebarCta[] = [
     {
-      label: 'Chip in $20.24',
-      description: 'Donate to accelerate key battleground operations.',
-      href: 'https://www.donaldjtrump.com/',
-      ariaLabel: 'Donate twenty dollars and twenty four cents'
+      label: 'Join 12th Man',
+      description: 'Support the national teams with exclusive member perks.',
+      href: 'https://www.cricket.com.au/12thman',
+      ariaLabel: 'Join the Cricket Australia 12th Man supporters club'
     },
     {
-      label: 'Become a Captain',
-      description: 'Lead local volunteer teams and coordinate canvasses.',
-      href: 'https://www.donaldjtrump.com/join/',
-      ariaLabel: 'Sign up to become a neighborhood captain'
+      label: 'Club cricket hub',
+      description: 'Register your local side and find club resources.',
+      href: 'https://play.cricket.com.au/',
+      ariaLabel: 'Open the community club cricket registration hub'
     },
     {
-      label: 'Rapid Response List',
-      description: 'Get SMS alerts for breaking news and key votes.',
-      href: 'https://www.donaldjtrump.com/subscribe/',
-      ariaLabel: 'Subscribe to the Trump rapid response list'
+      label: 'Match alerts',
+      description: 'Sign up for email and push alerts on Aussie fixtures.',
+      href: 'https://www.cricket.com.au/newsletters',
+      ariaLabel: 'Subscribe to Australian cricket match alerts'
     }
   ];
 
   readonly resourceLinks: SidebarCta[] = [
     {
-      label: 'State Leadership',
-      description: 'Find your state director and field staff.',
-      href: 'https://www.donaldjtrump.com/states/',
-      ariaLabel: 'Explore state leadership contacts'
+      label: 'Domestic fixtures',
+      description: 'Sheffield Shield, WNCL, and premier cricket schedules.',
+      href: 'https://www.cricket.com.au/fixtures',
+      ariaLabel: 'Browse Australian domestic cricket fixtures'
     },
     {
-      label: 'Events Calendar',
-      description: 'See rallies, town halls, and digital events near you.',
-      href: 'https://www.donaldjtrump.com/events/',
-      ariaLabel: 'Open the campaign events calendar'
+      label: 'Broadcast guide',
+      description: 'Find streaming and radio options for every league.',
+      href: 'https://www.cricket.com.au/broadcast-guide',
+      ariaLabel: 'Open the Australian cricket broadcast guide'
     }
   ];
 }

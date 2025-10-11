@@ -1,7 +1,7 @@
 @use '../../shared/styles/tokens';
 @use '../../shared/styles/mixins';
 
-.campaign-sidebar {
+.cricket-sidebar {
   position: sticky;
   top: var(--space-9);
   display: grid;
@@ -61,7 +61,7 @@
 }
 
 @include mixins.respond('lg') {
-  .campaign-sidebar {
+  .cricket-sidebar {
     position: static;
     top: auto;
     padding: var(--space-4);
@@ -70,7 +70,7 @@
 }
 
 @include mixins.respond('md') {
-  .campaign-sidebar {
+  .cricket-sidebar {
     gap: var(--space-4);
   }
 }

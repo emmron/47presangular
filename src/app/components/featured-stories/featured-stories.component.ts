@@ -19,22 +19,22 @@ type FeaturedStory = {
 export class FeaturedStoriesComponent {
   readonly stories: FeaturedStory[] = [
     {
-      title: 'Ground Game Intensifies in Swing States',
-      excerpt: 'Organizers ramp up door-to-door outreach in Pennsylvania and Arizona as polling margins tighten.',
-      topic: 'Field Operations',
-      url: 'https://www.donaldjtrump.com/news/'
+      title: 'Aussies lock in New Zealand tour squad',
+      excerpt: 'Selectors reward Shield form as Lance Morris and Aaron Hardie headline the travelling party.',
+      topic: 'International',
+      url: 'https://www.cricket.com.au/news/australia-squad-new-zealand-tour/'
     },
     {
-      title: 'Fundraising Push Sets New Monthly Record',
-      excerpt: 'Digital campaigns and grassroots donations combine for a historic funding surge across small-dollar donors.',
-      topic: 'Fundraising',
-      url: 'https://www.donaldjtrump.com/news/'
+      title: 'WNCL final set for North Sydney Oval',
+      excerpt: 'NSW Breakers and Tasmania Tigers prepare for a rematch with star-studded line-ups.',
+      topic: 'Domestic',
+      url: 'https://www.cricket.com.au/news/wncl-final-preview/'
     },
     {
-      title: 'Policy Rollout Focuses on Energy Independence',
-      excerpt: 'The campaign outlines a renewed strategy for domestic energy production aimed at lowering costs for families.',
-      topic: 'Policy',
-      url: 'https://www.donaldjtrump.com/news/'
+      title: 'BBL clubs chase marquee deals',
+      excerpt: 'Franchises eye overseas signatures as contracting window opens ahead of summer.',
+      topic: 'Big Bash',
+      url: 'https://www.cricket.com.au/news/bbl-signings-window/'
     }
   ];
 }
