@@ -5,6 +5,8 @@ import { LatestComponent } from './layout/pages/latest/latest.component';
 import { TimelineComponent } from './layout/pages/timeline/timeline.component';
 import { IssuesComponent } from './layout/pages/issues/issues.component';
 import { MediaComponent } from './layout/pages/media/media.component';
+import { ShellComponent } from './components/shell/shell.component';
+import { NewsFeedComponent } from './components/news-feed/news-feed.component';
 
 export const routes: Routes = [
   {
@@ -16,6 +18,32 @@ export const routes: Routes = [
       { path: 'timeline', component: TimelineComponent },
       { path: 'issues', component: IssuesComponent },
       { path: 'media', component: MediaComponent }
+    component: ShellComponent,
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'timeline'
+      },
+      {
+        path: 'timeline',
+        loadComponent: () =>
+          import('./routes/timeline/timeline.component').then(m => m.TimelineComponent)
+      },
+      {
+        path: 'topics/:slug',
+        loadComponent: () =>
+          import('./routes/topic-page/topic-page.component').then(m => m.TopicPageComponent)
+      },
+      {
+        path: 'news',
+        component: NewsFeedComponent
+      },
+      {
+        path: 'news/:id',
+        loadComponent: () =>
+          import('./components/story/story-detail/story-detail.component').then(m => m.StoryDetailComponent)
+      }
     ]
   },
   {

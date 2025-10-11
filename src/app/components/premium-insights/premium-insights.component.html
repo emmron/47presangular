@@ -1,0 +1,40 @@
+<section class="premium" aria-labelledby="premium-title">
+  <header>
+    <h1 id="premium-title">Premium Insights</h1>
+    <p>Supporters get early looks at polling and strategy briefings. Upgrade via Stripe or Memberful.</p>
+  </header>
+
+  <ng-container *ngIf="entitlement$ | async as entitlement">
+    <div *ngIf="!entitlement.isAuthenticated" class="cta-panel">
+      <p>Log in or upgrade to unlock supporter dashboards.</p>
+      <div class="buttons">
+        <button type="button" (click)="loginWithStripe()">Unlock with Stripe</button>
+        <button type="button" (click)="loginWithMemberful()">Unlock with Memberful</button>
+      </div>
+    </div>
+
+    <div *ngIf="entitlement.isAuthenticated" class="insights">
+      <div class="status">
+        <span class="plan">Plan: {{ entitlement.plan | titlecase }}</span>
+        <span *ngIf="entitlement.expiresAt" class="expiry">Access through {{ entitlement.expiresAt | date:'longDate' }}</span>
+        <button type="button" class="logout" (click)="logout()">Sign out</button>
+      </div>
+
+      <div class="tiers">
+        <section>
+          <h2>Supporter Feed</h2>
+          <ul>
+            <li *ngFor="let insight of supporterInsights">{{ insight }}</li>
+          </ul>
+        </section>
+
+        <section *ngIf="entitlement.plan === 'strategist'">
+          <h2>Strategist Briefings</h2>
+          <ul>
+            <li *ngFor="let insight of strategistInsights">{{ insight }}</li>
+          </ul>
+        </section>
+      </div>
+    </div>
+  </ng-container>
+</section>
