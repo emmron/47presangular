@@ -1,0 +1,111 @@
+.ad-spotlight {
+  background: linear-gradient(145deg, #111827, #1f2937);
+  color: #f8fafc;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.ad-spotlight__header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem;
+  align-items: baseline;
+}
+
+.ad-spotlight__advertiser {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(148, 163, 184, 0.75);
+}
+
+.ad-spotlight__body {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.ad-spotlight__media picture,
+.ad-spotlight__media img {
+  display: block;
+  width: 100%;
+  border-radius: 0.75rem;
+  overflow: hidden;
+}
+
+.ad-spotlight__copy {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.ad-spotlight__eyebrow {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: rgba(96, 165, 250, 0.75);
+}
+
+.ad-spotlight__description {
+  color: rgba(226, 232, 240, 0.8);
+  line-height: 1.6;
+}
+
+.ad-spotlight__metrics {
+  display: flex;
+  gap: 1.5rem;
+  font-size: 0.9rem;
+  color: rgba(148, 163, 184, 0.9);
+}
+
+.ad-spotlight__metrics div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.ad-spotlight__metrics dt {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.75rem;
+  color: rgba(148, 163, 184, 0.65);
+}
+
+.ad-spotlight__cta {
+  align-self: flex-start;
+  padding: 0.75rem 1.25rem;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 600;
+  color: #0f172a;
+  background: linear-gradient(135deg, #34d399, #3b82f6);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ad-spotlight__cta:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 30px -20px rgba(59, 130, 246, 0.9);
+}
+
+.ad-spotlight__placeholder {
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  background: rgba(30, 41, 59, 0.45);
+  text-align: center;
+  color: rgba(148, 163, 184, 0.75);
+}
+
+.ad-spotlight__error {
+  color: #f87171;
+}
+
+@media (min-width: 768px) {
+  .ad-spotlight__body {
+    grid-template-columns: minmax(0, 320px) minmax(0, 1fr);
+    align-items: center;
+  }
+}
