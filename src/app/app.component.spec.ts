@@ -32,10 +32,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it('should render navigation links', () => {
+  it('should have the tracker title', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.componentInstance;
+    expect(app.title).toEqual('Trump 47 Campaign Tracker');
+  });
+
+  it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('nav a')?.textContent).toContain('Dashboard');
+    expect(compiled.querySelector('.brand')?.textContent).toContain('Trump 47 Campaign Tracker');
   });
 });

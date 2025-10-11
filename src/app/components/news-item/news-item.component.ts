@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { NewsItem } from '../../models/news.model';
 import { NewsItem } from '../../models/news.model';
 import { TrackingService } from '../../services/tracking.service';
 import { ReferralService } from '../../services/referral.service';
@@ -14,12 +16,14 @@ interface ShareLink {
 @Component({
   selector: 'app-news-item',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './news-item.component.html',
   styleUrl: './news-item.component.scss'
 })
 export class NewsItemComponent {
   @Input() item!: NewsItem;
+
+  formatDate(date: Date | string): string {
 
   constructor(
     private tracking: TrackingService,
@@ -37,6 +41,13 @@ export class NewsItemComponent {
     });
   }
 
+  get detailRoute(): string[] {
+    return ['/news', this.item.id];
+  }
+
+  toIsoString(date: Date | string): string {
+    const value = typeof date === 'string' ? new Date(date) : date;
+    return value.toISOString();
   get dateTimeAttr(): string {
     const value = this.item.pubDate instanceof Date ? this.item.pubDate : new Date(this.item.pubDate);
     return value.toISOString();
