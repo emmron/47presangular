@@ -1,4 +1,6 @@
 import { Routes } from '@angular/router';
+import { NewsFeedComponent } from './components/news-feed/news-feed.component';
+import { StoryDetailComponent } from './components/story/story-detail/story-detail.component';
 
 export const routes: Routes = [
   {

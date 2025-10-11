@@ -70,8 +70,8 @@ export class NewsStateService {
   }
 
   // Data Operations
-  fetchNews(): void {
-    this.newsApiService.getNews().subscribe({
+  fetchNews(forceRefresh = false): void {
+    this.newsApiService.getNews(forceRefresh).subscribe({
       next: (loadingState) => {
         switch (loadingState.state) {
           case 'loading':
@@ -79,17 +79,14 @@ export class NewsStateService {
             break;
           case 'loaded':
             this.updateState({
-              items: loadingState.data,
+              items: this.enrichItems(loadingState.data),
               loading: false,
               error: null,
               lastUpdated: new Date()
             });
             break;
           case 'error':
-            this.updateState({
-              loading: false,
-              error: loadingState.error.message
-            });
+            this.handleBackendError(loadingState.error);
             break;
         }
       }
@@ -125,13 +122,27 @@ export class NewsStateService {
     });
   }
 
+  private handleBackendError(error: Error): void {
+    const friendlyMessage = error.message || 'The news feed is currently unavailable.';
+    this.updateState({
+      loading: false,
+      error: friendlyMessage
+    });
+  }
+
+  private enrichItems(items: NewsItem[]): NewsItem[] {
+    return items.map(item => ({
+      ...item,
+      content: item.content ?? '',
+      category: item.category ?? 'News'
+    }));
+  }
+
   private setupAutoRefresh(): void {
-    // Clear any existing subscription
     if (this.refreshSubscription) {
       this.refreshSubscription.unsubscribe();
     }
 
-    // Set up new refresh timer
     this.refreshSubscription = timer(this.REFRESH_INTERVAL, this.REFRESH_INTERVAL)
       .subscribe(() => {
         if (!this.currentState.loading) {

@@ -1,0 +1,40 @@
+<section class="story-detail" *ngIf="!loading && story; else loadingOrError">
+  <nav class="breadcrumb">
+    <a routerLink="/" aria-label="Back to campaign news">← Back to news feed</a>
+  </nav>
+
+  <header class="story-header">
+    <div class="meta">
+      <span class="source">{{ story.source }}</span>
+      <time [dateTime]="story.pubDate.toISOString()">{{ story.pubDate | date: 'longDate' }}</time>
+    </div>
+    <h1>{{ story.title }}</h1>
+    <p class="lede" *ngIf="story.content">{{ story.content }}</p>
+    <a
+      *ngIf="story.link"
+      class="external-cta"
+      [href]="story.link"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Read on Reddit
+    </a>
+  </header>
+
+  <div class="story-body">
+    <app-key-facts [summary]="story.summary"></app-key-facts>
+    <app-story-timeline [events]="story.timelineEvents"></app-story-timeline>
+    <app-source-list [sources]="story.sources"></app-source-list>
+  </div>
+</section>
+
+<ng-template #loadingOrError>
+  <div class="story-status" *ngIf="loading" role="status">
+    <div class="spinner"></div>
+    <p>Loading story details…</p>
+  </div>
+  <div class="story-status" *ngIf="!loading && error" role="alert">
+    <p>{{ error }}</p>
+    <a routerLink="/" class="return-link">Return to news feed</a>
+  </div>
+</ng-template>

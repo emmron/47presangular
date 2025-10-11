@@ -1,0 +1,11 @@
+<section class="dashboard">
+  <app-engagement-banner [referralCode]="referralCode"></app-engagement-banner>
+
+  <div class="referral-card" aria-live="polite">
+    <h2>Your referral code</h2>
+    <p>Share this code with supporters and track conversions via UTM links.</p>
+    <div class="code">{{ referralCode }}</div>
+  </div>
+
+  <app-news-feed></app-news-feed>
+</section>

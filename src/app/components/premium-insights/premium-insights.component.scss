@@ -1,0 +1,88 @@
+.premium {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  header {
+    h1 {
+      margin: 0;
+      font-size: 2rem;
+    }
+
+    p {
+      margin: 0;
+      color: #4f5b75;
+    }
+  }
+
+  .cta-panel {
+    background: #fff7f5;
+    border: 1px solid #f7c2ba;
+    border-radius: 12px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    .buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+
+      button {
+        background: #c41230;
+        color: #fff;
+        border: none;
+        border-radius: 999px;
+        padding: 0.5rem 1.5rem;
+        font-weight: 600;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .insights {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    background: #fff;
+    border-radius: 12px;
+    padding: 1.5rem;
+    border: 1px solid #d0d5e6;
+
+    .status {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+
+      .logout {
+        margin-left: auto;
+        background: transparent;
+        border: 1px solid #c41230;
+        border-radius: 999px;
+        padding: 0.4rem 1.2rem;
+        color: #c41230;
+        font-weight: 600;
+        cursor: pointer;
+      }
+    }
+
+    .tiers {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+
+      section {
+        h2 {
+          margin-top: 0;
+        }
+
+        ul {
+          margin: 0;
+          padding-left: 1.25rem;
+        }
+      }
+    }
+  }
+}
