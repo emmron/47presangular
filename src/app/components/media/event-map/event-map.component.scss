@@ -1,0 +1,123 @@
+.event-map {
+  background: #0f172a;
+  color: #f8fafc;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.event-map__header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.event-map__eyebrow {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: rgba(129, 140, 248, 0.75);
+  margin: 0 0 0.5rem;
+}
+
+.event-map__subhead {
+  max-width: 380px;
+  color: rgba(226, 232, 240, 0.75);
+}
+
+.event-map__content {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.event-map__map {
+  width: 100%;
+  height: 280px;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  box-shadow: inset 0 0 0 1px rgba(148, 163, 184, 0.15);
+}
+
+.event-map__map--inactive {
+  filter: grayscale(1);
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.event-map__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 1rem;
+}
+
+.event-map__card {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: minmax(0, 1fr);
+  background: rgba(15, 23, 42, 0.7);
+  border-radius: 0.75rem;
+  padding: 1rem;
+}
+
+.event-map__card-media picture,
+.event-map__card-media img {
+  display: block;
+  width: 100%;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.event-map__card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.event-map__card-date {
+  font-size: 0.9rem;
+  color: rgba(226, 232, 240, 0.75);
+}
+
+.event-map__card-location {
+  font-weight: 600;
+  color: rgba(191, 219, 254, 0.9);
+}
+
+.event-map__card-description {
+  color: rgba(148, 163, 184, 0.85);
+  line-height: 1.6;
+}
+
+.event-map__state {
+  padding: 1.5rem;
+  text-align: center;
+  background: rgba(30, 41, 59, 0.55);
+  border-radius: 0.75rem;
+  color: rgba(226, 232, 240, 0.75);
+}
+
+.event-map__error {
+  color: #f87171;
+  text-align: center;
+}
+
+@media (min-width: 1024px) {
+  .event-map__content {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+    align-items: start;
+  }
+
+  .event-map__map {
+    height: 360px;
+  }
+
+  .event-map__card {
+    grid-template-columns: 160px minmax(0, 1fr);
+  }
+}
