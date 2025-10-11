@@ -1,43 +1,215 @@
-<div class="app-shell">
-  <header class="topbar">
-    <div class="brand">
-      <span class="label">Trump 47</span>
-      <h1>Campaign Command Center</h1>
+<div class="ozc-shell">
+  <header class="ozc-header" role="banner">
+    <div class="ozc-header__branding">
+      <div class="ozc-header__logo" aria-hidden="true">OC</div>
+      <div class="ozc-header__copy">
+        <p class="ozc-header__eyebrow">Community verified cricket bargains</p>
+        <h1>Oz Crickets</h1>
+        <p class="ozc-header__tagline">
+          Australia’s sharpest cricket deals, curated by fans and tracked with newsroom-grade intelligence.
+        </p>
+      </div>
     </div>
-    <nav class="primary-nav">
-      <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
-      <a routerLink="/events" routerLinkActive="active">Events</a>
-      <a routerLink="/positions" routerLinkActive="active">Positions</a>
-      <a routerLink="/timeline" routerLinkActive="active">Timeline</a>
-      <a routerLink="/widgets" routerLinkActive="active">Widgets</a>
-    </nav>
+    <div class="ozc-header__metrics" role="list">
+      <article class="ozc-metric" role="listitem" *ngFor="let metric of pulseMetrics()">
+        <p class="ozc-metric__value">{{ metric.value }}</p>
+        <p class="ozc-metric__label">{{ metric.label }}</p>
+        <p class="ozc-metric__meta">{{ metric.meta }}</p>
+      </article>
+    </div>
   </header>
 
-  <main class="layout">
-    <section class="primary">
-      <router-outlet></router-outlet>
-    </section>
-    <aside class="news-rail">
-      <h2>Rapid Response Wire</h2>
-      <p class="subtitle">
-        Automated stream of campaign news, digital releases, and media moments for
-        surrogates and partners.
+  <section class="ozc-search-panel" aria-label="Search and refine deals">
+    <div class="ozc-search-panel__primary">
+      <span class="ozc-search-panel__icon" aria-hidden="true">🔍</span>
+      <label class="visually-hidden" for="deal-search">Search deals</label>
+      <input
+        id="deal-search"
+        type="search"
+        inputmode="search"
+        placeholder="Search bats, tickets, streaming codes, or stores"
+        [value]="searchTerm()"
+        (input)="onSearchInput($event)"
+      />
+    </div>
+    <div class="ozc-search-panel__toggles">
+      <label class="ozc-toggle">
+        <input type="checkbox" [checked]="onlyLocalStock()" (change)="toggleLocalStock()" />
+        <span>Local stock only</span>
+      </label>
+      <label class="ozc-toggle">
+        <input type="checkbox" [checked]="includeTickets()" (change)="toggleTickets()" />
+        <span>Include ticket releases</span>
+      </label>
+    </div>
+  </section>
+
+  <nav class="ozc-stream-nav" aria-label="Deal streams">
+    <button
+      *ngFor="let stream of streams"
+      type="button"
+      [class.is-active]="selectedStream() === stream.id"
+      (click)="setStream(stream.id)"
+    >
+      <span class="ozc-stream-nav__label">{{ stream.label }}</span>
+      <span class="ozc-stream-nav__meta">{{ stream.description }}</span>
+    </button>
+  </nav>
+
+  <section class="ozc-active-filters" *ngIf="activeFilters().length > 0" aria-label="Active filters">
+    <span class="ozc-active-filters__label">Active filters:</span>
+    <button
+      type="button"
+      class="ozc-active-filters__chip"
+      *ngFor="let filter of activeFilters()"
+      (click)="clearFilter(filter.key)"
+    >
+      {{ filter.label }}
+      <span aria-hidden="true">×</span>
+    </button>
+    <button type="button" class="ozc-active-filters__reset" (click)="resetFilters()">Clear all</button>
+  </section>
+
+  <main class="ozc-layout">
+    <aside class="ozc-filters" aria-label="Browse categories">
+      <div class="ozc-filters__header">
+        <h2>Discover</h2>
+        <p>Dial into the cricket vertical that matters to you.</p>
+      </div>
+      <ul class="ozc-filters__list">
+        <li *ngFor="let category of categories(); trackBy: trackByCategory">
+          <button
+            type="button"
+            [class.is-active]="selectedCategory() === category.slug"
+            (click)="setCategory(category.slug)"
+          >
+            <span class="ozc-filters__icon" aria-hidden="true">{{ category.icon }}</span>
+            <span class="ozc-filters__copy">
+              <span class="ozc-filters__label">{{ category.label }}</span>
+              <span class="ozc-filters__description">{{ category.description }}</span>
+            </span>
+            <span
+              class="ozc-filters__count"
+              [attr.aria-label]="category.count + ' deals in ' + category.label"
+            >
+              {{ category.count }}
+            </span>
+          </button>
+        </li>
+      </ul>
+      <div class="ozc-filters__footer">
+        <p class="ozc-filters__hint">Filters update in real time as the community votes.</p>
+        <p class="ozc-filters__hint">Suggest a new tag in <strong>#meta</strong>.</p>
+      </div>
+    </aside>
+
+    <section class="ozc-feed" aria-live="polite">
+      <h2 class="visually-hidden">Deal feed</h2>
+      <article
+        class="ozc-deal"
+        *ngFor="let deal of filteredDeals(); trackBy: trackByDealId"
+        [class.is-hot]="deal.status === 'hot'"
+        [class.is-new]="deal.status === 'new'"
+        [class.is-last-chance]="deal.status === 'lastChance'"
+      >
+        <header class="ozc-deal__header">
+          <div class="ozc-deal__votes" [attr.aria-label]="deal.voteCount + ' votes'">
+            <span class="ozc-deal__votes-value">{{ deal.voteCount }}</span>
+            <span class="ozc-deal__votes-label">votes</span>
+          </div>
+          <div class="ozc-deal__headline">
+            <a class="ozc-deal__title" [href]="deal.link" target="_blank" rel="noopener">
+              {{ deal.title }}
+            </a>
+            <p class="ozc-deal__description">{{ deal.description }}</p>
+          </div>
+          <span class="ozc-deal__badge" [attr.data-tone]="deal.status">
+            {{ dealStatusMeta[deal.status].emoji }} {{ dealStatusMeta[deal.status].label }}
+          </span>
+        </header>
+
+        <dl class="ozc-deal__pricing">
+          <div class="ozc-deal__price">
+            <dt>Now</dt>
+            <dd>{{ formatPrice(deal) }}</dd>
+          </div>
+          <div class="ozc-deal__was" *ngIf="deal.originalPrice !== undefined">
+            <dt>Was</dt>
+            <dd>{{ deal.originalPrice | currency: deal.currency : 'symbol-narrow' }}</dd>
+          </div>
+          <div class="ozc-deal__discount" *ngIf="formatDiscount(deal) as discount">
+            <dt>Save</dt>
+            <dd>{{ discount }}</dd>
+          </div>
+          <div class="ozc-deal__shipping" *ngIf="deal.shipping">
+            <dt>Delivery</dt>
+            <dd>{{ deal.shipping }}</dd>
+          </div>
+          <div class="ozc-deal__location" *ngIf="deal.location">
+            <dt>State</dt>
+            <dd>{{ deal.location }}</dd>
+          </div>
+        </dl>
+
+        <footer class="ozc-deal__footer">
+          <div class="ozc-deal__meta">
+            <span>{{ deal.store }}</span>
+            <span aria-hidden="true">•</span>
+            <span>Posted {{ relativeTime(deal.postedAt) }} by {{ deal.postedBy }}</span>
+            <span aria-hidden="true">•</span>
+            <span>{{ deal.commentCount }} comments</span>
+            <span *ngIf="deal.expiresAt" class="ozc-deal__expires">
+              Expires {{ relativeTime(deal.expiresAt) }}
+            </span>
+          </div>
+          <div class="ozc-deal__tags">
+            <span class="ozc-deal__tag" *ngFor="let tag of deal.tags">#{{ tag }}</span>
+          </div>
+          <a class="ozc-deal__cta" [href]="deal.link" target="_blank" rel="noopener">View deal</a>
+        </footer>
+      </article>
+
+      <p class="ozc-feed__empty" *ngIf="filteredDeals().length === 0">
+        Nothing matches those filters yet. Try widening the search or clearing filters.
       </p>
-      <app-news-feed></app-news-feed>
+    </section>
+
+    <aside class="ozc-insights" aria-label="Community insights">
+      <section class="ozc-insights__block">
+        <h2>Trending conversations</h2>
+        <ul>
+          <li *ngFor="let tag of trendingTags()">
+            <span class="ozc-insights__chip">#{{ tag.tag }}</span>
+            <span class="ozc-insights__count">{{ tag.mentions }} mentions</span>
+          </li>
+        </ul>
+      </section>
+
+      <section class="ozc-insights__block">
+        <h2>Top stores</h2>
+        <ul>
+          <li *ngFor="let store of topStores()">
+            <div>
+              <p class="ozc-insights__title">{{ store.name }}</p>
+              <p class="ozc-insights__meta">{{ store.deals }} deals • {{ store.votes }} votes</p>
+            </div>
+            <span class="ozc-insights__score">{{ store.score }}</span>
+          </li>
+        </ul>
+      </section>
+
+      <section class="ozc-insights__block">
+        <h2>Community leaders</h2>
+        <ul>
+          <li *ngFor="let leader of communityLeaders()">
+            <div>
+              <p class="ozc-insights__title">{{ leader.name }}</p>
+              <p class="ozc-insights__meta">{{ leader.deals }} deals shared</p>
+            </div>
+            <span class="ozc-insights__score">{{ leader.votes }} votes</span>
+          </li>
+        </ul>
+      </section>
     </aside>
   </main>
 </div>
-<main class="layout">
-  <div class="layout__inner">
-    <section class="layout__hero" aria-label="Featured campaign coverage">
-      <app-live-stream-widget class="layout__live-widget"></app-live-stream-widget>
-      <app-ad-spotlight class="layout__ad-widget"></app-ad-spotlight>
-    </section>
-
-    <section class="layout__grid" aria-label="Campaign coverage and events">
-      <app-event-map class="layout__map"></app-event-map>
-      <app-news-feed class="layout__news"></app-news-feed>
-    </section>
-  </div>
-</main>
-<app-shell></app-shell>
