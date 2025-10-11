@@ -97,6 +97,19 @@
             color: var(--text-primary);
           }
         }
+
+        .followed-toggle {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          font-size: 0.95rem;
+          color: var(--text-secondary);
+
+          input {
+            width: 18px;
+            height: 18px;
+          }
+        }
       }
 
       .refresh-control {
@@ -150,6 +163,68 @@
         }
       }
     }
+
+    .saved-preferences {
+      margin-top: 24px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: center;
+      justify-content: space-between;
+
+      .saved-select,
+      .saved-form {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      .saved-select-input {
+        padding: 10px 16px;
+        border-radius: 10px;
+        border: 1px solid var(--border-color);
+        background: var(--card-background);
+        min-width: 180px;
+      }
+
+      .delete-saved {
+        border: none;
+        padding: 10px 16px;
+        border-radius: 10px;
+        background: #dc2626;
+        color: #fff;
+        cursor: pointer;
+      }
+
+      .saved-form {
+        input {
+          padding: 10px 16px;
+          border-radius: 10px;
+          border: 1px solid var(--border-color);
+          min-width: 220px;
+        }
+
+        button {
+          border: none;
+          padding: 10px 20px;
+          border-radius: 10px;
+          background: var(--primary-color);
+          color: #fff;
+          font-weight: 600;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  .preferences-error {
+    margin-bottom: 16px;
+    padding: 12px 16px;
+    border-radius: 12px;
+    background: rgba(239, 68, 68, 0.1);
+    color: #b91c1c;
+    font-weight: 500;
   }
 
   .loading {

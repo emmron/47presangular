@@ -27,6 +27,16 @@
     </div>
 
     <footer class="actions">
+      <button
+        *ngIf="isAuthenticated"
+        type="button"
+        class="save-btn"
+        (click)="onSave()"
+        [disabled]="isSaved"
+        [attr.aria-pressed]="isSaved"
+      >
+        {{ isSaved ? 'Saved' : 'Save Article' }}
+      </button>
       <a [href]="item.link"
         target="_blank"
         rel="noopener noreferrer"

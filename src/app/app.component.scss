@@ -1,0 +1,138 @@
+.app-shell {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #0f172a 0%, #1e293b 35%, #f8fafc 100%);
+  color: #0f172a;
+  display: flex;
+  flex-direction: column;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 1.5rem 3rem;
+  background: rgba(15, 23, 42, 0.9);
+  color: #e2e8f0;
+  flex-wrap: wrap;
+
+  .brand {
+    h1 {
+      margin: 0;
+      font-size: 1.75rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    p {
+      margin: 0.25rem 0 0;
+      color: #cbd5f5;
+      font-size: 0.95rem;
+    }
+  }
+}
+
+.nav-links {
+  display: inline-flex;
+  gap: 1rem;
+
+  a {
+    color: #cbd5f5;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 0.35rem 0.75rem;
+    border-radius: 999px;
+    transition: background 0.2s ease, color 0.2s ease;
+
+    &.active,
+    &:hover {
+      background: rgba(99, 102, 241, 0.25);
+      color: #f8fafc;
+    }
+  }
+}
+
+.auth-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  .user-avatar {
+    background: rgba(148, 163, 184, 0.25);
+    padding: 0.45rem 0.75rem;
+    border-radius: 999px;
+    font-weight: 600;
+  }
+
+  button {
+    border: none;
+    border-radius: 999px;
+    padding: 0.45rem 1rem;
+    background: #6366f1;
+    color: #f8fafc;
+    font-weight: 600;
+    cursor: pointer;
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  }
+
+  .sign-in-form {
+    display: inline-flex;
+    gap: 0.5rem;
+
+    input {
+      border: none;
+      border-radius: 999px;
+      padding: 0.45rem 0.9rem;
+      font-size: 0.95rem;
+      min-width: 220px;
+    }
+  }
+}
+
+.message {
+  margin: 1rem auto 0;
+  padding: 0.75rem 1.5rem;
+  border-radius: 999px;
+  background: rgba(99, 102, 241, 0.15);
+  color: #1e293b;
+  font-weight: 500;
+}
+
+.content {
+  flex: 1;
+  padding: 2rem;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto 3rem;
+}
+
+@media (max-width: 960px) {
+  .topbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .auth-controls {
+    width: 100%;
+
+    .sign-in-form {
+      width: 100%;
+
+      input {
+        flex: 1;
+      }
+
+      button {
+        flex-shrink: 0;
+      }
+    }
+  }
+
+  .content {
+    padding: 1rem;
+  }
+}

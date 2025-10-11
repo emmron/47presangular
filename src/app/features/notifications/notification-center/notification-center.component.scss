@@ -1,0 +1,127 @@
+.notification-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1rem;
+
+  .summary {
+    font-size: 0.95rem;
+    color: #475569;
+  }
+
+  .toolbar-actions {
+    display: inline-flex;
+    gap: 0.75rem;
+
+    button {
+      border: none;
+      border-radius: 8px;
+      padding: 0.45rem 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      background: #2563eb;
+      color: #ffffff;
+
+      &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+    }
+
+    button:last-child {
+      background: #0f172a;
+    }
+  }
+}
+
+.notification-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.75rem;
+
+  li {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem;
+    border-radius: 12px;
+    background: #f8fafc;
+    box-shadow: inset 0 0 0 1px rgba(148, 163, 184, 0.2);
+
+    &.unread {
+      background: #e2e8f0;
+      box-shadow: inset 0 0 0 1px rgba(37, 99, 235, 0.25);
+    }
+
+    .content {
+      flex: 1;
+
+      h3 {
+        margin: 0 0 0.35rem;
+        font-size: 1.05rem;
+        color: #0f172a;
+      }
+
+      p {
+        margin: 0 0 0.5rem;
+        color: #475569;
+      }
+
+      .meta {
+        display: flex;
+        gap: 0.75rem;
+        font-size: 0.85rem;
+        color: #64748b;
+      }
+    }
+
+    .actions {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      align-items: flex-end;
+
+      a {
+        color: #2563eb;
+        text-decoration: none;
+        font-weight: 600;
+      }
+
+      button {
+        border: none;
+        border-radius: 8px;
+        padding: 0.45rem 0.85rem;
+        background: #1d4ed8;
+        color: #ffffff;
+        font-weight: 600;
+        cursor: pointer;
+
+        &:disabled {
+          background: #94a3b8;
+          cursor: not-allowed;
+        }
+      }
+    }
+  }
+}
+
+.empty {
+  margin: 0;
+  color: #64748b;
+}
+
+@media (max-width: 768px) {
+  .notification-list li {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .notification-toolbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

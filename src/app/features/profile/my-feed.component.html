@@ -1,0 +1,120 @@
+<section class="my-feed" *ngIf="(profile$ | async) as profile; else signIn">
+  <header class="feed-header">
+    <div class="identity">
+      <h1>My Feed</h1>
+      <p class="subtitle">Personalized for {{ profile.displayName || profile.email }}</p>
+    </div>
+    <div class="meta">
+      <span *ngIf="profile.followTopics.length">Following {{ profile.followTopics.length }} topic(s)</span>
+      <span *ngIf="!profile.followTopics.length">No topics followed yet</span>
+    </div>
+  </header>
+
+  <section class="status" *ngIf="error" role="alert">
+    {{ error }}
+  </section>
+
+  <section class="follow-topics">
+    <h2>Follow Topics</h2>
+    <div class="topics-list" *ngIf="profile.followTopics.length; else noTopics">
+      <span class="topic-chip" *ngFor="let topic of profile.followTopics">
+        {{ topic }}
+        <button type="button" (click)="removeFollowTopic(topic, profile)" [attr.aria-label]="'Remove topic ' + topic">
+          &times;
+        </button>
+      </span>
+    </div>
+    <ng-template #noTopics>
+      <p class="empty">Add topics you want to keep tabs on to tune your feed.</p>
+    </ng-template>
+
+    <form class="topic-form" (ngSubmit)="addFollowTopic()">
+      <input
+        type="text"
+        [formControl]="followTopicControl"
+        placeholder="Add a topic (e.g. fundraising, debates)"
+        aria-label="Add follow topic"
+      >
+      <button type="submit" [disabled]="savingTopics">
+        {{ savingTopics ? 'Adding...' : 'Add Topic' }}
+      </button>
+    </form>
+  </section>
+
+  <section class="saved-filters">
+    <h2>Saved Searches</h2>
+    <div *ngIf="(savedFilters$ | async) as savedFilters; else noFilters">
+      <ul *ngIf="savedFilters.length; else noFilters">
+        <li *ngFor="let filter of savedFilters">
+          <span class="filter-name">{{ filter.name }}</span>
+          <div class="filter-actions">
+            <button type="button" (click)="applySavedFilter(filter)">Apply</button>
+            <button type="button" (click)="deleteSavedFilter(filter)">Remove</button>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <ng-template #noFilters>
+      <p class="empty">Save filters from the main feed to build a personalized collection.</p>
+    </ng-template>
+  </section>
+
+  <section class="saved-articles">
+    <h2>Saved Articles</h2>
+    <div *ngIf="(savedArticles$ | async) as savedArticles; else noArticles">
+      <ul *ngIf="savedArticles.length; else noArticles">
+        <li *ngFor="let article of savedArticles">
+          <a [href]="article.item.link" target="_blank" rel="noopener noreferrer">
+            {{ article.item.title }}
+          </a>
+          <span class="article-meta">{{ article.item.source }} · {{ article.item.pubDate | date:'medium' }}</span>
+          <button type="button" (click)="removeSavedArticle(article)">Remove</button>
+        </li>
+      </ul>
+    </div>
+    <ng-template #noArticles>
+      <p class="empty">Save articles from the main feed to review them here later.</p>
+    </ng-template>
+  </section>
+
+  <section class="notification-preferences">
+    <h2>Notification Preferences</h2>
+    <form [formGroup]="digestForm" (ngSubmit)="saveDigestPreferences()">
+      <div class="form-row">
+        <label>
+          <input type="checkbox" formControlName="emailDigest">
+          Receive email digests
+        </label>
+        <select formControlName="digestFrequency">
+          <option value="daily">Daily</option>
+          <option value="weekly">Weekly</option>
+          <option value="monthly">Monthly</option>
+        </select>
+      </div>
+
+      <div class="form-row">
+        <label>
+          <input type="checkbox" formControlName="pushNotifications">
+          Push notifications
+        </label>
+        <span class="permission">{{ getNotificationPermissionDescription() }}</span>
+      </div>
+
+      <button type="submit" [disabled]="savingDigestPreferences">
+        {{ savingDigestPreferences ? 'Saving...' : 'Save Preferences' }}
+      </button>
+    </form>
+  </section>
+
+  <section class="notification-center">
+    <h2>Notification Center</h2>
+    <app-notification-center></app-notification-center>
+  </section>
+</section>
+
+<ng-template #signIn>
+  <section class="sign-in-prompt">
+    <h1>Sign in to build your feed</h1>
+    <p>Log in from the main feed to personalize topics, save filters, and manage notifications.</p>
+  </section>
+</ng-template>

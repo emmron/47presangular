@@ -1,0 +1,43 @@
+<div class="notification-toolbar">
+  <span class="summary">
+    <strong>{{ unreadCount }}</strong> unread update(s)
+  </span>
+  <div class="toolbar-actions">
+    <button type="button" (click)="markAllAsRead()" [disabled]="unreadCount === 0">
+      Mark all as read
+    </button>
+    <button
+      type="button"
+      *ngIf="permission !== 'granted' && permission !== 'unsupported'"
+      (click)="requestBrowserPermission()"
+      [disabled]="loadingPermission"
+    >
+      {{ loadingPermission ? 'Requesting...' : 'Enable browser alerts' }}
+    </button>
+  </div>
+</div>
+
+<ul class="notification-list" *ngIf="(notifications$ | async) as notifications; else noNotifications">
+  <li *ngFor="let notification of notifications; trackBy: trackById" [class.unread]="!notification.readAt">
+    <div class="content">
+      <h3>{{ notification.title }}</h3>
+      <p>{{ notification.body }}</p>
+      <div class="meta">
+        <span class="type">{{ notification.type | titlecase }}</span>
+        <time>{{ notification.createdAt | date:'short' }}</time>
+      </div>
+    </div>
+    <div class="actions">
+      <a *ngIf="notification.link" [href]="notification.link" target="_blank" rel="noopener noreferrer">
+        Open
+      </a>
+      <button type="button" (click)="markAsRead(notification)" [disabled]="!!notification.readAt">
+        {{ notification.readAt ? 'Read' : 'Mark as read' }}
+      </button>
+    </div>
+  </li>
+</ul>
+
+<ng-template #noNotifications>
+  <p class="empty">No notifications yet. Opt in for digests or push alerts to see updates here.</p>
+</ng-template>

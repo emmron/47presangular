@@ -22,4 +22,16 @@ export interface NewsFilter {
   dateFrom?: Date;
   dateTo?: Date;
   searchTerm?: string;
+  topics?: string[];
+  savedFilterId?: string | null;
+  onlyFollowedTopics?: boolean;
+}
+
+export interface SavedFilterSnapshot {
+  id: string;
+  name: string;
+  filters: NewsFilter;
+  createdAt?: string;
+  updatedAt?: string;
+  isDefault?: boolean;
 }

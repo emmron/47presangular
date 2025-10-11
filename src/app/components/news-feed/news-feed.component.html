@@ -34,6 +34,18 @@
         >
           Clear Filters
         </button>
+
+        <label
+          *ngIf="canFilterByFollowedTopics"
+          class="followed-toggle"
+        >
+          <input
+            type="checkbox"
+            [checked]="onlyFollowedTopics"
+            (change)="onToggleFollowedTopics($event)"
+          >
+          Followed topics only
+        </label>
       </div>
 
       <div class="refresh-control">
@@ -51,7 +63,48 @@
         </span>
       </div>
     </div>
+
+    <div class="saved-preferences" *ngIf="isLoggedIn">
+      <div class="saved-select">
+        <label class="label" for="savedFilterSelect">Saved searches</label>
+        <select
+          id="savedFilterSelect"
+          [ngModel]="activeSavedFilterId ?? ''"
+          (ngModelChange)="onSavedFilterSelect($event)"
+          class="saved-select-input"
+        >
+          <option value="">Current filters</option>
+          <option *ngFor="let filter of savedFilters" [value]="filter.id">
+            {{ filter.name }}
+          </option>
+        </select>
+        <button
+          type="button"
+          class="delete-saved"
+          *ngIf="activeSavedFilterId"
+          (click)="deleteSavedFilter(activeSavedFilterId!)"
+        >
+          Remove
+        </button>
+      </div>
+
+      <div class="saved-form">
+        <input
+          type="text"
+          [(ngModel)]="newFilterName"
+          placeholder="Name this search"
+          aria-label="Saved search name"
+        >
+        <button type="button" (click)="saveCurrentFilter()">
+          Save Search
+        </button>
+      </div>
+    </div>
   </header>
+
+  <div *ngIf="preferencesError" class="preferences-error" role="alert">
+    {{ preferencesError }}
+  </div>
 
   <div *ngIf="loading && !newsItems.length" class="loading" role="status">
     <div class="loading-spinner"></div>
@@ -77,8 +130,12 @@
     </div>
 
     <app-news-item
-      *ngFor="let item of filteredItems"
-      [item]="item">
+      *ngFor="let item of filteredItems; trackBy: trackByNewsId"
+      [item]="item"
+      [isAuthenticated]="isLoggedIn"
+      [isSaved]="isArticleSaved(item.id)"
+      (save)="saveArticle($event)"
+    >
     </app-news-item>
   </div>
 </div>
