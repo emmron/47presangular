@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 
 @Injectable({ providedIn: 'root' })
 export class ReferralService {
-  private readonly storageKey = 'trump47_referral_code';
+  private readonly storageKey = 'acp_referral_code';
 
   getReferralCode(): string {
     if (typeof window === 'undefined') {
-      return 'T47-OFFLINE';
+      return 'ACR-OFFLINE';
     }
 
     const existing = localStorage.getItem(this.storageKey);
@@ -14,7 +14,7 @@ export class ReferralService {
       return existing;
     }
 
-    const generated = `T47-${Math.random().toString(36).slice(2, 8).toUpperCase()}`;
+    const generated = `ACR-${Math.random().toString(36).slice(2, 8).toUpperCase()}`;
     localStorage.setItem(this.storageKey, generated);
     return generated;
   }

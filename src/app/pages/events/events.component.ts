@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-interface CampaignEvent {
+interface FixtureEvent {
   title: string;
   location: string;
   date: string;
   description: string;
-  rsvpUrl: string;
+  matchUrl: string;
 }
 
 @Component({
@@ -17,27 +17,27 @@ interface CampaignEvent {
   styleUrls: ['./events.component.scss']
 })
 export class EventsComponent {
-  readonly events: CampaignEvent[] = [
+  readonly events: FixtureEvent[] = [
     {
-      title: 'Rust Belt Jobs Rally',
-      location: 'Erie, Pennsylvania',
-      date: 'June 22, 2024',
-      description: 'Manufacturing workers and small business owners share testimonies on economic revival.',
-      rsvpUrl: 'https://www.donaldjtrump.com/events/'
+      title: 'Australia vs India – 1st Test',
+      location: 'Perth Stadium, Perth',
+      date: '24 November 2024',
+      description: 'The home summer opens with a day-night Test as Australia leans on a three-prong pace attack.',
+      matchUrl: 'https://www.cricket.com.au/series/australia-v-india-test-series'
     },
     {
-      title: 'Border Security Town Hall',
-      location: 'Yuma, Arizona',
-      date: 'June 24, 2024',
-      description: 'Policy roundtable featuring sheriffs, border agents, and Angel families.',
-      rsvpUrl: 'https://www.donaldjtrump.com/events/'
+      title: 'Sydney Sixers vs Brisbane Heat – BBL',
+      location: 'Sydney Cricket Ground, Sydney',
+      date: '12 December 2024',
+      description: 'Two finals contenders clash with marquee all-rounders fresh from overseas stints.',
+      matchUrl: 'https://www.cricket.com.au/fixtures'
     },
     {
-      title: 'Faith & Freedom Summit',
-      location: 'Greenville, South Carolina',
-      date: 'June 27, 2024',
-      description: 'Pastors, faith leaders, and youth ministries coordinating voter outreach.',
-      rsvpUrl: 'https://www.donaldjtrump.com/events/'
+      title: 'WNCL Final',
+      location: 'Allan Border Field, Brisbane',
+      date: '22 February 2025',
+      description: 'State pride on the line with national selectors watching every over for breakout stars.',
+      matchUrl: 'https://www.cricket.com.au/series/wncl'
     }
   ];
 }

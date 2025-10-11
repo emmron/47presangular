@@ -19,28 +19,28 @@ type Insight = {
 export class InsightsSidebarComponent {
   readonly insights: Insight[] = [
     {
-      label: 'Digital reach',
-      value: '2.1M',
+      label: 'International form guide',
+      value: '4-1',
       trend: 'up',
-      description: 'Impressions across official channels in the last 48 hours'
+      description: 'Combined record from the last five Australian internationals'
     },
     {
-      label: 'Grassroots events',
-      value: '38',
+      label: 'Domestic ladder movers',
+      value: '3 clubs',
       trend: 'steady',
-      description: 'Scheduled rallies and town halls this week'
+      description: 'Teams jumping two or more spots across Shield and WNCL tables'
     },
     {
-      label: 'Volunteer signups',
-      value: '+14%',
+      label: 'Standout performers',
+      value: '6 players',
       trend: 'up',
-      description: 'Week-over-week increase in new volunteers'
+      description: 'Reached 50+ runs or 3+ wickets in the past 48 hours'
     }
   ];
 
   readonly keyActions: string[] = [
-    'Track upcoming debate preparation milestones',
-    'Highlight localized policy rollouts for supporters',
-    'Coordinate regional press availability with rapid response team'
+    'Monitor upcoming squad announcements and injury reports',
+    'Highlight Big Bash contract windows and trade whispers',
+    'Spotlight community cricket participation drives across the states'
   ];
 }

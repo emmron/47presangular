@@ -1,8 +1,8 @@
 <section class="events" aria-labelledby="events-heading">
   <header class="events__intro">
-    <p class="events__eyebrow">On the road</p>
-    <h1 id="events-heading">Upcoming events</h1>
-    <p>Find campaign stops and grassroots meetups to plug into the movement.</p>
+    <p class="events__eyebrow">Fixtures radar</p>
+    <h1 id="events-heading">Upcoming fixtures</h1>
+    <p>Track the next hits of Australian cricket across internationals and domestic leagues.</p>
   </header>
   <div class="events__list" role="list">
     <article class="events__card" role="listitem" *ngFor="let event of events">
@@ -10,7 +10,7 @@
       <h2>{{ event.title }}</h2>
       <p class="events__location">{{ event.location }}</p>
       <p>{{ event.description }}</p>
-      <a class="events__cta" [href]="event.rsvpUrl" target="_blank" rel="noopener noreferrer">RSVP &rsaquo;</a>
+      <a class="events__cta" [href]="event.matchUrl" target="_blank" rel="noopener noreferrer">Match centre &rsaquo;</a>
     </article>
   </div>
 </section>

@@ -53,7 +53,7 @@ export class NewsItemComponent {
     const params = {
       source: 'news_card',
       medium: 'social_share',
-      campaign: 'news_distribution',
+      campaign: 'aussie_cricket_news_distribution',
       content: this.item.id,
       referralCode
     } as const;

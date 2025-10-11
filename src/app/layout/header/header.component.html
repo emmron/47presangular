@@ -1,11 +1,11 @@
 <header class="site-header" role="banner">
   <div class="site-header__inner">
     <div class="site-header__branding">
-      <a class="site-header__logo" routerLink="/news" aria-label="Trump 47 Tracker home">
-        <span class="site-header__logo-mark" aria-hidden="true">47</span>
+      <a class="site-header__logo" routerLink="/news" aria-label="Aussie Cricket Pulse home">
+        <span class="site-header__logo-mark" aria-hidden="true">AUS</span>
         <span class="site-header__logo-text">
-          <span class="site-header__logo-primary">Trump 47</span>
-          <span class="site-header__logo-secondary">Campaign Tracker</span>
+          <span class="site-header__logo-primary">Aussie Cricket</span>
+          <span class="site-header__logo-secondary">Pulse</span>
         </span>
       </a>
     </div>
@@ -21,7 +21,7 @@
         <li class="primary-nav__item primary-nav__item--mega">
           <button class="primary-nav__link mega-trigger" type="button" aria-haspopup="true"
             [attr.aria-expanded]="megaMenuOpen" aria-controls="issues-mega" (click)="toggleMegaMenu()">
-            Issues
+            Focus Areas
             <span class="chevron" [class.is-open]="megaMenuOpen" aria-hidden="true"></span>
           </button>
           <div id="issues-mega" class="mega-menu" [class.is-open]="megaMenuOpen" [attr.aria-hidden]="!megaMenuOpen">
@@ -44,7 +44,7 @@
     </nav>
 
     <div class="site-header__actions">
-      <div class="cta-list" role="group" aria-label="Campaign calls to action">
+      <div class="cta-list" role="group" aria-label="Cricket supporter actions">
         <a *ngFor="let cta of ctas" class="cta" [ngClass]="'cta--' + cta.style" [href]="cta.href" target="_blank"
           rel="noopener noreferrer">
           <span class="cta__label">{{ cta.label }}</span>
@@ -76,7 +76,7 @@
           <li *ngFor="let link of navLinks">
             <a [routerLink]="link.route" routerLinkActive="is-active" (click)="closeMobileMenu()">{{ link.label }}</a>
           </li>
-          <li class="mobile-drawer__section-label">Issues</li>
+          <li class="mobile-drawer__section-label">Focus Areas</li>
           <li class="mobile-drawer__mega" *ngFor="let section of megaMenuSections">
             <p class="mobile-drawer__heading">{{ section.heading }}</p>
             <ul>
@@ -90,7 +90,7 @@
           </li>
         </ul>
       </nav>
-      <div class="mobile-drawer__ctas" role="group" aria-label="Campaign calls to action">
+      <div class="mobile-drawer__ctas" role="group" aria-label="Cricket supporter actions">
         <a *ngFor="let cta of ctas" class="cta" [ngClass]="'cta--' + cta.style" [href]="cta.href" target="_blank"
           rel="noopener noreferrer">
           <span class="cta__label">{{ cta.label }}</span>

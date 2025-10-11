@@ -1,6 +1,6 @@
-# TrumpTracker
+# AussieCricketPulse
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.3.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.3 and powers an Australian cricket news dashboard that blends coverage from international tours, domestic leagues, and grassroots pathways.
 
 ## Development server
 
@@ -60,7 +60,7 @@ Pushing to the `main` branch automatically builds and publishes the static site 
 
 1. Installs dependencies with `npm ci` using Node.js 20.
 2. Builds the Angular app with a repository-aware `base-href` so assets resolve correctly at `https://<user>.github.io/<repo>/`.
-3. Uploads `dist/trump-tracker/browser` as the static artifact and deploys it to GitHub Pages.
+3. Uploads `dist/trump-tracker/browser` (the default Angular output directory for this project) as the static artifact and deploys it to GitHub Pages.
 
 After the first successful run, enable GitHub Pages in the repository settings and choose the "GitHub Actions" source. Subsequent pushes to `main` will update the live site automatically.
 

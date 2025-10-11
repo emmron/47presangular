@@ -11,8 +11,7 @@ export interface TrackingParams {
 
 @Injectable({ providedIn: 'root' })
 export class TrackingService {
-  private readonly hubspotPortalId = 'HUBSPOT_PORTAL_ID';
-  private readonly ngpVANCommitteeId = 'NGP_VAN_COMMITTEE_ID';
+  private readonly referralTag = 'AUSSIE_CRICKET_PULSE';
 
   buildTrackedUrl(baseUrl: string, params: TrackingParams): string {
     const url = new URL(baseUrl);
@@ -22,16 +21,15 @@ export class TrackingService {
       }
     });
 
-    // Attach CRM references so the links can be ingested downstream.
-    url.searchParams.set('hubspot_portal_id', this.hubspotPortalId);
-    url.searchParams.set('ngp_van_committee_id', this.ngpVANCommitteeId);
+    // Tag outbound links so downstream partners can attribute referrals.
+    url.searchParams.set('ref', this.referralTag);
 
     return url.toString();
   }
 
   emitEvent(eventName: string, payload: Record<string, unknown> = {}): void {
-    // In a real deployment this would forward to Google Analytics, HubSpot, and NGP VAN.
-    // For now we log to the console so the data pipeline can be validated in QA.
+    // In a real deployment this would forward to analytics and partner attribution tools.
+    // For now we log to the console so signal flow can be validated in QA.
     console.debug('[tracking]', eventName, payload);
   }
 }

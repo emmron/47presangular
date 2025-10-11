@@ -7,7 +7,7 @@ interface CommunityThread {
   description: string;
   link: string;
   platform: 'reddit' | 'official';
-  moderationLevel: 'community' | 'campaign';
+  moderationLevel: 'community' | 'official';
 }
 
 @Component({
@@ -20,25 +20,25 @@ interface CommunityThread {
 export class CommunityComponent {
   readonly featuredThreads: CommunityThread[] = [
     {
-      title: 'Strategy AMA with campaign leadership',
-      description: 'Bring your questions for the digital, field, and finance directors. Moderated by the official campaign team.',
-      link: 'https://community.trump47.com/threads/strategy-ama',
+      title: 'Selector Q&A: Perth Test talking points',
+      description: 'Official stream recapping key selection calls before India arrive in November.',
+      link: 'https://www.cricket.com.au/news',
       platform: 'official',
-      moderationLevel: 'campaign',
+      moderationLevel: 'official',
     },
     {
-      title: 'Grassroots organizing toolkit',
-      description: 'Volunteer leaders share the scripts and materials that are working in their counties.',
-      link: 'https://www.reddit.com/r/Conservative/comments/toolkit',
+      title: 'Club cricket coaching swap',
+      description: 'Coaches trade session plans and training drills from grade and premier cricket.',
+      link: 'https://www.reddit.com/r/Cricket/comments',
       platform: 'reddit',
       moderationLevel: 'community',
     },
     {
-      title: 'Digital rapid response room',
-      description: 'Coordinate social media pushes in real time. Official moderators surface priority narratives.',
-      link: 'https://community.trump47.com/threads/digital-war-room',
+      title: 'Women & Girls participation forum',
+      description: 'Share success stories and funding tips for growing female cricket programs nationwide.',
+      link: 'https://www.community.cricket.com.au/clubs',
       platform: 'official',
-      moderationLevel: 'campaign',
+      moderationLevel: 'official',
     },
   ];
 

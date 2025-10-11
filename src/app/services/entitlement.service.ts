@@ -21,7 +21,7 @@ export class EntitlementService {
       return;
     }
 
-    const raw = localStorage.getItem('trump47_entitlement');
+    const raw = localStorage.getItem('acp_entitlement');
     if (raw) {
       const parsed = JSON.parse(raw) as EntitlementState;
       if (parsed.expiresAt) {
@@ -68,6 +68,6 @@ export class EntitlementService {
     }
 
     const state = this.state$.value;
-    localStorage.setItem('trump47_entitlement', JSON.stringify(state));
+    localStorage.setItem('acp_entitlement', JSON.stringify(state));
   }
 }

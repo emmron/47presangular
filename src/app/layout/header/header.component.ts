@@ -40,59 +40,59 @@ export class HeaderComponent {
   readonly navLinks: NavLink[] = [
     { label: 'News', route: '/news' },
     { label: 'Dashboard', route: '/dashboard' },
-    { label: 'Events', route: '/events' },
+    { label: 'Fixtures', route: '/events' },
     { label: 'Get Involved', route: '/get-involved' }
   ];
 
   readonly megaMenuSections: MegaMenuSection[] = [
     {
-      heading: 'Top Priorities',
+      heading: 'International Focus',
       items: [
         {
-          label: 'Economic Agenda',
-          description: 'Jobs, inflation, and trade policy priorities.',
+          label: "Men's internationals",
+          description: 'Test, ODI, and T20 tour outlooks for the national side.',
           route: '/issues',
-          fragment: 'economy'
+          fragment: 'internationals'
         },
         {
-          label: 'Border & Security',
-          description: 'Immigration, national defense, and public safety.',
+          label: "Women's internationals",
+          description: 'Series updates, selection talking points, and rival previews.',
           route: '/issues',
-          fragment: 'security'
+          fragment: 'womens-internationals'
         }
       ]
     },
     {
-      heading: 'Policy Pillars',
+      heading: 'Domestic Spotlight',
       items: [
         {
-          label: 'Healthcare & Social',
-          description: 'Healthcare access, veteran services, and family support.',
+          label: 'Sheffield Shield & Marsh Cup',
+          description: 'State squads, form lines, and ladder movement.',
           route: '/issues',
-          fragment: 'healthcare'
+          fragment: 'domestic'
         },
         {
-          label: 'Election Integrity',
-          description: 'Voting reforms and oversight initiatives.',
+          label: 'Big Bash leagues',
+          description: 'BBL and WBBL headlines, contracts, and trade whispers.',
           route: '/issues',
-          fragment: 'elections'
+          fragment: 'big-bash'
         }
       ]
     },
     {
-      heading: 'Movement Voices',
+      heading: 'Pathways & Community',
       items: [
         {
-          label: 'Grassroots Spotlights',
-          description: 'Community stories and volunteer organizing.',
+          label: 'Premier cricket focus',
+          description: 'Club cricket standouts pushing for higher honours.',
           route: '/issues',
-          fragment: 'grassroots'
+          fragment: 'pathways'
         },
         {
-          label: 'Media Statements',
-          description: 'Campaign press releases and official responses.',
+          label: 'Participation & growth',
+          description: 'Nationwide initiatives growing the game.',
           route: '/issues',
-          fragment: 'media'
+          fragment: 'participation'
         }
       ]
     }
@@ -100,21 +100,21 @@ export class HeaderComponent {
 
   readonly ctas: CtaLink[] = [
     {
-      label: 'Donate',
-      description: 'Power the movement with a contribution.',
-      href: 'https://www.donaldjtrump.com/',
+      label: 'Buy Tickets',
+      description: 'Secure seats for upcoming internationals and domestic fixtures.',
+      href: 'https://www.cricket.com.au/tickets',
       style: 'primary'
     },
     {
-      label: 'Volunteer',
-      description: 'Host events or knock doors in your community.',
-      href: 'https://www.donaldjtrump.com/join/',
+      label: 'Stream Matches',
+      description: 'Catch every ball with the latest streaming subscriptions.',
+      href: 'https://kayosports.com.au/',
       style: 'outline'
     },
     {
-      label: 'Subscribe',
-      description: 'Get rapid response alerts from campaign HQ.',
-      href: 'https://www.donaldjtrump.com/subscribe/',
+      label: 'Join a Club',
+      description: 'Find a local program through Cricket Australia Club Finder.',
+      href: 'https://www.community.cricket.com.au/clubfinder',
       style: 'ghost'
     }
   ];

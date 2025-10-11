@@ -2,54 +2,69 @@ import { Injectable } from '@angular/core';
 import { TrackingService, TrackingParams } from './tracking.service';
 
 export interface EngagementAction {
-  id: 'donate' | 'volunteer';
+  id: 'tickets' | 'stream' | 'club';
   label: string;
   description: string;
   url: string;
-  platform: 'winRed' | 'actBlue' | 'custom';
+  platform: 'ticketing' | 'streaming' | 'community';
 }
 
 @Injectable({ providedIn: 'root' })
 export class EngagementService {
-  private readonly donationBaseUrl = 'https://secure.winred.com/trump47/donate';
-  private readonly volunteerBaseUrl = 'https://action.ngpvan.com/trump47/volunteer';
+  private readonly actionConfigs = {
+    tickets: {
+      baseUrl: 'https://www.cricket.com.au/tickets',
+      label: 'Buy Tickets',
+      description: 'Reserve seats for internationals, WBBL, and BBL fixtures.',
+      platform: 'ticketing' as const,
+      content: 'tickets_banner'
+    },
+    stream: {
+      baseUrl: 'https://kayosports.com.au/',
+      label: 'Stream Live',
+      description: 'Access live streams and minis via Kayo Sports.',
+      platform: 'streaming' as const,
+      content: 'stream_banner'
+    },
+    club: {
+      baseUrl: 'https://play.cricket.com.au/clubs',
+      label: 'Find a Club',
+      description: 'Search for local community cricket programs.',
+      platform: 'community' as const,
+      content: 'club_banner'
+    }
+  } satisfies Record<EngagementAction['id'], {
+    baseUrl: string;
+    label: string;
+    description: string;
+    platform: EngagementAction['platform'];
+    content: string;
+  }>;
 
   constructor(private tracking: TrackingService) {}
 
   getInlineActions(referralCode?: string): EngagementAction[] {
-    return [
-      this.buildAction('donate', {
+    return (['tickets', 'stream', 'club'] as const).map(id =>
+      this.buildAction(id, {
         source: 'site',
         medium: 'inline_cta',
-        campaign: 'daily_engagement',
-        content: 'donation_banner',
+        campaign: 'cricket_supporter_engagement',
+        content: this.actionConfigs[id].content,
         referralCode,
-      }),
-      this.buildAction('volunteer', {
-        source: 'site',
-        medium: 'inline_cta',
-        campaign: 'daily_engagement',
-        content: 'volunteer_banner',
-        referralCode,
-      }),
-    ];
+      })
+    );
   }
 
-  private buildAction(id: 'donate' | 'volunteer', params: TrackingParams): EngagementAction {
-    const isDonate = id === 'donate';
-    const url = this.tracking.buildTrackedUrl(
-      isDonate ? this.donationBaseUrl : this.volunteerBaseUrl,
-      params
-    );
+  private buildAction(id: EngagementAction['id'], params: TrackingParams): EngagementAction {
+    const config = this.actionConfigs[id];
+    const url = this.tracking.buildTrackedUrl(config.baseUrl, params);
 
     return {
       id,
-      label: isDonate ? 'Donate Now' : 'Volunteer Today',
-      description: isDonate
-        ? 'Fuel the ground game with a rapid contribution via WinRed-style checkout.'
-        : 'Join the field team, phone bank, or host events synced to NGP VAN.',
+      label: config.label,
+      description: config.description,
       url,
-      platform: isDonate ? 'winRed' : 'actBlue',
+      platform: config.platform,
     };
   }
 }

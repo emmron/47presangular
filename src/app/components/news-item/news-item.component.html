@@ -36,7 +36,7 @@
       <a
         [routerLink]="detailRoute"
         class="view-story"
-        [attr.aria-label]="'Read campaign context for: ' + item.title"
+        [attr.aria-label]="'Read cricket context for: ' + item.title"
       >
         View story
       </a>
@@ -45,9 +45,9 @@
         target="_blank"
         rel="noopener noreferrer"
         class="read-more"
-        [attr.aria-label]="'Read full post on Reddit: ' + item.title"
+        [attr.aria-label]="'Read full story from ' + item.source"
       >
-        <span>Read on Reddit</span>
+        <span>Read full story</span>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="16"
@@ -66,7 +66,7 @@
       </a>
 
       <div class="share">
-        <span>Amplify:</span>
+        <span>Share:</span>
         <a
           *ngFor="let share of shareLinks"
           class="share-link"

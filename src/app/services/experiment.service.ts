@@ -8,7 +8,7 @@ export interface ExperimentVariant {
 
 @Injectable({ providedIn: 'root' })
 export class ExperimentService {
-  private readonly storageKeyPrefix = 'trump47_experiment_';
+  private readonly storageKeyPrefix = 'acp_experiment_';
 
   assignVariant(experimentId: string, variants: ExperimentVariant[]): ExperimentVariant {
     if (typeof window === 'undefined') {

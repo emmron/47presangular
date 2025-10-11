@@ -11,19 +11,19 @@ import { CommonModule } from '@angular/common';
 export class DashboardComponent {
   readonly metrics = [
     {
-      label: 'Battleground events this week',
+      label: 'International matches this month',
+      value: 12,
+      change: '+3 vs. last tour block'
+    },
+    {
+      label: 'Domestic fixtures this week',
+      value: 27,
+      change: '+5 after rain reschedules'
+    },
+    {
+      label: 'Players in form watchlist',
       value: 18,
-      change: '+4 vs. last week'
-    },
-    {
-      label: 'Grassroots captains onboarded',
-      value: 312,
-      change: '+28 in the last 24 hours'
-    },
-    {
-      label: 'Digital impressions YTD',
-      value: '47M',
-      change: '+8% month over month'
+      change: '+6 earning media buzz'
     }
   ];
 }

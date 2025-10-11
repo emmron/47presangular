@@ -17,7 +17,7 @@ export class LayoutNavComponent {
     { path: '', label: 'Overview', icon: 'dashboard' },
     { path: 'latest', label: 'Latest', icon: 'flash_on' },
     { path: 'timeline', label: 'Timeline', icon: 'timeline' },
-    { path: 'issues', label: 'Issues', icon: 'forum' },
+    { path: 'issues', label: 'Focus Areas', icon: 'forum' },
     { path: 'media', label: 'Media', icon: 'play_circle' }
   ];
 

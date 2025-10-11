@@ -13,8 +13,8 @@ export class FooterComponent {
   readonly navLinks = [
     { label: 'News', route: '/news' },
     { label: 'Dashboard', route: '/dashboard' },
-    { label: 'Issues', route: '/issues' },
-    { label: 'Events', route: '/events' },
+    { label: 'Focus Areas', route: '/issues' },
+    { label: 'Fixtures', route: '/events' },
     { label: 'Get Involved', route: '/get-involved' }
   ];
 

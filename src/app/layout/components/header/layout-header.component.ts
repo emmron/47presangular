@@ -6,6 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./layout-header.component.scss']
 })
 export class LayoutHeaderComponent {
-  readonly title = 'Trump 47 Campaign Tracker';
-  readonly subtitle = 'Real-time intelligence on the 2024 campaign trail';
+  readonly title = 'Aussie Cricket Pulse';
+  readonly subtitle = 'Real-time intelligence across Australian cricket.';
 }

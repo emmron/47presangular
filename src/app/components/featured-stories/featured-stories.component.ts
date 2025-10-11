@@ -19,22 +19,22 @@ type FeaturedStory = {
 export class FeaturedStoriesComponent {
   readonly stories: FeaturedStory[] = [
     {
-      title: 'Ground Game Intensifies in Swing States',
-      excerpt: 'Organizers ramp up door-to-door outreach in Pennsylvania and Arizona as polling margins tighten.',
-      topic: 'Field Operations',
-      url: 'https://www.donaldjtrump.com/news/'
+      title: 'Shield run machines push for Test recalls',
+      excerpt: 'Twin centuries in Adelaide have selectors reconsidering the pecking order before India arrive.',
+      topic: 'Sheffield Shield',
+      url: 'https://www.cricket.com.au/news'
     },
     {
-      title: 'Fundraising Push Sets New Monthly Record',
-      excerpt: 'Digital campaigns and grassroots donations combine for a historic funding surge across small-dollar donors.',
-      topic: 'Fundraising',
-      url: 'https://www.donaldjtrump.com/news/'
+      title: 'WBBL stars headline Australia A tour',
+      excerpt: 'A youth-heavy squad departs for New Zealand with spots in the national setup on the line.',
+      topic: 'Women’s Cricket',
+      url: 'https://www.cricket.com.au/news'
     },
     {
-      title: 'Policy Rollout Focuses on Energy Independence',
-      excerpt: 'The campaign outlines a renewed strategy for domestic energy production aimed at lowering costs for families.',
-      topic: 'Policy',
-      url: 'https://www.donaldjtrump.com/news/'
+      title: 'BBL trade period sparks marquee shuffle',
+      excerpt: 'Clubs are juggling retention picks and overseas slots as the contracting window opens.',
+      topic: 'Big Bash',
+      url: 'https://www.cricket.com.au/news'
     }
   ];
 }

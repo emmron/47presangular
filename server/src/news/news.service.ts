@@ -107,9 +107,9 @@ export class NewsService {
   }
 
   private async fetchReddit(): Promise<NewsItemDto[]> {
-    const subredditQuery = 'politics+news+worldnews';
+    const subredditQuery = 'Cricket+BigBashLeague+CricketAustralia';
     const searchParams = new URLSearchParams({
-      q: 'trump 2024 campaign',
+      q: 'Australian cricket OR Big Bash',
       restrict_sr: '1',
       sort: 'new',
       limit: '100'
@@ -147,7 +147,7 @@ export class NewsService {
     }
 
     const params = new URLSearchParams({
-      q: 'Trump AND (campaign OR election OR 2024)',
+      q: '"Australian cricket" OR "Australia cricket" OR "Big Bash League" OR "BBL" OR "WBBL" OR "Sheffield Shield"',
       language: 'en',
       sortBy: 'publishedAt',
       apiKey
@@ -182,7 +182,7 @@ export class NewsService {
     }
 
     const params = new URLSearchParams({
-      q: 'Trump presidential campaign 2024',
+      q: 'Australian cricket',
       sort: 'newest',
       'api-key': apiKey
     });

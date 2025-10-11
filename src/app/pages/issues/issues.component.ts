@@ -18,63 +18,63 @@ interface IssueSection {
 export class IssuesComponent {
   readonly sections: IssueSection[] = [
     {
-      id: 'economy',
-      title: 'Economy first agenda',
-      summary: 'Tax relief for working families, energy dominance, and small business expansion.',
+      id: 'internationals',
+      title: "Men's internationals",
+      summary: 'Tests, ODIs, and T20s featuring the Australian men.',
       bullets: [
-        'Pledge to extend middle-class tax cuts and expand opportunity zones.',
-        'Reinvest in American energy with new drilling permits and refining capacity.',
-        'Launch apprenticeship partnerships with community colleges.'
+        'Selectors weighing spin options for the next subcontinent tour.',
+        'Managing the pace cartel workloads through overlapping series.',
+        'Stabilising the middle order in white-ball squads ahead of the World Cup.'
       ]
     },
     {
-      id: 'security',
-      title: 'Border & national security',
-      summary: 'Finish the wall, restore remain-in-Mexico, and boost law enforcement resources.',
+      id: 'womens-internationals',
+      title: "Women's internationals",
+      summary: 'World champion Aussies fine-tuning for multi-format series.',
       bullets: [
-        'Deploy additional border agents and accelerate asylum processing reforms.',
-        'Block fentanyl trafficking with new technology at ports of entry.',
-        'Back the blue with federal support for local task forces.'
+        'Rotation plan to balance WPL commitments with national duties.',
+        'Emerging quicks pressing for debuts after standout WNCL campaigns.',
+        'Leadership group mapping out Ashes defence later in the summer.'
       ]
     },
     {
-      id: 'healthcare',
-      title: 'Healthcare & social supports',
-      summary: 'Lower costs, protect seniors, and expand rural care access.',
+      id: 'domestic',
+      title: 'Sheffield Shield & Marsh Cup',
+      summary: 'State rivalries driving selection debates and ladder movement.',
       bullets: [
-        'Drive price transparency across hospitals and insurers.',
-        'Expand telehealth waivers for rural clinics and veteran care.',
-        'Protect Medicare and Social Security with fiscal discipline.'
+        'Queensland and Victoria jostling for top-two berths in the Shield.',
+        'White-ball bolters staking claims with heavy Marsh Cup returns.',
+        'Spin depth chart evolving as SCG and Adelaide decks take turn.'
       ]
     },
     {
-      id: 'elections',
-      title: 'Election integrity',
-      summary: 'Secure ballots, clean voter rolls, and restore confidence in elections.',
+      id: 'big-bash',
+      title: 'Big Bash leagues',
+      summary: 'BBL and WBBL squads recalibrating under the new contracting windows.',
       bullets: [
-        'Advance voter ID standards with state partners.',
-        'Invest in poll watcher training and legal rapid response teams.',
-        'Modernize election systems with paper backups and audits.'
+        'Draft retention lists due before international player nominations open.',
+        'Clubs chasing marquee all-rounders after standout Hundred campaigns.',
+        'Venue upgrades and themed rounds to broaden audience reach.'
       ]
     },
     {
-      id: 'grassroots',
-      title: 'Grassroots spotlights',
-      summary: 'Stories from volunteers building the movement at the local level.',
+      id: 'pathways',
+      title: 'Premier cricket focus',
+      summary: 'Club standouts and Australia A tours feeding the national depth chart.',
       bullets: [
-        'Faith coalition in Georgia registering new voters weekly.',
-        'Small business owners hosting roundtables on regulatory reform.',
-        'College chapters leading campus debate nights.'
+        'Under-19 squads locking in for the next Youth World Cup cycle.',
+        'Premier competitions trialling nighttime red-ball fixtures.',
+        'Academy coaches spotlighting multi-sport talent conversions.'
       ]
     },
     {
-      id: 'media',
-      title: 'Media statements',
-      summary: 'Official campaign messaging and fact checks in response to breaking news.',
+      id: 'participation',
+      title: 'Participation & growth',
+      summary: 'Initiatives widening the player base from schools to social leagues.',
       bullets: [
-        'Weekly talking points for surrogate interviews.',
-        'Shareable graphics for social platforms.',
-        'Rapid rebuttal briefs for newsroom outreach.'
+        'Woolworths Cricket Blast expanding into more remote communities.',
+        'State associations piloting inclusive equipment grants.',
+        'First Nations programs pairing cultural exchange with coaching clinics.'
       ]
     }
   ];

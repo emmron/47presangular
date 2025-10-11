@@ -1,7 +1,7 @@
 <aside class="campaign-sidebar" aria-labelledby="sidebar-title">
   <div class="campaign-sidebar__section">
-    <h2 id="sidebar-title">Stay engaged</h2>
-    <p>Key actions and resources to keep the campaign momentum moving.</p>
+    <h2 id="sidebar-title">Stay connected</h2>
+    <p>Key links to follow Australian cricket across every competition.</p>
     <ul class="campaign-sidebar__list">
       <li *ngFor="let cta of takeActionCtas">
         <a class="campaign-sidebar__card" [href]="cta.href" target="_blank" rel="noopener noreferrer"
@@ -13,7 +13,7 @@
     </ul>
   </div>
   <div class="campaign-sidebar__section">
-    <h3>Additional resources</h3>
+    <h3>Additional coverage</h3>
     <ul class="campaign-sidebar__list campaign-sidebar__list--compact">
       <li *ngFor="let link of resourceLinks">
         <a class="campaign-sidebar__link" [href]="link.href" target="_blank" rel="noopener noreferrer"
