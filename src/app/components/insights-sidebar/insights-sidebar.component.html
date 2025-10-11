@@ -1,0 +1,23 @@
+<aside class="insights" aria-labelledby="insights-heading" id="insights">
+  <div class="insights__header">
+    <h2 id="insights-heading">Campaign insights</h2>
+    <p class="insights__description">Key performance signals updated throughout the day.</p>
+  </div>
+
+  <ul class="insights__metrics" role="list">
+    <li *ngFor="let insight of insights" class="insights__metric" [attr.data-trend]="insight.trend">
+      <div class="insights__metric-header">
+        <p class="insights__metric-label">{{ insight.label }}</p>
+        <p class="insights__metric-value">{{ insight.value }}</p>
+      </div>
+      <p class="insights__metric-description">{{ insight.description }}</p>
+    </li>
+  </ul>
+
+  <section class="insights__actions" aria-labelledby="actions-heading">
+    <h3 id="actions-heading">Next actions</h3>
+    <ol>
+      <li *ngFor="let action of keyActions">{{ action }}</li>
+    </ol>
+  </section>
+</aside>

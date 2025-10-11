@@ -1,0 +1,10 @@
+<section class="key-facts" *ngIf="hasSummary">
+  <header>
+    <h2>Key Facts</h2>
+    <p class="subtitle">Essential takeaways from the reporting</p>
+  </header>
+
+  <ul>
+    <li *ngFor="let fact of summary">{{ fact }}</li>
+  </ul>
+</section>
