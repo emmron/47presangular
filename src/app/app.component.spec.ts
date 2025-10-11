@@ -1,10 +1,22 @@
 import { TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { of } from 'rxjs';
 import { AppComponent } from './app.component';
+import { AuthService } from './auth/auth.service';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AppComponent],
+      imports: [RouterTestingModule, AppComponent],
+      providers: [
+        {
+          provide: AuthService,
+          useValue: {
+            user$: of(null),
+            logout: jasmine.createSpy('logout'),
+          },
+        },
+      ],
     }).compileComponents();
   });
 
