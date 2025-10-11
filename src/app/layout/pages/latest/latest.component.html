@@ -1,0 +1,22 @@
+<section class="latest">
+  <header class="latest__header">
+    <h2>Latest reporting</h2>
+    <p>Fresh stories and rapid-response coverage from the past 24 hours.</p>
+  </header>
+
+  <div class="latest__grid" *ngIf="items$ | async as items; else loading">
+    <article class="latest__card" *ngFor="let item of items">
+      <h3>{{ item.title }}</h3>
+      <p class="latest__meta">
+        {{ item.source }} &middot; {{ item.pubDate | date:'short' }}
+      </p>
+      <p class="latest__summary">{{ item.content }}</p>
+      <a [href]="item.link" target="_blank" rel="noopener" class="latest__link">Read full briefing</a>
+    </article>
+  </div>
+</section>
+
+<ng-template #loading>
+  <div class="latest__loading" *ngIf="loading$ | async">Loading live coverage...</div>
+  <div class="latest__empty" *ngIf="!(loading$ | async)">No coverage available yet.</div>
+</ng-template>

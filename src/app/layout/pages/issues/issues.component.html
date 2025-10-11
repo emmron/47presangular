@@ -1,0 +1,14 @@
+<section class="issues" *ngIf="issues$ | async as issues">
+  <header class="issues__header">
+    <h2>What issues are driving coverage?</h2>
+    <p>Topics dominating the conversation and how many outlets are focused on each.</p>
+  </header>
+
+  <div class="issues__grid">
+    <article class="issues__card" *ngFor="let issue of issues">
+      <h3>{{ issue.name | titlecase }}</h3>
+      <p class="issues__metric"><strong>{{ issue.stories }}</strong> stories tracked</p>
+      <p class="issues__metric"><strong>{{ issue.sources }}</strong> unique sources</p>
+    </article>
+  </div>
+</section>
