@@ -1,21 +1,18 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { NewsFeedComponent } from './components/news-feed/news-feed.component';
+import { LayoutModule } from './layout/layout.module';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NewsFeedComponent],
+  imports: [LayoutModule],
   template: `
-    <main>
-      <app-news-feed></app-news-feed>
-    </main>
+    <app-layout></app-layout>
   `,
   styles: [`
-    main {
+    :host {
+      display: block;
       min-height: 100vh;
       background: #f0f2f5;
-      padding: 20px 0;
     }
   `]
 })

@@ -1,0 +1,17 @@
+<nav class="nav">
+  <div class="nav__inner">
+    <a
+      *ngFor="let link of links"
+      class="nav__link"
+      [routerLink]="link.path"
+      routerLinkActive="nav__link--active"
+      [routerLinkActiveOptions]="{ exact: link.path === '' }"
+      [class.nav__link--active]="isActive(link)"
+    >
+      <span class="material-symbols-rounded nav__icon" aria-hidden="true">
+        {{ link.icon }}
+      </span>
+      <span>{{ link.label }}</span>
+    </a>
+  </div>
+</nav>
