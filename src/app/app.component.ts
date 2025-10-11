@@ -1,15 +1,13 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-@Component({
   selector: 'app-root',
   standalone: true,
-      <header class="app-header">
-        <div class="branding">
-          <h1>Trump 47 Campaign Tracker</h1>
           <p class="tagline">Tracking momentum across narratives, events, and daily coverage.</p>
         </div>
         <nav class="primary-nav">
           <a routerLink="/timeline" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+            Timeline
+          </a>
             Timeline
           </a>
             Timeline
