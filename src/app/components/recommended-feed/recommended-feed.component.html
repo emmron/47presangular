@@ -1,0 +1,39 @@
+<section class="recommended-feed" aria-labelledby="recommended-heading">
+  <header class="recommended-feed__header">
+    <div>
+      <h2 id="recommended-heading">Recommended for you</h2>
+      <p class="recommended-feed__subtitle" *ngIf="strategy() === 'personalized'">
+        Tailored using your recent reading activity.
+      </p>
+      <p class="recommended-feed__subtitle" *ngIf="strategy() === 'fallback' && cohort() as activeCohort">
+        Showing <strong>{{ activeCohort.label }}</strong> — {{ activeCohort.description }}
+      </p>
+      <p class="recommended-feed__subtitle" *ngIf="strategy() === 'fallback' && !cohort()">
+        Highlights we think you will enjoy even without a reading history.
+      </p>
+    </div>
+    <button type="button" class="recommended-feed__refresh" (click)="refresh()" [disabled]="loading()">
+      Refresh
+    </button>
+  </header>
+
+  <p class="recommended-feed__status" *ngIf="loading()">Loading recommendations…</p>
+  <p class="recommended-feed__status recommended-feed__status--error" *ngIf="errorMessage() as error">
+    {{ error }}
+  </p>
+
+  <ng-container *ngIf="!loading() && !errorMessage()">
+    <p class="recommended-feed__status" *ngIf="!items().length">
+      We need a little more reading history before we can personalize your feed. Check back after exploring a few stories.
+    </p>
+
+    <div class="recommended-feed__items" *ngIf="items().length">
+      <app-news-item
+        *ngFor="let item of items()"
+        [item]="item"
+        [showSave]="true"
+        [analyticsContext]="strategy() === 'personalized' ? 'personalized-recommendation' : 'fallback-recommendation'"
+      ></app-news-item>
+    </div>
+  </ng-container>
+</section>

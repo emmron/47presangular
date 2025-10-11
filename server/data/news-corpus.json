@@ -1,0 +1,122 @@
+[
+  {
+    "id": "rally-energy",
+    "title": "Trump launches energy-focused swing state rally",
+    "summary": "Campaign pivots to domestic energy policy with new pledges on drilling and refinery permits.",
+    "url": "https://example.com/news/rally-energy",
+    "source": "Campaign Daily",
+    "category": "Energy",
+    "tags": ["energy", "campaign", "economy"],
+    "imageUrl": "https://picsum.photos/seed/energy/400/225",
+    "publishedAt": "2024-06-01T13:00:00.000Z",
+    "popularity": 72
+  },
+  {
+    "id": "fundraising-tour",
+    "title": "Record-breaking fundraising tour wraps up in Texas",
+    "summary": "Donor circuit nets the campaign its strongest quarter to date with major bundlers joining the team.",
+    "url": "https://example.com/news/fundraising-tour",
+    "source": "Finance Wire",
+    "category": "Fundraising",
+    "tags": ["fundraising", "finance", "donors"],
+    "imageUrl": "https://picsum.photos/seed/fundraising/400/225",
+    "publishedAt": "2024-06-03T10:30:00.000Z",
+    "popularity": 88
+  },
+  {
+    "id": "foreign-policy-brief",
+    "title": "Campaign advisers outline foreign policy priorities",
+    "summary": "Transition team vets NATO commitments and outlines Asia-Pacific strategy in new white paper.",
+    "url": "https://example.com/news/foreign-policy-brief",
+    "source": "Global Outlook",
+    "category": "Foreign Policy",
+    "tags": ["foreign policy", "defense", "international"],
+    "imageUrl": "https://picsum.photos/seed/foreignpolicy/400/225",
+    "publishedAt": "2024-06-02T15:45:00.000Z",
+    "popularity": 64
+  },
+  {
+    "id": "voter-registration",
+    "title": "Massive voter registration drive targets suburban counties",
+    "summary": "Grassroots organizers focus on suburban swing voters with data-driven outreach.",
+    "url": "https://example.com/news/voter-registration",
+    "source": "Civic Pulse",
+    "category": "Grassroots",
+    "tags": ["grassroots", "voters", "data"],
+    "imageUrl": "https://picsum.photos/seed/voters/400/225",
+    "publishedAt": "2024-06-04T09:15:00.000Z",
+    "popularity": 93
+  },
+  {
+    "id": "policy-immigration",
+    "title": "Immigration policy rollout details border technology plan",
+    "summary": "Campaign announces expanded surveillance and staffing along the southern border.",
+    "url": "https://example.com/news/policy-immigration",
+    "source": "Policy Desk",
+    "category": "Policy",
+    "tags": ["immigration", "policy", "border"],
+    "imageUrl": "https://picsum.photos/seed/immigration/400/225",
+    "publishedAt": "2024-06-05T12:20:00.000Z",
+    "popularity": 81
+  },
+  {
+    "id": "tech-coalition",
+    "title": "Tech coalition forms to advise on digital outreach",
+    "summary": "Silicon Valley supporters emphasize data privacy alongside targeted campaigning.",
+    "url": "https://example.com/news/tech-coalition",
+    "source": "Innovation Ledger",
+    "category": "Technology",
+    "tags": ["technology", "data", "campaign"],
+    "imageUrl": "https://picsum.photos/seed/tech/400/225",
+    "publishedAt": "2024-06-06T17:05:00.000Z",
+    "popularity": 69
+  },
+  {
+    "id": "swing-state-polling",
+    "title": "Internal polling shows momentum in Rust Belt",
+    "summary": "Campaign shares internal numbers highlighting manufacturing towns moving right.",
+    "url": "https://example.com/news/swing-state-polling",
+    "source": "Poll Watch",
+    "category": "Polling",
+    "tags": ["polling", "economy", "rust belt"],
+    "imageUrl": "https://picsum.photos/seed/polling/400/225",
+    "publishedAt": "2024-06-04T19:40:00.000Z",
+    "popularity": 76
+  },
+  {
+    "id": "debate-prep",
+    "title": "Debate prep intensifies with mock town halls",
+    "summary": "Advisers run simulated debate nights focusing on suburban economic messaging.",
+    "url": "https://example.com/news/debate-prep",
+    "source": "Stagecraft",
+    "category": "Debate",
+    "tags": ["debate", "economy", "voters"],
+    "imageUrl": "https://picsum.photos/seed/debate/400/225",
+    "publishedAt": "2024-06-07T08:55:00.000Z",
+    "popularity": 84
+  },
+  {
+    "id": "rural-infrastructure",
+    "title": "Rural infrastructure tour pitches broadband expansion",
+    "summary": "Campaign bus tour outlines infrastructure spending to close rural digital divide.",
+    "url": "https://example.com/news/rural-infrastructure",
+    "source": "Heartland Report",
+    "category": "Infrastructure",
+    "tags": ["infrastructure", "technology", "rural"],
+    "imageUrl": "https://picsum.photos/seed/infrastructure/400/225",
+    "publishedAt": "2024-06-05T08:10:00.000Z",
+    "popularity": 71
+  },
+  {
+    "id": "student-outreach",
+    "title": "Student outreach expands with campus coalition",
+    "summary": "Younger volunteers focus on inflation messaging and career opportunities.",
+    "url": "https://example.com/news/student-outreach",
+    "source": "Campus Chronicle",
+    "category": "Youth Vote",
+    "tags": ["students", "grassroots", "economy"],
+    "imageUrl": "https://picsum.photos/seed/students/400/225",
+    "publishedAt": "2024-06-03T22:25:00.000Z",
+    "popularity": 67
+  }
+]

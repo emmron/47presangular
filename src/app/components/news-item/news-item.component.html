@@ -1,8 +1,8 @@
-<article class="news-item">
+<article class="news-item" (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()">
   <div class="news-content">
     <header>
       <h2>
-        <a [href]="item.link" target="_blank" rel="noopener noreferrer">
+        <a [href]="item.link" target="_blank" rel="noopener noreferrer" (click)="onReadMoreClick()">
           {{ item.title }}
         </a>
       </h2>
@@ -16,6 +16,14 @@
       </div>
     </header>
 
+    <div class="recommendation-meta" *ngIf="item.metrics?.recommendationScore !== undefined || item.metrics?.strategy">
+      <span class="score" *ngIf="item.metrics?.recommendationScore !== undefined">
+        Match score: {{ item.metrics?.recommendationScore | number:'1.0-2' }}
+      </span>
+      <span class="strategy" *ngIf="item.metrics?.strategy === 'fallback' && item.metrics?.cohortLabel">{{ item.metrics?.cohortLabel }}</span>
+      <span class="strategy" *ngIf="item.metrics?.strategy === 'personalized'">Personalized</span>
+    </div>
+
     <div class="content">
       <img *ngIf="item.imageUrl"
         [src]="item.imageUrl"
@@ -23,7 +31,7 @@
         [title]="item.title"
         class="thumbnail"
         loading="lazy">
-      <p>{{ item.content }}</p>
+      <p>{{ item.summary || item.content }}</p>
     </div>
 
     <footer class="actions">
@@ -31,7 +39,8 @@
         target="_blank"
         rel="noopener noreferrer"
         class="read-more"
-        [attr.aria-label]="'Read full post: ' + item.title">
+        [attr.aria-label]="'Read full post: ' + item.title"
+        (click)="onReadMoreClick()">
         <span>Read on Reddit</span>
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
@@ -39,6 +48,10 @@
           <line x1="10" y1="14" x2="21" y2="3"></line>
         </svg>
       </a>
+      <button *ngIf="showSave" type="button" class="save" [attr.aria-pressed]="isSaved" (click)="toggleSave()">
+        <span *ngIf="!isSaved">Save for later</span>
+        <span *ngIf="isSaved">Saved</span>
+      </button>
     </footer>
   </div>
 </article>

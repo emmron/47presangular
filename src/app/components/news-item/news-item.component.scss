@@ -104,6 +104,27 @@
       }
     }
 
+    .recommendation-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 12px;
+      font-size: 0.9em;
+      color: #2563eb;
+
+      .score {
+        font-weight: 600;
+      }
+
+      .strategy {
+        background: rgba(37, 99, 235, 0.1);
+        color: #1d4ed8;
+        padding: 4px 10px;
+        border-radius: 999px;
+        font-weight: 600;
+      }
+    }
+
     .content {
       position: relative;
       margin-bottom: 24px;
@@ -171,6 +192,29 @@
         &:active {
           transform: translateY(0);
           box-shadow: 0 2px 4px rgba(255, 69, 0, 0.2);
+        }
+      }
+
+      .save {
+        margin-left: 16px;
+        border: 1px solid #d1d5db;
+        background: #ffffff;
+        color: #111827;
+        padding: 10px 18px;
+        border-radius: 24px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+
+        &[aria-pressed='true'] {
+          background: rgba(16, 185, 129, 0.12);
+          border-color: rgba(5, 150, 105, 0.4);
+          color: #047857;
+        }
+
+        &:hover {
+          transform: translateY(-1px);
+          box-shadow: 0 8px 12px rgba(0, 0, 0, 0.08);
         }
       }
     }

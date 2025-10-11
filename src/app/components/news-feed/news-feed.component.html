@@ -78,7 +78,9 @@
 
     <app-news-item
       *ngFor="let item of filteredItems"
-      [item]="item">
+      [item]="item"
+      [showSave]="true"
+      analyticsContext="core-feed">
     </app-news-item>
   </div>
 </div>

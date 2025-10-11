@@ -7,6 +7,21 @@ export interface NewsItem {
   source: string;
   category?: string;
   imageUrl?: string;
+  summary?: string;
+  metrics?: NewsMetrics;
+}
+
+export interface RecommendationBreakdown {
+  contentScore?: number;
+  collaborativeScore?: number;
+  popularityBoost?: number;
+}
+
+export interface NewsMetrics {
+  recommendationScore?: number;
+  breakdown?: RecommendationBreakdown;
+  strategy?: 'personalized' | 'fallback';
+  cohortLabel?: string;
 }
 
 export interface NewsState {
