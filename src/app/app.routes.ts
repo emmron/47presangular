@@ -5,20 +5,26 @@ import { StoryDetailComponent } from './components/story/story-detail/story-deta
 export const routes: Routes = [
   {
     path: '',
-    component: NewsFeedComponent,
-    title: 'Trump 47 Campaign Tracker'
+    pathMatch: 'full',
+    redirectTo: 'timeline'
   },
   {
-    path: 'news/:id',
-    component: StoryDetailComponent,
-    title: 'Story detail • Trump 47 Campaign Tracker'
+    path: 'timeline',
+    loadComponent: () =>
+      import('./routes/timeline/timeline.component').then(m => m.TimelineComponent)
+  },
+  {
+    path: 'topics/:slug',
+    loadComponent: () =>
+      import('./routes/topic-page/topic-page.component').then(m => m.TopicPageComponent)
+  },
+  {
+    path: 'news',
+    loadComponent: () =>
+      import('./components/news-feed/news-feed.component').then(m => m.NewsFeedComponent)
+  },
+  {
+    path: '**',
+    redirectTo: 'timeline'
   }
-import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { CommunityComponent } from './components/community/community.component';
-import { PremiumInsightsComponent } from './components/premium-insights/premium-insights.component';
-
-export const routes: Routes = [
-  { path: '', component: DashboardComponent },
-  { path: 'community', component: CommunityComponent },
-  { path: 'premium', component: PremiumInsightsComponent },
 ];

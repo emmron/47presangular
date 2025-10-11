@@ -7,6 +7,10 @@ export interface NewsItem {
   source: string;
   category?: string;
   imageUrl?: string;
+  topics?: string[];
+  eventSlug?: string;
+  sentiment?: 'positive' | 'negative' | 'neutral' | 'unknown';
+  momentumScore?: number;
 }
 
 export interface StorySource {
@@ -41,4 +45,47 @@ export interface NewsFilter {
   dateFrom?: Date;
   dateTo?: Date;
   searchTerm?: string;
+}
+
+export interface MomentumPoint {
+  date: Date;
+  value: number;
+}
+
+export interface TopicCallout {
+  title: string;
+  markdown: string;
+}
+
+export interface TopicEvent {
+  slug: string;
+  title: string;
+  date: Date;
+  description: string;
+  momentum: number;
+  relatedItemIds: string[];
+}
+
+export interface Topic {
+  slug: string;
+  title: string;
+  summary: string;
+  curatedCopy: string;
+  callouts?: TopicCallout[];
+  heroImage?: string;
+  spotlightIds?: string[];
+  momentumSeries: MomentumPoint[];
+  events: TopicEvent[];
+}
+
+export interface TopicDataset {
+  lastUpdated: Date;
+  topics: Topic[];
+  items: NewsItem[];
+}
+
+export interface TopicDetail {
+  lastUpdated: Date;
+  topic: Topic;
+  items: NewsItem[];
 }

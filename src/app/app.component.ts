@@ -1,119 +1,108 @@
 import { Component } from '@angular/core';
-import { RouterOutlet, RouterModule } from '@angular/router';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-import { CommonModule } from '@angular/common';
-import { EngagementBannerComponent } from './components/engagement-banner/engagement-banner.component';
-import { ReferralService } from './services/referral.service';
-import { ExperimentService } from './services/experiment.service';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, RouterModule],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive],
   template: `
-    <div class="app-shell">
+    <main class="app-shell">
       <header class="app-header">
-        <div class="container">
-          <a routerLink="/" class="brand" aria-label="Trump 47 Campaign Tracker home">
-            Trump 47 Campaign Tracker
-          </a>
-          <p class="tagline">Realtime updates, context, and analysis on campaign developments.</p>
-        </div>
-      </header>
-      <main class="app-main">
-        <div class="container">
-          <router-outlet></router-outlet>
-        </div>
-      </main>
-    </div>
-  `,
-  styles: [`
-    .app-shell {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      background: var(--background);
-    }
-
-    .app-header {
-      background: linear-gradient(135deg, rgba(255, 69, 0, 0.95), rgba(255, 107, 61, 0.95));
-      padding: 32px 0;
-      color: #fff;
-      box-shadow: 0 10px 30px rgba(255, 69, 0, 0.2);
-    }
-
-    .brand {
-      font-size: clamp(1.6rem, 4vw, 2.2rem);
-      font-weight: 700;
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .tagline {
-      margin-top: 8px;
-      max-width: 640px;
-      font-size: 1rem;
-      opacity: 0.85;
-    }
-
-    .app-main {
-      flex: 1;
-      padding: 32px 0 64px;
-    }
-
-    @media (max-width: 768px) {
-      .app-header {
-        padding: 24px 0;
-      }
-
-      .app-main {
-        padding: 24px 0 48px;
-      }
-    }
-  `]
-  imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive, EngagementBannerComponent],
-  template: `
-    <main>
-      <header class="site-header">
         <div class="branding">
-          <span class="logo">47</span>
-          <div>
-            <h1>{{ heroCopy }}</h1>
-            <p>Live intelligence on the Trump 47 campaign machine.</p>
-          </div>
+          <h1>Trump 47 Campaign Tracker</h1>
+          <p class="tagline">Tracking momentum across narratives, events, and daily coverage.</p>
         </div>
-
-        <nav>
-          <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Dashboard</a>
-          <a routerLink="/community" routerLinkActive="active">Community</a>
-          <a routerLink="/premium" routerLinkActive="active">Premium</a>
+        <nav class="primary-nav">
+          <a routerLink="/timeline" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Timeline</a>
+          <a routerLink="/news" routerLinkActive="active">Live feed</a>
         </nav>
       </header>
-
-      <app-engagement-banner class="global-cta" [referralCode]="referralCode"></app-engagement-banner>
-
-      <section class="content">
+      <section class="app-content">
         <router-outlet></router-outlet>
       </section>
     </main>
   `,
-  styleUrls: ['./app.component.scss']
+  styles: [
+    `
+      :host {
+        display: block;
+        min-height: 100vh;
+        background: linear-gradient(180deg, #f8f9fa 0%, #edf2ff 100%);
+        font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        color: #212529;
+      }
+
+      .app-shell {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem 1.25rem 4rem;
+      }
+
+      .app-header {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+      }
+
+      .branding h1 {
+        margin: 0;
+        font-size: 1.75rem;
+      }
+
+      .branding .tagline {
+        margin: 0.5rem 0 0;
+        color: #495057;
+        font-size: 1rem;
+      }
+
+      .primary-nav {
+        display: flex;
+        gap: 1.25rem;
+      }
+
+      .primary-nav a {
+        text-decoration: none;
+        color: #495057;
+        font-weight: 600;
+        position: relative;
+        padding-bottom: 0.25rem;
+      }
+
+      .primary-nav a.active,
+      .primary-nav a:hover,
+      .primary-nav a:focus {
+        color: #4c6ef5;
+      }
+
+      .primary-nav a.active::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -0.35rem;
+        height: 3px;
+        border-radius: 999px;
+        background: #4c6ef5;
+      }
+
+      .app-content {
+        margin-top: 2rem;
+      }
+
+      @media (min-width: 768px) {
+        .app-header {
+          flex-direction: row;
+          align-items: center;
+          justify-content: space-between;
+        }
+
+        .branding {
+          max-width: 640px;
+        }
+      }
+    `
+  ]
 })
-export class AppComponent {
-  readonly heroCopy: string;
-
-  constructor(
-    private referrals: ReferralService,
-    experiment: ExperimentService,
-  ) {
-    this.heroCopy = experiment.assignVariant('hero_messaging', [
-      { id: 'momentum', weight: 50, copy: 'Keep the momentum surging' },
-      { id: 'ground-game', weight: 30, copy: 'Deploy the ground game faster' },
-      { id: 'data-lead', weight: 20, copy: 'Own the data advantage' },
-    ]).copy;
-  }
-
-  get referralCode(): string {
-    return this.referrals.getReferralCode();
-  }
-}
+export class AppComponent {}
