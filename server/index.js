@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const { v4: uuidv4 } = require('uuid');
 const cron = require('node-cron');
+const Parser = require('rss-parser');
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -13,6 +14,20 @@ app.use(express.json());
 const users = new Map();
 const sessions = new Map();
 const digestJobs = new Map();
+
+const OZB_FEED_URL = 'https://www.ozbargain.com.au/deals/feed';
+const DEAL_CACHE_TTL_MS = 1000 * 60 * 5;
+
+const rssParser = new Parser({
+  customFields: {
+    item: [
+      ['ozb:meta', 'ozbMeta'],
+      ['media:thumbnail', 'mediaThumbnail']
+    ]
+  }
+});
+
+let cachedDealsSnapshot = null;
 
 function getUserRecord(userId) {
   const record = users.get(userId);
@@ -397,6 +412,233 @@ const DATA_PATH = path.join(__dirname, 'data', 'news-topics.json');
 
 const app = express();
 app.use(cors());
+
+app.get('/api/deals/latest', async (req, res) => {
+  try {
+    const forceRefresh = req.query.force === 'true';
+    const limitParam = Number.parseInt(req.query.limit, 10);
+    const limit = Number.isFinite(limitParam) && limitParam > 0 ? limitParam : null;
+
+    const payload = await getLatestDeals({ forceRefresh, limit });
+
+    res.json({
+      fetchedAt: payload.fetchedAt,
+      source: payload.source,
+      totalDeals: payload.totalDeals,
+      deals: payload.deals,
+      cacheAgeMs: payload.cacheAgeMs,
+      cacheTtlMs: DEAL_CACHE_TTL_MS
+    });
+  } catch (error) {
+    console.error('Failed to refresh OzBargain feed', error);
+    res.status(502).json({
+      message: 'Failed to load OzBargain feed.',
+      detail: error.message
+    });
+  }
+});
+
+async function getLatestDeals(options = {}) {
+  const { forceRefresh = false, limit = null } = options;
+  const snapshot = await loadOzbargainSnapshot(forceRefresh);
+  const deals = limit ? snapshot.deals.slice(0, limit) : snapshot.deals;
+
+  return {
+    fetchedAt: snapshot.fetchedAt,
+    source: snapshot.source,
+    totalDeals: snapshot.deals.length,
+    deals,
+    cacheAgeMs: Date.now() - snapshot.timestamp
+  };
+}
+
+async function loadOzbargainSnapshot(forceRefresh = false) {
+  const now = Date.now();
+
+  if (!forceRefresh && cachedDealsSnapshot && now - cachedDealsSnapshot.timestamp < DEAL_CACHE_TTL_MS) {
+    return cachedDealsSnapshot;
+  }
+
+  const feed = await rssParser.parseURL(OZB_FEED_URL);
+  const deals = Array.isArray(feed.items)
+    ? feed.items
+        .map((item, index) => mapOzbargainItem(item, index))
+        .filter((deal) => deal !== null)
+    : [];
+
+  const snapshot = {
+    timestamp: now,
+    fetchedAt: new Date(now).toISOString(),
+    source: OZB_FEED_URL,
+    deals
+  };
+
+  cachedDealsSnapshot = snapshot;
+  return snapshot;
+}
+
+function mapOzbargainItem(item, index) {
+  if (!item || !item.title || !item.link) {
+    return null;
+  }
+
+  const meta = item.ozbMeta && item.ozbMeta.$ ? item.ozbMeta.$ : {};
+  const categories = Array.isArray(item.categories)
+    ? item.categories
+        .filter((value) => typeof value === 'string')
+        .map((value) => decodeHtmlEntities(value).trim())
+        .filter(Boolean)
+    : [];
+  const summary = extractSummaryText(item.content || item.contentSnippet || '');
+  const priceLabel = extractPriceFromTitle(item.title);
+  const priceValue = priceLabel ? parsePriceValue(priceLabel) : undefined;
+  const store = extractStoreName(item.title, summary);
+  const positiveVotes = coerceInteger(meta['votes-pos']);
+  const negativeVotes = coerceInteger(meta['votes-neg']);
+  const commentCount = coerceInteger(meta['comment-count']);
+  const clickCount = coerceInteger(meta['click-count']);
+  const externalUrl = typeof meta.url === 'string' ? meta.url : undefined;
+  const thumbnail =
+    typeof meta.image === 'string'
+      ? meta.image
+      : item.mediaThumbnail?.$?.url || undefined;
+
+  return {
+    id: deriveItemId(item, index),
+    title: decodeHtmlEntities(item.title).trim(),
+    link: item.link,
+    author: decodeHtmlEntities(item.creator || item['dc:creator'] || 'Community Scout'),
+    postedAt: deriveIsoDate(item.isoDate || item.pubDate),
+    thumbnail,
+    categories,
+    summary,
+    priceLabel: priceLabel || undefined,
+    priceValue,
+    store,
+    commentCount,
+    clickCount,
+    positiveVotes,
+    negativeVotes,
+    externalUrl,
+    score: positiveVotes - negativeVotes
+  };
+}
+
+function deriveItemId(item, index) {
+  if (typeof item.guid === 'string' && item.guid.trim().length) {
+    return item.guid.split(' ')[0];
+  }
+
+  if (typeof item.id === 'string' && item.id.trim().length) {
+    return item.id.trim();
+  }
+
+  if (typeof item.link === 'string' && item.link.trim().length) {
+    return item.link.split('/').pop();
+  }
+
+  return `${index}`;
+}
+
+function deriveIsoDate(value) {
+  if (!value) {
+    return new Date().toISOString();
+  }
+
+  const parsed = new Date(value);
+  if (Number.isNaN(parsed.getTime())) {
+    return new Date().toISOString();
+  }
+
+  return parsed.toISOString();
+}
+
+function decodeHtmlEntities(input) {
+  if (typeof input !== 'string') {
+    return '';
+  }
+
+  const entities = {
+    amp: '&',
+    lt: '<',
+    gt: '>',
+    quot: '"',
+    apos: "'",
+    nbsp: ' '
+  };
+
+  return input
+    .replace(/&#x([0-9a-f]+);/gi, (_, hex) => {
+      const code = parseInt(hex, 16);
+      return Number.isFinite(code) ? String.fromCharCode(code) : '';
+    })
+    .replace(/&#(\d+);/g, (_, dec) => {
+      const code = parseInt(dec, 10);
+      return Number.isFinite(code) ? String.fromCharCode(code) : '';
+    })
+    .replace(/&([a-z]+);/gi, (match, name) => entities[name.toLowerCase()] || match);
+}
+
+function extractSummaryText(html) {
+  const withoutTags = html
+    .replace(/<script[^>]*>[\s\S]*?<\/script>/gi, '')
+    .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, '')
+    .replace(/<[^>]*>/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+
+  return decodeHtmlEntities(withoutTags);
+}
+
+function extractPriceFromTitle(title) {
+  if (typeof title !== 'string') {
+    return undefined;
+  }
+
+  const priceMatch = title.match(/\$\d+[\d,.]*/);
+  return priceMatch ? priceMatch[0] : undefined;
+}
+
+function parsePriceValue(priceLabel) {
+  if (typeof priceLabel !== 'string') {
+    return undefined;
+  }
+
+  const normalized = priceLabel.replace(/[^0-9.,]/g, '').replace(/,/g, '');
+  const value = parseFloat(normalized);
+  return Number.isFinite(value) ? value : undefined;
+}
+
+function extractStoreName(title, summary) {
+  if (typeof title === 'string') {
+    const atMatch = title.match(/@\s*([^|\-\[]+)/);
+    if (atMatch) {
+      return atMatch[1].trim();
+    }
+  }
+
+  if (typeof summary === 'string') {
+    const fromSummary = summary.match(/@[\s]*([A-Za-z0-9 &'-]+)/);
+    if (fromSummary) {
+      return fromSummary[1].trim();
+    }
+  }
+
+  return undefined;
+}
+
+function coerceInteger(value) {
+  if (typeof value === 'number') {
+    return Number.isFinite(value) ? Math.trunc(value) : 0;
+  }
+
+  if (typeof value === 'string') {
+    const parsed = parseInt(value, 10);
+    return Number.isFinite(parsed) ? parsed : 0;
+  }
+
+  return 0;
+}
 
 function loadDataset() {
   const raw = fs.readFileSync(DATA_PATH, 'utf-8');
