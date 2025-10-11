@@ -8,22 +8,26 @@
       </h2>
 
       <div class="meta">
-        <span class="source">{{ item.source }}</span>
-        <span class="category" *ngIf="item.category">{{ item.category }}</span>
-        <time class="date" [dateTime]="item.pubDate.toISOString()">
-          {{ formatDate(item.pubDate) }}
+        <span class="source">{{ item.source.name }}</span>
+        <span class="topics" *ngIf="item.topics.length">
+          <span *ngFor="let topic of item.topics" class="topic-chip">{{ topic }}</span>
+        </span>
+        <time class="date" [dateTime]="item.publishedAt.toISOString()">
+          {{ formatDate(item.publishedAt) }}
         </time>
       </div>
     </header>
 
     <div class="content">
-      <img *ngIf="item.imageUrl"
-        [src]="item.imageUrl"
-        [alt]="'Thumbnail for: ' + item.title"
-        [title]="item.title"
+      <img *ngIf="primaryImage"
+        [src]="primaryImage.url"
+        [alt]="primaryImage.caption || item.title"
         class="thumbnail"
         loading="lazy">
-      <p>{{ item.content }}</p>
+      <p *ngIf="item.summary; else fallback">{{ item.summary }}</p>
+      <ng-template #fallback>
+        <p>{{ item.content }}</p>
+      </ng-template>
     </div>
 
     <footer class="actions">
@@ -31,8 +35,8 @@
         target="_blank"
         rel="noopener noreferrer"
         class="read-more"
-        [attr.aria-label]="'Read full post: ' + item.title">
-        <span>Read on Reddit</span>
+        [attr.aria-label]="'Read full article: ' + item.title">
+        <span>Read full article</span>
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
           <polyline points="15 3 21 3 21 9"></polyline>
