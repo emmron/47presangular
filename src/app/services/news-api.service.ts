@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map, retry } from 'rxjs/operators';
+
 import { NewsItem, StoryDetail, StorySource, TimelineEvent } from '../models/news.model';
 import { LoadingState, toLoadingState } from '../models/loading-state.model';
 
@@ -22,7 +23,7 @@ interface NewsItemResponse {
 export class NewsApiService {
   private readonly API_URL = '/api/news';
 
-  constructor(private http: HttpClient) {}
+  constructor(private readonly http: HttpClient) {}
 
   getNews(forceRefresh = false): Observable<LoadingState<NewsItem[]>> {
     const params = forceRefresh ? { refresh: 'true' } : undefined;
@@ -32,41 +33,24 @@ export class NewsApiService {
         .get<NewsItemResponse[]>(this.API_URL, { params })
         .pipe(
           retry(2),
-          map((response) => this.transformResponse(response)),
-          catchError((error) => this.handleError(error))
+          map(response => this.transformResponse(response)),
+          catchError(error => this.handleError(error))
         )
     );
   }
 
-  private transformResponse(items: NewsItemResponse[]): NewsItem[] {
-    return items.map((item) => ({
-      ...item,
-      pubDate: new Date(item.pubDate)
-    }));
   getStoryDetail(id: string): Observable<StoryDetail> {
-    return this.http.get<any>(`/api/news/${id}`).pipe(
+    return this.http.get<any>(`${this.API_URL}/${id}`).pipe(
       map(response => this.transformStoryDetail(response)),
-      catchError(this.handleError)
+      catchError(error => this.handleError(error))
     );
   }
 
-  private transformRedditResponse(response: any): NewsItem[] {
-    if (!response?.data?.children) {
-      throw new Error('Invalid Reddit API response format');
-    }
-
-    return response.data.children
-      .filter((post: any) => post.data && !post.data.over_18) // Filter out NSFW content
-      .map((post: any) => ({
-        id: post.data.id,
-        title: post.data.title,
-        link: 'https://reddit.com' + post.data.permalink,
-        pubDate: new Date(post.data.created_utc * 1000),
-        content: post.data.selftext || post.data.url,
-        source: post.data.subreddit_name_prefixed,
-        imageUrl: this.getPostImage(post.data),
-        category: post.data.link_flair_text || 'News'
-      }));
+  private transformResponse(items: NewsItemResponse[]): NewsItem[] {
+    return items.map(item => ({
+      ...item,
+      pubDate: new Date(item.pubDate)
+    }));
   }
 
   private transformStoryDetail(response: any): StoryDetail {
@@ -116,6 +100,25 @@ export class NewsApiService {
       sources,
       timelineEvents
     };
+  }
+
+  private transformRedditResponse(response: any): NewsItem[] {
+    if (!response?.data?.children) {
+      throw new Error('Invalid Reddit API response format');
+    }
+
+    return response.data.children
+      .filter((post: any) => post.data && !post.data.over_18)
+      .map((post: any) => ({
+        id: post.data.id,
+        title: post.data.title,
+        link: 'https://reddit.com' + post.data.permalink,
+        pubDate: new Date(post.data.created_utc * 1000),
+        content: post.data.selftext || post.data.url,
+        source: post.data.subreddit_name_prefixed,
+        imageUrl: this.getPostImage(post.data),
+        category: post.data.link_flair_text || 'News'
+      }));
   }
 
   private getPostImage(postData: any): string | undefined {
