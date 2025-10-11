@@ -100,6 +100,33 @@ export interface NewsFilter {
   searchTerm?: string;
 }
 
+export interface SavedFilterPreset {
+  id: string;
+  name: string;
+  filters: NewsFilter;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface DigestSchedule {
+  enabled: boolean;
+  frequency: 'daily' | 'weekly';
+  timeOfDay: string;
+  timezone?: string;
+  lastRunAt: string | null;
+  nextRunAt: string | null;
+}
+
+export interface DigestSummary {
+  id: string;
+  generatedAt: string;
+  summary: string;
+  test?: boolean;
+}
+
+export interface DigestState {
+  schedule: DigestSchedule | null;
+  history: DigestSummary[];
 export interface NewsQueryOptions {
   page?: number;
   pageSize?: number;

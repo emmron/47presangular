@@ -1,0 +1,130 @@
+.login-container {
+  max-width: 420px;
+  margin: 60px auto;
+  padding: 32px;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+
+  h1 {
+    font-size: 1.75rem;
+    margin-bottom: 8px;
+    text-align: center;
+  }
+
+  .lead {
+    text-align: center;
+    color: #5f6a7c;
+    margin-bottom: 24px;
+  }
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  label {
+    font-weight: 600;
+    color: #1f2a37;
+  }
+
+  input {
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid #d0d5dd;
+    font-size: 1rem;
+    transition: border-color 0.2s ease;
+
+    &:focus {
+      outline: none;
+      border-color: #2563eb;
+      box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15);
+    }
+  }
+
+  button {
+    margin-top: 8px;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: #2563eb;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease;
+
+    &:disabled {
+      background: #94a3b8;
+      cursor: not-allowed;
+    }
+
+    &:not(:disabled):hover {
+      background: #1d4ed8;
+    }
+  }
+}
+
+.divider {
+  margin: 24px 0;
+  display: flex;
+  align-items: center;
+  color: #94a3b8;
+
+  span {
+    flex: 1;
+    text-align: center;
+    position: relative;
+    font-size: 0.85rem;
+  }
+
+  span::before,
+  span::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 35%;
+    height: 1px;
+    background: currentColor;
+  }
+
+  span::before {
+    left: 0;
+  }
+
+  span::after {
+    right: 0;
+  }
+}
+
+.social-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  button {
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #d0d5dd;
+    background: #f8fafc;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease;
+
+    &:hover {
+      background: #e2e8f0;
+      border-color: #cbd5f5;
+    }
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  }
+}
+
+.error {
+  color: #dc2626;
+  font-weight: 500;
+  margin: 8px 0 0;
+}

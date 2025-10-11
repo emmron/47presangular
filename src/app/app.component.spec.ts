@@ -1,4 +1,8 @@
 import { TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { of } from 'rxjs';
+import { AppComponent } from './app.component';
+import { AuthService } from './auth/auth.service';
 import { provideRouter } from '@angular/router';
 import { AppComponent } from './app.component';
 import { ExperimentService, ExperimentVariant } from './services/experiment.service';
@@ -19,6 +23,15 @@ class ReferralServiceStub {
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [RouterTestingModule, AppComponent],
+      providers: [
+        {
+          provide: AuthService,
+          useValue: {
+            user$: of(null),
+            logout: jasmine.createSpy('logout'),
+          },
+        },
       imports: [AppComponent]
       imports: [AppComponent],
       providers: [provideRouter([])]
@@ -35,6 +48,7 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
+  it('should render the global header', () => {
   it('should have the campaign tracker title', () => {
   it('should have the tracker title', () => {
     const fixture = TestBed.createComponent(AppComponent);
