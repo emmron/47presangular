@@ -1,0 +1,68 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum SourceType {
+  OFFICIAL
+  LICENSED
+  SOCIAL
+}
+
+enum MediaType {
+  IMAGE
+  VIDEO
+  AUDIO
+}
+
+model NewsItem {
+  id          String   @id @default(cuid())
+  externalId  String   @unique
+  title       String
+  summary     String?
+  content     String?
+  link        String
+  sourceName  String
+  sourceSlug  String
+  sourceType  SourceType
+  sourceUrl   String?
+  author      String?
+  publishedAt DateTime
+  mediaAssets MediaAsset[]
+  topics      NewsItemTopic[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model MediaAsset {
+  id        String    @id @default(cuid())
+  newsItem  NewsItem  @relation(fields: [newsItemId], references: [id], onDelete: Cascade)
+  newsItemId String
+  url       String
+  type      MediaType
+  caption   String?
+  width     Int?
+  height    Int?
+  createdAt DateTime  @default(now())
+}
+
+model Topic {
+  id        String           @id @default(cuid())
+  slug      String           @unique
+  label     String
+  newsItems NewsItemTopic[]
+}
+
+model NewsItemTopic {
+  newsItem   NewsItem @relation(fields: [newsItemId], references: [id], onDelete: Cascade)
+  newsItemId String
+  topic      Topic    @relation(fields: [topicId], references: [id], onDelete: Cascade)
+  topicId    String
+  createdAt  DateTime @default(now())
+
+  @@id([newsItemId, topicId])
+}

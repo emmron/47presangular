@@ -1,0 +1,41 @@
+<section class="login-container">
+  <h1>Sign in to Trump 47 Tracker</h1>
+  <p class="lead">Authenticate to personalize your news briefings and schedule email digests.</p>
+
+  <form (ngSubmit)="signInWithEmail()" class="auth-form" autocomplete="off">
+    <label for="email">Email</label>
+    <input
+      id="email"
+      name="email"
+      type="email"
+      [(ngModel)]="email"
+      placeholder="you@example.com"
+      required
+      [disabled]="loading"
+    >
+
+    <label for="displayName">Display name</label>
+    <input
+      id="displayName"
+      name="displayName"
+      type="text"
+      [(ngModel)]="displayName"
+      placeholder="Optional"
+      [disabled]="loading"
+    >
+
+    <button type="submit" [disabled]="loading">{{ loading ? 'Signing in...' : 'Continue with email' }}</button>
+    <p *ngIf="error" class="error">{{ error }}</p>
+  </form>
+
+  <div class="divider">
+    <span>or</span>
+  </div>
+
+  <div class="social-buttons">
+    <button type="button" (click)="signInWith('google')" [disabled]="loading">Continue with Google</button>
+    <button type="button" (click)="signInWith('twitter')" [disabled]="loading">Continue with Twitter</button>
+    <button type="button" (click)="signInWith('facebook')" [disabled]="loading">Continue with Facebook</button>
+    <p *ngIf="socialError" class="error">{{ socialError }}</p>
+  </div>
+</section>

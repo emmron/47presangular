@@ -1,3 +1,7 @@
+import { Controller, Get, Query } from '@nestjs/common';
+import { NewsService } from './news.service';
+import { NewsQueryDto } from './dto/news-query.dto';
+import { PaginatedNewsResponseDto } from './dto/news-item.dto';
 import { Controller, Get, HttpException, HttpStatus, Query } from '@nestjs/common';
 import { NewsService } from './news.service';
 import { NewsItemDto } from '../common/news-item.dto';
@@ -7,6 +11,8 @@ export class NewsController {
   constructor(private readonly newsService: NewsService) {}
 
   @Get()
+  getNews(@Query() query: NewsQueryDto): Promise<PaginatedNewsResponseDto> {
+    return this.newsService.getNews(query);
   async getNews(@Query('refresh') refresh?: string): Promise<NewsItemDto[]> {
     try {
       const forceRefresh = refresh === 'true';

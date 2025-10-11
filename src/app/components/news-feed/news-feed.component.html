@@ -21,8 +21,8 @@
           title="Filter by news source"
         >
           <option value="">All Sources</option>
-          <option *ngFor="let source of availableSources" [value]="source">
-            {{ source }}
+          <option *ngFor="let source of availableSources" [value]="source.slug">
+            {{ source.name }}
           </option>
         </select>
 
@@ -52,6 +52,65 @@
       </div>
     </div>
   </header>
+
+  <section class="briefings" aria-label="Saved briefings and digest settings">
+    <div class="save-briefing">
+      <h2>Save this filter set</h2>
+      <p>Capture your current filters as a reusable briefing.</p>
+      <div class="save-form">
+        <input
+          type="text"
+          [(ngModel)]="newPresetName"
+          placeholder="Briefing name"
+          [disabled]="savingPreset"
+          aria-label="Briefing name"
+        >
+        <button type="button" (click)="saveCurrentFilters()" [disabled]="savingPreset">
+          {{ savingPreset ? 'Saving…' : 'Save filters' }}
+        </button>
+      </div>
+      <p *ngIf="presetMessage" class="preset-message">{{ presetMessage }}</p>
+    </div>
+
+    <div class="my-briefings">
+      <h2>My Briefings</h2>
+      <p class="owner" *ngIf="user$ | async as user">Saved for {{ user.displayName || user.email }}</p>
+      <p *ngIf="!hasPresets" class="empty">No saved briefings yet.</p>
+      <ul *ngIf="hasPresets">
+        <li *ngFor="let preset of presets" [class.active]="preset.id === selectedPresetId">
+          <button type="button" class="apply" (click)="applyPreset(preset)">Apply</button>
+          <div class="details">
+            <strong>{{ preset.name }}</strong>
+            <small>Updated {{ preset.updatedAt | date:'short' }}</small>
+          </div>
+          <button
+            type="button"
+            class="delete"
+            (click)="deletePreset(preset)"
+            aria-label="Remove preset"
+          >
+            &times;
+          </button>
+        </li>
+      </ul>
+    </div>
+
+    <div class="digest" *ngIf="digestState as digest">
+      <h2>Email Digest</h2>
+      <ng-container *ngIf="digest.schedule; else noSchedule">
+        <p>
+          {{ digest.schedule.frequency | titlecase }} at {{ digest.schedule.timeOfDay }}
+          ({{ digest.schedule.timezone || 'UTC' }})
+        </p>
+        <p class="meta">Next run: {{ digest.schedule.nextRunAt || 'TBD' }}</p>
+        <p class="meta">Last run: {{ digest.schedule.lastRunAt || 'Never' }}</p>
+      </ng-container>
+      <ng-template #noSchedule>
+        <p class="empty">No digest scheduled. Visit your profile to set one.</p>
+      </ng-template>
+      <a routerLink="/profile">Manage schedule</a>
+    </div>
+  </section>
 
   <div *ngIf="loading && !newsItems.length" class="loading" role="status">
     <div class="loading-spinner"></div>
