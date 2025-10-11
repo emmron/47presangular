@@ -1,0 +1,22 @@
+<section class="engagement-banner" aria-label="Campaign engagement actions">
+  <div class="copy">
+    <h2>Power the movement</h2>
+    <p>
+      Chip in or jump on a volunteer shift. Every action is synced with HubSpot and NGP VAN so field directors can follow up instantly.
+    </p>
+  </div>
+
+  <div class="actions">
+    <a
+      *ngFor="let action of actions"
+      [href]="action.url"
+      class="cta"
+      target="_blank"
+      rel="noopener noreferrer"
+      (click)="onClick(action)"
+    >
+      <span class="label">{{ action.label }}</span>
+      <small class="description">{{ action.description }}</small>
+    </a>
+  </div>
+</section>
