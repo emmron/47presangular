@@ -1,45 +1,59 @@
 <div class="page">
-  <header class="masthead">
-    <div class="brand">
-      <span class="brand__badge">Oz Crickets</span>
-      <h1 class="brand__title">Live bargains from OzBargain</h1>
-      <p class="brand__subtitle">
-        A curated cricket-friendly lens on today's hottest community deals. Freshly scraped every few minutes.
+  <header class="press-header">
+    <div class="press-header__mast">
+      <span class="press-header__edition">Oz Crickets Gazette</span>
+      <h1>Today's Bargain Dispatch</h1>
+      <p>
+        A retro-styled digest of live OzBargain finds, refreshed all day and sorted for savvy shoppers.
       </p>
     </div>
-    <div class="masthead__controls">
-      <div class="search">
-        <label class="search__label" for="deal-search">Search the feed</label>
+    <div class="press-header__actions">
+      <label class="search" for="deal-search">
+        <span class="search__label">Search the archive</span>
         <input
           id="deal-search"
           type="search"
-          placeholder="Search by product, store, category..."
+          placeholder="Search by store, keyword, or category"
           [value]="searchTerm()"
           (input)="handleSearchInput($event)"
         />
-      </div>
-      <div class="controls__actions">
-        <button type="button" class="ghost" (click)="clearFilters()" [disabled]="!selectedCategory() && !selectedStore() && !searchTerm()">
+      </label>
+      <div class="press-header__buttons">
+        <button
+          type="button"
+          class="button ghost"
+          (click)="clearFilters()"
+          [disabled]="!selectedCategory() && !selectedStore() && !searchTerm()"
+        >
           Clear filters
         </button>
-        <button type="button" class="primary" (click)="refresh()" [disabled]="loading()">
-          <span *ngIf="!loading(); else loadingText">Refresh deals</span>
+        <button type="button" class="button primary" (click)="refresh()" [disabled]="loading()">
+          <ng-container *ngIf="!loading(); else refreshing">Refresh feed</ng-container>
         </button>
-        <ng-template #loadingText>Loading…</ng-template>
+        <ng-template #refreshing>Loading…</ng-template>
       </div>
-      <div class="controls__meta">
-        <span *ngIf="lastUpdated() as updated">Updated {{ updated | date:'shortTime' }}</span>
+      <div class="press-header__meta">
+        <span *ngIf="lastUpdated() as updated">Updated {{ updated | date: 'shortTime' }}</span>
         <span class="divider" aria-hidden="true">•</span>
         <span>{{ deals().length }} live deals</span>
       </div>
     </div>
   </header>
 
-  <main class="layout">
-    <section class="primary" *ngIf="!error(); else errorState">
-      <div class="filters" *ngIf="categories().length || stores().length">
-        <div class="filter-group" *ngIf="categories().length">
-          <h2>Popular categories</h2>
+  <section class="ticker" *ngIf="filteredDeals().length">
+    <div class="ticker__label">Breaking bargains</div>
+    <div class="ticker__track" aria-live="polite">
+      <span class="ticker__item" *ngFor="let deal of filteredDeals() | slice:0:15">
+        {{ deal.title }}
+      </span>
+    </div>
+  </section>
+
+  <main class="press-layout">
+    <section class="press-feed" *ngIf="!error(); else errorState">
+      <div class="filter-ribbon" *ngIf="categories().length || stores().length">
+        <section class="filter-panel" *ngIf="categories().length">
+          <h2>Categories</h2>
           <div class="chip-row">
             <button
               type="button"
@@ -60,9 +74,9 @@
               <span class="chip__count">{{ category.count }}</span>
             </button>
           </div>
-        </div>
-        <div class="filter-group" *ngIf="stores().length">
-          <h2>Active stores</h2>
+        </section>
+        <section class="filter-panel" *ngIf="stores().length">
+          <h2>Stores</h2>
           <div class="chip-row">
             <button
               type="button"
@@ -83,75 +97,83 @@
               <span class="chip__count">{{ store.count }}</span>
             </button>
           </div>
-        </div>
+        </section>
       </div>
 
-      <ng-container *ngIf="loading(); else loadedState">
-        <div class="skeleton-grid">
-          <div class="skeleton" *ngFor="let idx of skeletonPlaceholders" [style.animation-delay.ms]="idx * 60"></div>
+      <ng-container *ngIf="loading(); else loaded">
+        <div class="ledger-skeleton">
+          <div class="ledger-skeleton__row" *ngFor="let idx of skeletonPlaceholders" [style.animation-delay.ms]="idx * 80">
+            <span></span><span></span><span></span>
+          </div>
         </div>
       </ng-container>
-      <ng-template #loadedState>
+
+      <ng-template #loaded>
         <ng-container *ngIf="filteredDeals() as deals">
-          <article class="hero" *ngIf="heroDeal() as hero">
-            <div class="hero__media" *ngIf="hero.thumbnail">
-              <img [src]="hero.thumbnail" [alt]="hero.title" loading="lazy" />
+          <article class="lead-story" *ngIf="heroDeal() as hero">
+            <div class="lead-story__flag">
+              <span>Lead deal</span>
+              <time>{{ getRelativeTime(hero.postedAt) }}</time>
             </div>
-            <div class="hero__body">
-              <div class="hero__meta">
-                <span class="hero__badge">Top pick</span>
-                <span *ngIf="hero.store" class="hero__store">{{ hero.store }}</span>
-                <span class="hero__time">{{ getRelativeTime(hero.postedAt) }}</span>
+            <div class="lead-story__content">
+              <div class="lead-story__text">
+                <h2>{{ hero.title }}</h2>
+                <p *ngIf="hero.summary">{{ hero.summary }}</p>
+                <div class="lead-story__meta">
+                  <span *ngIf="hero.store">{{ hero.store }}</span>
+                  <span *ngIf="hero.priceLabel">{{ hero.priceLabel }}</span>
+                  <span *ngFor="let category of hero.categories">{{ category }}</span>
+                </div>
+                <a class="lead-story__link" [href]="hero.link" target="_blank" rel="noopener">View on OzBargain</a>
               </div>
-              <h2>{{ hero.title }}</h2>
-              <p class="hero__summary" *ngIf="hero.summary">{{ hero.summary }}</p>
-              <div class="hero__tags">
-                <span class="tag" *ngIf="hero.priceLabel">{{ hero.priceLabel }}</span>
-                <span class="tag" *ngFor="let category of hero.categories">{{ category }}</span>
+              <div class="lead-story__media" *ngIf="hero.thumbnail">
+                <img [src]="hero.thumbnail" [alt]="hero.title" loading="lazy" />
               </div>
-              <a class="hero__link" [href]="hero.link" target="_blank" rel="noopener">View on OzBargain</a>
             </div>
           </article>
 
-          <div class="deal-grid" *ngIf="deals.length; else emptyState">
+          <section class="deal-ledger" *ngIf="deals.length; else emptyState">
+            <header class="deal-ledger__header">
+              <span>Store</span>
+              <span>Deal summary</span>
+              <span>Reporter</span>
+              <span>Opened</span>
+            </header>
             <ng-container *ngFor="let deal of deals">
-              <article class="deal-card" *ngIf="heroDealId() !== deal.id">
-                <div class="deal-card__media" *ngIf="deal.thumbnail">
-                  <img [src]="deal.thumbnail" [alt]="deal.title" loading="lazy" />
+              <article class="deal-entry" *ngIf="heroDealId() !== deal.id">
+                <div class="deal-entry__store">
+                  <strong>{{ deal.store ?? 'Community' }}</strong>
+                  <span class="deal-entry__time">{{ getRelativeTime(deal.postedAt) }}</span>
                 </div>
-                <div class="deal-card__body">
-                  <div class="deal-card__header">
-                    <span class="deal-card__store" *ngIf="deal.store">{{ deal.store }}</span>
-                    <span class="deal-card__time">{{ getRelativeTime(deal.postedAt) }}</span>
-                  </div>
+                <div class="deal-entry__summary">
                   <h3>{{ deal.title }}</h3>
-                  <p class="deal-card__summary" *ngIf="deal.summary">{{ deal.summary }}</p>
-                  <div class="deal-card__tags">
+                  <p *ngIf="deal.summary">{{ deal.summary }}</p>
+                  <div class="deal-entry__tags">
                     <span class="tag" *ngIf="deal.priceLabel">{{ deal.priceLabel }}</span>
-                    <span class="tag alt" *ngFor="let category of deal.categories">{{ category }}</span>
+                    <span class="tag muted" *ngFor="let category of deal.categories">{{ category }}</span>
                   </div>
                 </div>
-                <div class="deal-card__footer">
-                  <span class="deal-card__author">Shared by {{ deal.author }}</span>
-                  <a class="deal-card__link" [href]="deal.link" target="_blank" rel="noopener">Open deal</a>
+                <div class="deal-entry__author">{{ deal.author }}</div>
+                <div class="deal-entry__link">
+                  <a [href]="deal.link" target="_blank" rel="noopener">Inspect deal</a>
                 </div>
               </article>
             </ng-container>
-          </div>
+          </section>
         </ng-container>
       </ng-template>
     </section>
 
     <aside class="sidebar">
-      <section class="panel">
-        <h2>Deal velocity</h2>
-        <p>
-          {{ deals().length }} deals pulled from the OzBargain feed.
-          {{ filteredDeals().length }} match your filters.
-        </p>
-        <ul class="stat-list">
+      <section class="sidebar-card">
+        <h2>Newsroom stats</h2>
+        <ul>
           <li>
-            <span>Most common category</span>
+            <span>Total deals</span>
+            <strong>{{ deals().length }}</strong>
+          </li>
+          <li>
+            <span>Most active category</span>
             <strong>{{ topCategoryName() ?? '—' }}</strong>
           </li>
           <li>
@@ -160,14 +182,14 @@
           </li>
           <li>
             <span>Latest refresh</span>
-            <strong *ngIf="lastUpdated() as updated">{{ updated | date:'mediumTime' }}</strong>
+            <strong *ngIf="lastUpdated() as updated">{{ updated | date: 'mediumTime' }}</strong>
             <strong *ngIf="!lastUpdated()">—</strong>
           </li>
         </ul>
       </section>
 
-      <section class="panel" *ngIf="stores().length">
-        <h2>Store leaderboard</h2>
+      <section class="sidebar-card" *ngIf="stores().length">
+        <h2>Store roll call</h2>
         <ol>
           <li *ngFor="let store of stores() | slice:0:6">
             <span>{{ store.name }}</span>
@@ -176,8 +198,8 @@
         </ol>
       </section>
 
-      <section class="panel" *ngIf="categories().length">
-        <h2>Category heat</h2>
+      <section class="sidebar-card" *ngIf="categories().length">
+        <h2>Category barometer</h2>
         <ul class="progress-list">
           <li *ngFor="let category of categories() | slice:0:6">
             <div class="progress-list__label">
@@ -185,7 +207,10 @@
               <span>{{ category.count }}</span>
             </div>
             <div class="progress">
-              <div class="progress__bar" [style.width.%]="topCategoryCount() ? (category.count / topCategoryCount()) * 100 : 0"></div>
+              <div
+                class="progress__bar"
+                [style.width.%]="topCategoryCount() ? (category.count / topCategoryCount()) * 100 : 0"
+              ></div>
             </div>
           </li>
         </ul>
@@ -196,15 +221,15 @@
 
 <ng-template #errorState>
   <section class="error">
-    <h2>We hit a snag</h2>
+    <h2>Feed unavailable</h2>
     <p>{{ error() }}</p>
-    <button type="button" class="primary" (click)="refresh()">Try again</button>
+    <button type="button" class="button primary" (click)="refresh()">Try again</button>
   </section>
 </ng-template>
 
 <ng-template #emptyState>
   <div class="empty">
     <h3>No deals match these filters</h3>
-    <p>Try clearing or broadening your search to see more OzBargain finds.</p>
+    <p>Adjust your filters to reveal more of today's bargains.</p>
   </div>
 </ng-template>
