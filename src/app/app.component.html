@@ -1,43 +1,334 @@
-<div class="app-shell">
-  <header class="topbar">
-    <div class="brand">
-      <span class="label">Trump 47</span>
-      <h1>Campaign Command Center</h1>
+<div class="page">
+  <header class="masthead">
+    <div class="masthead__inner">
+      <div class="masthead__brand">
+        <span class="masthead__flag">Oz Crickets Chronicle</span>
+        <h1>The Bargain Ledger</h1>
+        <p>
+          An old-world front page for modern OzBargain discoveries — refreshed live, annotated with community
+          engagement, and tuned for discerning deal hunters.
+        </p>
+      </div>
+      <div class="masthead__tools">
+        <div class="masthead__dateline">
+          <span *ngIf="lastUpdated() as updated; else awaitingEdition">
+            Edition for {{ updated | date: 'EEEE, MMMM d' }}
+          </span>
+          <ng-template #awaitingEdition>Awaiting first edition</ng-template>
+          <span class="masthead__count">{{ deals().length }} active briefs</span>
+        </div>
+        <label class="search" for="deal-search">
+          <span class="search__label">Search the newswire</span>
+          <input
+            id="deal-search"
+            type="search"
+            placeholder="Search by store, keyword, or category"
+            [value]="searchTerm()"
+            (input)="handleSearchInput($event)"
+          />
+        </label>
+        <div class="masthead__controls">
+          <button
+            type="button"
+            class="button ghost"
+            (click)="clearFilters()"
+            [disabled]="!hasActiveFilters()"
+          >
+            Clear filters
+          </button>
+          <button type="button" class="button primary" (click)="refresh()" [disabled]="loading()">
+            <ng-container *ngIf="!loading(); else refreshing">Refresh feed</ng-container>
+          </button>
+          <ng-template #refreshing>Loading…</ng-template>
+        </div>
+        <div class="masthead__meta" *ngIf="hasActiveFilters()">
+          Active filters applied. Reset to return to the full press run.
+        </div>
+      </div>
     </div>
-    <nav class="primary-nav">
-      <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
-      <a routerLink="/events" routerLinkActive="active">Events</a>
-      <a routerLink="/positions" routerLinkActive="active">Positions</a>
-      <a routerLink="/timeline" routerLinkActive="active">Timeline</a>
-      <a routerLink="/widgets" routerLinkActive="active">Widgets</a>
-    </nav>
+
+    <div class="masthead__filters" *ngIf="categories().length || stores().length">
+      <section class="filter-panel" *ngIf="categories().length">
+        <h2>Categories</h2>
+        <div class="chip-row">
+          <button
+            type="button"
+            class="chip"
+            [class.active]="!selectedCategory()"
+            (click)="selectCategory(null)"
+          >
+            All
+          </button>
+          <button
+            type="button"
+            class="chip"
+            *ngFor="let category of categories() | slice:0:12"
+            [class.active]="selectedCategory() === category.name"
+            (click)="selectCategory(category.name)"
+          >
+            {{ category.name }}
+            <span class="chip__count">{{ category.count }}</span>
+          </button>
+        </div>
+      </section>
+      <section class="filter-panel" *ngIf="stores().length">
+        <h2>Stores</h2>
+        <div class="chip-row">
+          <button
+            type="button"
+            class="chip"
+            [class.active]="!selectedStore()"
+            (click)="selectStore(null)"
+          >
+            Any store
+          </button>
+          <button
+            type="button"
+            class="chip"
+            *ngFor="let store of stores() | slice:0:10"
+            [class.active]="selectedStore() === store.name"
+            (click)="selectStore(store.name)"
+          >
+            {{ store.name }}
+            <span class="chip__count">{{ store.count }}</span>
+          </button>
+        </div>
+      </section>
+    </div>
   </header>
 
-  <main class="layout">
-    <section class="primary">
-      <router-outlet></router-outlet>
-    </section>
-    <aside class="news-rail">
-      <h2>Rapid Response Wire</h2>
-      <p class="subtitle">
-        Automated stream of campaign news, digital releases, and media moments for
-        surrogates and partners.
-      </p>
-      <app-news-feed></app-news-feed>
-    </aside>
+  <section class="ticker" *ngIf="filteredDeals().length">
+    <div class="ticker__label">Market ticker</div>
+    <div class="ticker__track" aria-live="polite">
+      <span class="ticker__item" *ngFor="let deal of filteredDeals() | slice:0:18">
+        {{ deal.title }}
+      </span>
+    </div>
+  </section>
+
+  <main class="layout" *ngIf="!error(); else errorState">
+    <ng-container *ngIf="loading(); else loaded">
+      <div class="ledger-skeleton">
+        <div class="ledger-skeleton__card" *ngFor="let idx of skeletonPlaceholders" [style.animation-delay.ms]="idx * 70">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-template #loaded>
+      <section class="front-page">
+        <article class="front-lead" *ngIf="heroDeal() as hero">
+          <header class="front-lead__header">
+            <span class="front-lead__flag">Front page exclusive</span>
+            <time>{{ getRelativeTime(hero.postedAt) }}</time>
+          </header>
+          <div class="front-lead__body">
+            <div class="front-lead__copy">
+              <h2>{{ hero.title }}</h2>
+              <p *ngIf="hero.summary">{{ hero.summary }}</p>
+              <ul class="front-lead__tags">
+                <li *ngIf="hero.store">{{ hero.store }}</li>
+                <li *ngIf="hero.priceLabel">{{ hero.priceLabel }}</li>
+                <li *ngFor="let category of hero.categories">{{ category }}</li>
+              </ul>
+              <div class="front-lead__metrics" *ngIf="hero.score > 0 || hero.commentCount > 0 || hero.clickCount > 0">
+                <div class="metric" *ngIf="hero.score > 0">
+                  <strong>{{ hero.score }}</strong>
+                  <span>Score</span>
+                </div>
+                <div class="metric" *ngIf="hero.commentCount > 0">
+                  <strong>{{ hero.commentCount | number }}</strong>
+                  <span>Comments</span>
+                </div>
+                <div class="metric" *ngIf="hero.clickCount > 0">
+                  <strong>{{ hero.clickCount | number }}</strong>
+                  <span>Clicks</span>
+                </div>
+              </div>
+              <div class="front-lead__actions">
+                <a class="button-link" [href]="hero.link" target="_blank" rel="noopener">View on OzBargain</a>
+                <a
+                  *ngIf="hero.externalUrl"
+                  class="button-link secondary"
+                  [href]="hero.externalUrl"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  Visit store
+                </a>
+              </div>
+            </div>
+            <div class="front-lead__media" *ngIf="hero.thumbnail">
+              <img [src]="hero.thumbnail" [alt]="hero.title" loading="lazy" />
+            </div>
+          </div>
+        </article>
+
+        <aside class="front-rail">
+          <section class="scorecard">
+            <h2>Edition overview</h2>
+            <ul>
+              <li>
+                <span>Stories in circulation</span>
+                <strong>{{ deals().length }}</strong>
+              </li>
+              <li>
+                <span>Fresh in last six hours</span>
+                <strong>{{ freshDealsCount() }}</strong>
+              </li>
+              <li>
+                <span>Average community score</span>
+                <strong>{{ averageScore() }}</strong>
+              </li>
+              <li>
+                <span>Votes logged</span>
+                <strong>{{ totalCommunityVotes() | number }}</strong>
+              </li>
+              <li>
+                <span>Clickthrough pulses</span>
+                <strong>{{ totalClickthroughs() | number }}</strong>
+              </li>
+              <li>
+                <span>Last refresh</span>
+                <strong *ngIf="lastUpdated() as updated">{{ updated | date: 'shortTime' }}</strong>
+                <strong *ngIf="!lastUpdated()">—</strong>
+              </li>
+            </ul>
+          </section>
+
+          <section class="scorecard" *ngIf="trendingCategories().length">
+            <h2>Sections drawing eyes</h2>
+            <ol>
+              <li *ngFor="let category of trendingCategories(); let idx = index">
+                <span class="rank">{{ idx + 1 }}</span>
+                <span class="label">{{ category.name }}</span>
+                <span class="value">{{ category.count }}</span>
+              </li>
+            </ol>
+          </section>
+
+          <section class="scorecard" *ngIf="trendingStores().length">
+            <h2>Stores on the wire</h2>
+            <ol>
+              <li *ngFor="let store of trendingStores(); let idx = index">
+                <span class="rank">{{ idx + 1 }}</span>
+                <span class="label">{{ store.name }}</span>
+                <span class="value">{{ store.count }}</span>
+              </li>
+            </ol>
+          </section>
+
+          <section class="scorecard" *ngIf="topScoringDeal() || topDiscussedDeal() || topClickedDeal()">
+            <h2>Engagement desk</h2>
+            <ul class="engagement">
+              <li *ngIf="topScoringDeal() as scoring">
+                <div class="engagement__metric">
+                  <strong>{{ scoring.score }}</strong>
+                  <span>Top score</span>
+                </div>
+                <p>{{ scoring.title }}</p>
+              </li>
+              <li *ngIf="topDiscussedDeal() as discussed">
+                <div class="engagement__metric">
+                  <strong>{{ discussed.commentCount | number }}</strong>
+                  <span>Most discussed</span>
+                </div>
+                <p>{{ discussed.title }}</p>
+              </li>
+              <li *ngIf="topClickedDeal() as clicked">
+                <div class="engagement__metric">
+                  <strong>{{ clicked.clickCount | number }}</strong>
+                  <span>Most clicks</span>
+                </div>
+                <p>{{ clicked.title }}</p>
+              </li>
+            </ul>
+          </section>
+        </aside>
+      </section>
+
+      <section class="front-deck" *ngIf="secondaryDeck().length">
+        <header class="front-deck__header">
+          <h2>Front page briefs</h2>
+          <span>{{ secondaryDeck().length }} featured stories</span>
+        </header>
+        <div class="front-deck__grid">
+          <article class="front-deck__card" *ngFor="let deal of secondaryDeck()">
+            <header>
+              <span class="front-deck__time">{{ getRelativeTime(deal.postedAt) }}</span>
+              <h3>{{ deal.title }}</h3>
+            </header>
+            <p *ngIf="deal.summary">{{ deal.summary }}</p>
+            <div class="front-deck__meta">
+              <span *ngIf="deal.store">{{ deal.store }}</span>
+              <span *ngIf="deal.priceLabel">{{ deal.priceLabel }}</span>
+            </div>
+            <div class="front-deck__metrics" *ngIf="deal.score > 0 || deal.commentCount > 0 || deal.clickCount > 0">
+              <span *ngIf="deal.score > 0"><strong>{{ deal.score }}</strong> score</span>
+              <span *ngIf="deal.commentCount > 0"><strong>{{ deal.commentCount | number }}</strong> comments</span>
+              <span *ngIf="deal.clickCount > 0"><strong>{{ deal.clickCount | number }}</strong> clicks</span>
+            </div>
+            <div class="front-deck__actions">
+              <a [href]="deal.link" target="_blank" rel="noopener">Inspect deal</a>
+              <a *ngIf="deal.externalUrl" [href]="deal.externalUrl" target="_blank" rel="noopener">Visit store</a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="ledger" *ngIf="digestColumns().length; else emptyState">
+        <header class="ledger__header">
+          <h2>Evening edition</h2>
+          <p>The remaining dispatches from today's OzBargain sweep, organised into twin columns for skimming.</p>
+        </header>
+        <div class="ledger__columns">
+          <div class="ledger__column" *ngFor="let column of digestColumns(); let columnIndex = index">
+            <article class="ledger-card" *ngFor="let deal of column">
+              <header>
+                <div class="ledger-card__source">
+                  <strong>{{ deal.store ?? 'Community' }}</strong>
+                  <span>{{ getRelativeTime(deal.postedAt) }}</span>
+                </div>
+                <h3>{{ deal.title }}</h3>
+              </header>
+              <p *ngIf="deal.summary">{{ deal.summary }}</p>
+              <div class="ledger-card__tags">
+                <span class="tag" *ngIf="deal.priceLabel">{{ deal.priceLabel }}</span>
+                <span class="tag muted" *ngFor="let category of deal.categories">{{ category }}</span>
+              </div>
+              <div class="ledger-card__metrics" *ngIf="deal.score > 0 || deal.commentCount > 0 || deal.clickCount > 0">
+                <span *ngIf="deal.score > 0"><strong>{{ deal.score }}</strong> score</span>
+                <span *ngIf="deal.commentCount > 0"><strong>{{ deal.commentCount | number }}</strong> comments</span>
+                <span *ngIf="deal.clickCount > 0"><strong>{{ deal.clickCount | number }}</strong> clicks</span>
+              </div>
+              <footer class="ledger-card__footer">
+                <span class="ledger-card__author">{{ deal.author }}</span>
+                <div class="ledger-card__links">
+                  <a [href]="deal.link" target="_blank" rel="noopener">Open briefing</a>
+                  <a *ngIf="deal.externalUrl" [href]="deal.externalUrl" target="_blank" rel="noopener">Visit store</a>
+                </div>
+              </footer>
+            </article>
+          </div>
+        </div>
+      </section>
+    </ng-template>
   </main>
 </div>
-<main class="layout">
-  <div class="layout__inner">
-    <section class="layout__hero" aria-label="Featured campaign coverage">
-      <app-live-stream-widget class="layout__live-widget"></app-live-stream-widget>
-      <app-ad-spotlight class="layout__ad-widget"></app-ad-spotlight>
-    </section>
 
-    <section class="layout__grid" aria-label="Campaign coverage and events">
-      <app-event-map class="layout__map"></app-event-map>
-      <app-news-feed class="layout__news"></app-news-feed>
-    </section>
+<ng-template #errorState>
+  <section class="error">
+    <h2>Feed unavailable</h2>
+    <p>{{ error() }}</p>
+    <button type="button" class="button primary" (click)="refresh()">Try again</button>
+  </section>
+</ng-template>
+
+<ng-template #emptyState>
+  <div class="empty">
+    <h3>No deals match these filters</h3>
+    <p>Adjust your filters to reveal more of today's bargains.</p>
   </div>
-</main>
-<app-shell></app-shell>
+</ng-template>

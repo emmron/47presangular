@@ -1,263 +1,462 @@
-import { Component } from '@angular/core';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-  selector: 'app-root',
-  standalone: true,
-          <p class="tagline">Tracking momentum across narratives, events, and daily coverage.</p>
-        </div>
-        <nav class="primary-nav">
-          <a routerLink="/timeline" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-            Timeline
-          </a>
-            Timeline
-          </a>
-            Timeline
-          </a>
 import { CommonModule } from '@angular/common';
-import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-import { AuthService } from './auth/auth.service';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-import { RouterOutlet } from '@angular/router';
-import { CommonModule } from '@angular/common';
-import { NewsFeedComponent } from './components/news-feed/news-feed.component';
-import { LiveStreamWidgetComponent } from './components/media/live-stream-widget/live-stream-widget.component';
-import { AdSpotlightComponent } from './components/media/ad-spotlight/ad-spotlight.component';
-import { EventMapComponent } from './components/media/event-map/event-map.component';
-import { ShellComponent } from './layout/shell/shell.component';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { Component, computed, signal } from '@angular/core';
+
+type FallbackDealsResponse = {
+  items: RssItem[];
+};
+
+type ApiDealsResponse = {
+  deals: ApiDeal[];
+  fetchedAt?: string;
+  source?: string;
+  totalDeals?: number;
+};
+
+type ApiDeal = {
+  id: string;
+  title: string;
+  link: string;
+  author: string;
+  postedAt: string;
+  thumbnail?: string;
+  categories: string[];
+  summary: string;
+  priceLabel?: string;
+  priceValue?: number;
+  store?: string;
+  commentCount: number;
+  clickCount: number;
+  positiveVotes: number;
+  negativeVotes: number;
+  externalUrl?: string;
+  score?: number;
+};
+
+type RssItem = {
+  title: string;
+  pubDate: string;
+  link: string;
+  guid?: string;
+  author: string;
+  thumbnail?: string;
+  description?: string;
+  content?: string;
+  categories?: string[];
+  enclosure?: {
+    thumbnail?: string;
+  };
+};
+
+export interface Deal {
+  id: string;
+  title: string;
+  link: string;
+  author: string;
+  postedAt: Date;
+  thumbnail?: string;
+  categories: string[];
+  summary: string;
+  priceLabel?: string;
+  priceValue?: number;
+  store?: string;
+  commentCount: number;
+  clickCount: number;
+  positiveVotes: number;
+  negativeVotes: number;
+  externalUrl?: string;
+  score: number;
+}
+
+interface CategorySummary {
+  name: string;
+  count: number;
+}
+
+interface StoreSummary {
+  name: string;
+  count: number;
+}
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, RouterLink, RouterLinkActive],
-  imports: [RouterOutlet, RouterLink, RouterLinkActive, NewsFeedComponent],
+  imports: [CommonModule, HttpClientModule],
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
-  imports: [RouterOutlet, CommonModule, NewsFeedComponent, LiveStreamWidgetComponent, AdSpotlightComponent, EventMapComponent],
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
-  imports: [ShellComponent],
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
-  imports: [RouterOutlet, RouterLink, RouterLinkActive],
-  template: `
-    <main class="app-shell">
-      <header class="app-header">
-        <div class="branding">
-          <h1>Trump 47 Campaign Tracker</h1>
-          <p>Personalize your daily campaign intelligence briefings.</p>
-        </div>
-        <nav>
-          <a routerLink="/news" routerLinkActive="active">News Feed</a>
-          <a routerLink="/profile" routerLinkActive="active">My Profile</a>
-        </nav>
-        <div class="auth">
-          <ng-container *ngIf="user$ | async as user; else guest">
-            <span class="welcome">Welcome, {{ user.displayName || user.email }}</span>
-            <button type="button" (click)="logout()">Log out</button>
-          </ng-container>
-          <ng-template #guest>
-            <a routerLink="/login" class="login-link">Sign in</a>
-          </ng-template>
-        </div>
-      </header>
-
-      <section class="content">
-          <p class="tagline">Tracking momentum across narratives, events, and daily coverage.</p>
-        </div>
-        <nav class="primary-nav">
-          <a routerLink="/timeline" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Timeline</a>
-          <a routerLink="/news" routerLinkActive="active">Live feed</a>
-        </nav>
-      </header>
-      <section class="app-content">
-        <router-outlet></router-outlet>
-      </section>
-    </main>
-  `,
-  styles: [`
-    .app-shell {
-      min-height: 100vh;
-      background: #f0f2f5;
-      padding-bottom: 40px;
-    }
-
-    .app-header {
-      display: grid;
-      grid-template-columns: 1fr auto auto;
-      gap: 24px;
-      align-items: center;
-      padding: 24px clamp(16px, 5vw, 48px) 16px;
-    }
-
-    .branding h1 {
-      margin: 0;
-      font-size: clamp(1.75rem, 4vw, 2.5rem);
-    }
-
-    .branding p {
-      margin: 4px 0 0;
-      color: #64748b;
-      max-width: 540px;
-    }
-
-    nav {
-      display: flex;
-      gap: 16px;
-    }
-
-    nav a {
-      text-decoration: none;
-      font-weight: 600;
-      color: #1f2937;
-      padding-bottom: 4px;
-      border-bottom: 2px solid transparent;
-    }
-
-    nav a.active {
-      border-color: #2563eb;
-      color: #2563eb;
-    }
-
-    .auth {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .welcome {
-      font-weight: 500;
-      color: #1f2937;
-    }
-
-    .auth button {
-      padding: 8px 14px;
-      border-radius: 8px;
-      border: none;
-      background: #ef4444;
-      color: #fff;
-      font-weight: 600;
-      cursor: pointer;
-    }
-
-    .login-link {
-      color: #2563eb;
-      font-weight: 600;
-      text-decoration: none;
-    }
-
-    .content {
-      padding: 0 clamp(16px, 6vw, 64px);
-    }
-
-    @media (max-width: 900px) {
-      .app-header {
-        grid-template-columns: 1fr;
-        align-items: flex-start;
-      }
-
-      nav {
-        order: 3;
-      }
-
-      .auth {
-        order: 2;
-        justify-content: flex-start;
-      }
-    }
-  `]
+  styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  user$ = this.authService.user$;
+  private static readonly PRIMARY_SCRAPER_URL = '/api/deals/latest';
+  private static readonly FALLBACK_FEED_URL =
+    'https://api.rss2json.com/v1/api.json?rss_url=https://www.ozbargain.com.au/deals/feed';
 
-  constructor(private authService: AuthService, private router: Router) {}
+  readonly deals = signal<Deal[]>([]);
+  readonly loading = signal(false);
+  readonly error = signal<string | null>(null);
+  readonly searchTerm = signal('');
+  readonly selectedCategory = signal<string | null>(null);
+  readonly selectedStore = signal<string | null>(null);
+  readonly lastUpdated = signal<Date | null>(null);
+  readonly skeletonPlaceholders = Array.from({ length: 6 }, (_, index) => index);
 
-  logout(): void {
-    this.authService.logout();
-    this.router.navigate(['/login']);
+  readonly categories = computed<CategorySummary[]>(() => {
+    const counts = new Map<string, number>();
+    for (const deal of this.deals()) {
+      for (const category of deal.categories) {
+        counts.set(category, (counts.get(category) ?? 0) + 1);
+      }
+    }
+
+    return Array.from(counts.entries())
+      .map(([name, count]) => ({ name, count }))
+      .sort((a, b) => b.count - a.count || a.name.localeCompare(b.name));
+  });
+
+  readonly stores = computed<StoreSummary[]>(() => {
+    const counts = new Map<string, number>();
+    for (const deal of this.deals()) {
+      if (!deal.store) {
+        continue;
+      }
+
+      counts.set(deal.store, (counts.get(deal.store) ?? 0) + 1);
+    }
+
+    return Array.from(counts.entries())
+      .map(([name, count]) => ({ name, count }))
+      .sort((a, b) => b.count - a.count || a.name.localeCompare(b.name));
+  });
+
+  readonly topCategoryCount = computed<number>(() => this.categories()[0]?.count ?? 0);
+  readonly topCategoryName = computed<string | null>(() => this.categories()[0]?.name ?? null);
+  readonly topStoreName = computed<string | null>(() => this.stores()[0]?.name ?? null);
+  readonly totalCommunityVotes = computed<number>(() =>
+    this.deals().reduce((sum, deal) => sum + deal.positiveVotes + deal.negativeVotes, 0)
+  );
+  readonly totalClickthroughs = computed<number>(() =>
+    this.deals().reduce((sum, deal) => sum + deal.clickCount, 0)
+  );
+  readonly topScoringDeal = computed<Deal | null>(() =>
+    this.findTopDeal(this.deals(), (deal) => deal.score)
+  );
+  readonly topDiscussedDeal = computed<Deal | null>(() =>
+    this.findTopDeal(this.deals(), (deal) => deal.commentCount)
+  );
+  readonly topClickedDeal = computed<Deal | null>(() =>
+    this.findTopDeal(this.deals(), (deal) => deal.clickCount)
+  );
+
+  readonly filteredDeals = computed<Deal[]>(() => {
+    const search = this.searchTerm().trim().toLowerCase();
+    const category = this.selectedCategory();
+    const store = this.selectedStore();
+
+    return this.deals()
+      .filter((deal) => {
+        if (category && !deal.categories.includes(category)) {
+          return false;
+        }
+
+        if (store && deal.store !== store) {
+          return false;
+        }
+
+        if (!search) {
+          return true;
+        }
+
+        const haystack = [
+          deal.title,
+          deal.summary,
+          deal.store ?? '',
+          ...deal.categories
+        ]
+          .join(' ')
+          .toLowerCase();
+
+        return haystack.includes(search);
+      })
+      .sort((a, b) => b.postedAt.getTime() - a.postedAt.getTime());
+  });
+
+  readonly heroDeal = computed<Deal | null>(() => this.filteredDeals()[0] ?? null);
+  readonly heroDealId = computed<string | null>(() => this.heroDeal()?.id ?? null);
+  readonly hasActiveFilters = computed<boolean>(
+    () => !!(this.selectedCategory() || this.selectedStore() || this.searchTerm().trim())
+  );
+  readonly remainderDeals = computed<Deal[]>(() => {
+    const heroId = this.heroDealId();
+    return this.filteredDeals().filter((deal) => deal.id !== heroId);
+  });
+  readonly secondaryDeck = computed<Deal[]>(() => this.remainderDeals().slice(0, 3));
+  readonly digestColumns = computed<Deal[][]>(() => {
+    const remainder = this.remainderDeals().slice(this.secondaryDeck().length);
+
+    if (!remainder.length) {
+      return [];
+    }
+
+    const midpoint = Math.ceil(remainder.length / 2);
+    return [remainder.slice(0, midpoint), remainder.slice(midpoint)];
+  });
+  readonly trendingCategories = computed<CategorySummary[]>(() => this.categories().slice(0, 3));
+  readonly trendingStores = computed<StoreSummary[]>(() => this.stores().slice(0, 3));
+  readonly averageScore = computed<number>(() => {
+    const deals = this.deals();
+    if (!deals.length) {
+      return 0;
+    }
+
+    const total = deals.reduce((sum, deal) => sum + deal.score, 0);
+    return Math.round((total / deals.length) * 10) / 10;
+  });
+  readonly freshDealsCount = computed<number>(() => {
+    const now = Date.now();
+    const windowMs = 1000 * 60 * 60 * 6; // six hours
+    return this.deals().filter((deal) => now - deal.postedAt.getTime() <= windowMs).length;
+  });
+
+  constructor(private readonly http: HttpClient) {
+    this.refresh();
+  }
+
+  refresh(): void {
+    this.loading.set(true);
+    this.error.set(null);
+    this.loadFromPrimary();
+  }
+
+  private loadFromPrimary(): void {
+    this.http.get<ApiDealsResponse>(AppComponent.PRIMARY_SCRAPER_URL).subscribe({
+      next: (response) => {
+        const payload = response.deals ?? [];
+        const mapped = payload.map((deal, index) => this.hydrateApiDeal(deal, index));
+        this.deals.set(mapped);
+        const refreshedAt = response.fetchedAt ? this.parseDateValue(response.fetchedAt) : new Date();
+        this.lastUpdated.set(refreshedAt);
+        this.loading.set(false);
+
+        if (!mapped.length) {
+          this.error.set('No fresh OzBargain deals were returned. Showing the latest available list.');
+        }
+      },
+      error: (err) => {
+        console.warn('Primary OzBargain scraper failed, falling back to RSS feed.', err);
+        this.loadFromFallback();
+      }
+    });
+  }
+
+  private loadFromFallback(): void {
+    this.http.get<FallbackDealsResponse>(AppComponent.FALLBACK_FEED_URL).subscribe({
+      next: (response) => {
+        const mapped = response.items?.map((item, index) => this.parseDeal(item, index)) ?? [];
+        this.deals.set(mapped);
+        this.lastUpdated.set(new Date());
+        this.loading.set(false);
+
+        if (!mapped.length) {
+          this.error.set('The OzBargain feed returned no deals. Please try again shortly.');
+        }
+      },
+      error: (fallbackError) => {
+        console.error('Fallback OzBargain RSS feed failed to load.', fallbackError);
+        this.error.set('We could not load the latest OzBargain deals. Please try again shortly.');
+        this.loading.set(false);
+      }
+    });
+  }
+
+  selectCategory(category: string | null): void {
+    this.selectedCategory.set(category);
+  }
+
+  selectStore(store: string | null): void {
+    this.selectedStore.set(store);
+  }
+
+  updateSearch(value: string): void {
+    this.searchTerm.set(value);
+  }
+
+  handleSearchInput(event: Event): void {
+    const target = event.target as HTMLInputElement | null;
+    this.updateSearch(target?.value ?? '');
+  }
+
+  clearFilters(): void {
+    this.selectedCategory.set(null);
+    this.selectedStore.set(null);
+    this.searchTerm.set('');
+  }
+
+  getRelativeTime(date: Date): string {
+    const now = Date.now();
+    const diffMs = now - date.getTime();
+    const diffMinutes = Math.floor(diffMs / (1000 * 60));
+
+    if (Number.isNaN(diffMinutes)) {
+      return '';
+    }
+
+    if (diffMinutes < 1) {
+      return 'just now';
+    }
+
+    if (diffMinutes < 60) {
+      return `${diffMinutes} minute${diffMinutes === 1 ? '' : 's'} ago`;
+    }
+
+    const diffHours = Math.floor(diffMinutes / 60);
+    if (diffHours < 24) {
+      return `${diffHours} hour${diffHours === 1 ? '' : 's'} ago`;
+    }
+
+    const diffDays = Math.floor(diffHours / 24);
+    if (diffDays < 7) {
+      return `${diffDays} day${diffDays === 1 ? '' : 's'} ago`;
+    }
+
+    return date.toLocaleDateString();
+  }
+
+  private hydrateApiDeal(item: ApiDeal, index: number): Deal {
+    const positiveVotes = this.coerceInteger(item.positiveVotes);
+    const negativeVotes = this.coerceInteger(item.negativeVotes);
+    const commentCount = this.coerceInteger(item.commentCount);
+    const clickCount = this.coerceInteger(item.clickCount);
+    const categories = Array.isArray(item.categories)
+      ? item.categories.filter((value): value is string => typeof value === 'string').map((value) => value.trim()).filter(Boolean)
+      : [];
+    const postedAt = this.parseDateValue(item.postedAt);
+    const score = Number.isFinite(item.score ?? NaN)
+      ? Number(item.score)
+      : positiveVotes - negativeVotes;
+
+    return {
+      id: item.id || `${index}`,
+      title: item.title?.trim() ?? '',
+      link: item.link,
+      author: item.author?.trim() ?? 'Community Scout',
+      postedAt,
+      thumbnail: item.thumbnail,
+      categories,
+      summary: item.summary?.trim() ?? '',
+      priceLabel: item.priceLabel,
+      priceValue: Number.isFinite(item.priceValue ?? NaN) ? item.priceValue : undefined,
+      store: item.store,
+      commentCount,
+      clickCount,
+      positiveVotes,
+      negativeVotes,
+      externalUrl: item.externalUrl,
+      score
+    };
+  }
+
+  private findTopDeal(deals: Deal[], selector: (deal: Deal) => number): Deal | null {
+    let best: Deal | null = null;
+    let bestValue = -Infinity;
+
+    for (const deal of deals) {
+      const value = selector(deal);
+      if (!Number.isFinite(value) || value <= 0) {
+        continue;
+      }
+
+      if (!best || value > bestValue) {
+        best = deal;
+        bestValue = value;
+      }
+    }
+
+    return best;
+  }
+
+  private parseDateValue(value: string | Date | null | undefined): Date {
+    if (value instanceof Date) {
+      return value;
+    }
+
+    if (typeof value === 'string') {
+      const parsed = new Date(value);
+      if (!Number.isNaN(parsed.getTime())) {
+        return parsed;
+      }
+    }
+
+    return new Date();
+  }
+
+  private coerceInteger(value: unknown): number {
+    if (typeof value === 'number') {
+      return Number.isFinite(value) ? Math.trunc(value) : 0;
+    }
+
+    if (typeof value === 'string') {
+      const parsed = Number.parseInt(value, 10);
+      return Number.isFinite(parsed) ? parsed : 0;
+    }
+
+    return 0;
+  }
+
+  private parseDeal(item: RssItem, index: number): Deal {
+    const summary = this.extractSummary(item.description ?? item.content ?? '');
+    const priceLabel = this.extractPrice(item.title);
+    const priceValue = priceLabel ? this.parsePriceValue(priceLabel) : undefined;
+    const store = this.extractStore(item.title, summary);
+
+    return {
+      id: item.guid ?? `${index}`,
+      title: item.title.trim(),
+      link: item.link,
+      author: item.author,
+      postedAt: new Date(item.pubDate),
+      thumbnail: item.thumbnail ?? item.enclosure?.thumbnail,
+      categories: item.categories ?? [],
+      summary,
+      priceLabel,
+      priceValue,
+      store,
+      commentCount: 0,
+      clickCount: 0,
+      positiveVotes: 0,
+      negativeVotes: 0,
+      externalUrl: undefined,
+      score: 0
+    };
+  }
+
+  private extractSummary(html: string): string {
+    const withoutTags = html
+      .replace(/<script[^>]*>[\s\S]*?<\/script>/gi, '')
+      .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, '')
+      .replace(/<[^>]*>/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
+
+    return withoutTags;
+  }
+
+  private extractPrice(title: string): string | undefined {
+    const priceMatch = title.match(/\$\d+[\d,.]*/);
+    return priceMatch ? priceMatch[0] : undefined;
+  }
+
+  private parsePriceValue(priceLabel: string): number | undefined {
+    const normalized = priceLabel.replace(/[^0-9.,]/g, '').replace(/,/g, '');
+    const value = parseFloat(normalized);
+    return Number.isFinite(value) ? value : undefined;
+  }
+
+  private extractStore(title: string, summary: string): string | undefined {
+    const atMatch = title.match(/@\s*([^|\-\[]+)/);
+    if (atMatch) {
+      return atMatch[1].trim();
+    }
+
+    const fromSummary = summary.match(/@[\s]*([A-Za-z0-9 &'-]+)/);
+    return fromSummary ? fromSummary[1].trim() : undefined;
   }
 }
-  styles: [
-    `
-      :host {
-        display: block;
-        min-height: 100vh;
-        background: linear-gradient(180deg, #f8f9fa 0%, #edf2ff 100%);
-        font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-        color: #212529;
-      }
-
-      .app-shell {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 2rem 1.25rem 4rem;
-      }
-
-      .app-header {
-        display: flex;
-        flex-direction: column;
-        gap: 1.5rem;
-        padding-bottom: 1.5rem;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-      }
-
-      .branding h1 {
-        margin: 0;
-        font-size: 1.75rem;
-      }
-
-      .branding .tagline {
-        margin: 0.5rem 0 0;
-        color: #495057;
-        font-size: 1rem;
-      }
-
-      .primary-nav {
-        display: flex;
-        gap: 1.25rem;
-      }
-
-      .primary-nav a {
-        text-decoration: none;
-        color: #495057;
-        font-weight: 600;
-        position: relative;
-        padding-bottom: 0.25rem;
-      }
-
-      .primary-nav a.active,
-      .primary-nav a:hover,
-      .primary-nav a:focus {
-        color: #4c6ef5;
-      }
-
-      .primary-nav a.active::after {
-        content: '';
-        position: absolute;
-        left: 0;
-        right: 0;
-        bottom: -0.35rem;
-        height: 3px;
-        border-radius: 999px;
-        background: #4c6ef5;
-      }
-
-      .app-content {
-        margin-top: 2rem;
-      }
-
-      @media (min-width: 768px) {
-        .app-header {
-          flex-direction: row;
-          align-items: center;
-          justify-content: space-between;
-        }
-
-        .branding {
-          max-width: 640px;
-        }
-      }
-    `,
-  ],
-    `
-  ]
-})
-export class AppComponent {}
