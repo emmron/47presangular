@@ -1,0 +1,38 @@
+[
+  {
+    "id": "jonathan-huckabee",
+    "name": "Jonathan Huckabee",
+    "title": "Director & Founder",
+    "company": "Cyan Web Solutions",
+    "bio": "Jonathan Huckabee is an experienced digital developer and technologist with over 30 years of crafting information technology solutions that improve business processes and performance. As the founder of both Cyan Web Solutions and The Streets Network, Jonathan has established himself in the Perth technology scene, specializing in SME business marketing, digital media and technology consulting, web development, digital advertising, eCommerce, web hosting, and brand development.",
+    "experience": "30+ years in IT and digital development",
+    "location": "Perth, Western Australia",
+    "imageUrl": "/assets/images/developers/jonathan-huckabee.jpg",
+    "skills": [
+      "Game Development",
+      "Web Development",
+      "Digital Media",
+      "Technology Consulting",
+      "eCommerce",
+      "Business Marketing",
+      "HTML/CSS/JavaScript",
+      "Project Management"
+    ],
+    "websites": [
+      {
+        "label": "Cyan Web Solutions",
+        "url": "https://www.cyanweb.dev"
+      },
+      {
+        "label": "The Streets Network",
+        "url": "#"
+      }
+    ],
+    "socialLinks": [
+      {
+        "platform": "LinkedIn",
+        "url": "https://www.linkedin.com/in/jonathan-huckabee-53b39517a/"
+      }
+    ]
+  }
+]
