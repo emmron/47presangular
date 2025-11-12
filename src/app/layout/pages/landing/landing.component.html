@@ -1,11 +1,238 @@
 <div class="landing">
-  <app-hero-metrics></app-hero-metrics>
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-section__content">
+      <div class="hero-section__badge">
+        <span>🚀 New Era of Web Development</span>
+      </div>
+      <h1 class="hero-section__title">
+        Build exceptional digital experiences with <span class="hero-section__title--highlight">Cyan</span>
+      </h1>
+      <p class="hero-section__description">
+        Transform your vision into reality with cutting-edge web solutions.
+        We deliver scalable, performant, and beautiful applications that drive results.
+      </p>
+      <div class="hero-section__actions">
+        <button class="btn btn--primary">Get Started</button>
+        <button class="btn btn--secondary">View Our Work</button>
+      </div>
+      <div class="hero-section__stats">
+        <div class="stat">
+          <span class="stat__value">500+</span>
+          <span class="stat__label">Projects Delivered</span>
+        </div>
+        <div class="stat">
+          <span class="stat__value">98%</span>
+          <span class="stat__label">Client Satisfaction</span>
+        </div>
+        <div class="stat">
+          <span class="stat__value">50+</span>
+          <span class="stat__label">Team Members</span>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <section class="landing__news">
-    <header class="landing__news-header">
-      <h2>Campaign briefing</h2>
-      <p>Explore the latest reporting gathered across national outlets.</p>
-    </header>
-    <app-news-feed></app-news-feed>
+  <!-- Features Section -->
+  <section class="features-section">
+    <div class="section-header">
+      <span class="section-header__eyebrow">What We Do</span>
+      <h2 class="section-header__title">Powerful features for modern web</h2>
+      <p class="section-header__description">
+        Everything you need to build and scale your digital presence
+      </p>
+    </div>
+    <div class="features-grid">
+      <article class="feature-card">
+        <div class="feature-card__icon">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+            <path d="M2 17l10 5 10-5M2 12l10 5 10-5"></path>
+          </svg>
+        </div>
+        <h3 class="feature-card__title">Modern Architecture</h3>
+        <p class="feature-card__description">
+          Built on the latest frameworks and best practices for optimal performance and maintainability.
+        </p>
+      </article>
+      <article class="feature-card">
+        <div class="feature-card__icon">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M12 6v6l4 2"></path>
+          </svg>
+        </div>
+        <h3 class="feature-card__title">Lightning Fast</h3>
+        <p class="feature-card__description">
+          Optimized for speed with advanced caching, lazy loading, and performance optimization techniques.
+        </p>
+      </article>
+      <article class="feature-card">
+        <div class="feature-card__icon">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+          </svg>
+        </div>
+        <h3 class="feature-card__title">Enterprise Security</h3>
+        <p class="feature-card__description">
+          Bank-level security with encryption, authentication, and compliance with industry standards.
+        </p>
+      </article>
+      <article class="feature-card">
+        <div class="feature-card__icon">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+            <line x1="8" y1="21" x2="16" y2="21"></line>
+            <line x1="12" y1="17" x2="12" y2="21"></line>
+          </svg>
+        </div>
+        <h3 class="feature-card__title">Responsive Design</h3>
+        <p class="feature-card__description">
+          Flawless experiences across all devices with mobile-first, adaptive design principles.
+        </p>
+      </article>
+      <article class="feature-card">
+        <div class="feature-card__icon">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+          </svg>
+        </div>
+        <h3 class="feature-card__title">Real-time Analytics</h3>
+        <p class="feature-card__description">
+          Comprehensive insights and monitoring to understand user behavior and optimize performance.
+        </p>
+      </article>
+      <article class="feature-card">
+        <div class="feature-card__icon">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="2" y1="12" x2="22" y2="12"></line>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+          </svg>
+        </div>
+        <h3 class="feature-card__title">Global Scale</h3>
+        <p class="feature-card__description">
+          Deploy worldwide with CDN integration, multi-region support, and automatic scaling.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section class="services-section">
+    <div class="section-header">
+      <span class="section-header__eyebrow">Our Services</span>
+      <h2 class="section-header__title">End-to-end web solutions</h2>
+      <p class="section-header__description">
+        From concept to deployment, we've got you covered
+      </p>
+    </div>
+    <div class="services-list">
+      <div class="service-item">
+        <div class="service-item__number">01</div>
+        <div class="service-item__content">
+          <h3 class="service-item__title">Web Application Development</h3>
+          <p class="service-item__description">
+            Custom web applications built with Angular, React, Vue, and other modern frameworks.
+            We create scalable solutions tailored to your business needs.
+          </p>
+          <ul class="service-item__features">
+            <li>Single Page Applications (SPAs)</li>
+            <li>Progressive Web Apps (PWAs)</li>
+            <li>Enterprise Web Platforms</li>
+          </ul>
+        </div>
+      </div>
+      <div class="service-item">
+        <div class="service-item__number">02</div>
+        <div class="service-item__content">
+          <h3 class="service-item__title">UI/UX Design</h3>
+          <p class="service-item__description">
+            User-centered design that combines aesthetics with functionality.
+            We create intuitive interfaces that users love.
+          </p>
+          <ul class="service-item__features">
+            <li>User Research & Testing</li>
+            <li>Wireframing & Prototyping</li>
+            <li>Design Systems</li>
+          </ul>
+        </div>
+      </div>
+      <div class="service-item">
+        <div class="service-item__number">03</div>
+        <div class="service-item__content">
+          <h3 class="service-item__title">Cloud Infrastructure</h3>
+          <p class="service-item__description">
+            Robust cloud solutions on AWS, Azure, and GCP.
+            We handle deployment, scaling, and maintenance so you can focus on your business.
+          </p>
+          <ul class="service-item__features">
+            <li>CI/CD Pipelines</li>
+            <li>Container Orchestration</li>
+            <li>Serverless Architecture</li>
+          </ul>
+        </div>
+      </div>
+      <div class="service-item">
+        <div class="service-item__number">04</div>
+        <div class="service-item__content">
+          <h3 class="service-item__title">Consulting & Strategy</h3>
+          <p class="service-item__description">
+            Strategic guidance to help you make the right technology decisions.
+            We align technical solutions with your business objectives.
+          </p>
+          <ul class="service-item__features">
+            <li>Technical Audits</li>
+            <li>Architecture Planning</li>
+            <li>Performance Optimization</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Metrics Section -->
+  <section class="metrics-section">
+    <div class="section-header section-header--centered">
+      <span class="section-header__eyebrow">Our Impact</span>
+      <h2 class="section-header__title">Trusted by companies worldwide</h2>
+    </div>
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="metric-card__value">2.5M+</div>
+        <div class="metric-card__label">Active Users</div>
+        <div class="metric-card__description">Across all platforms</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-card__value">99.9%</div>
+        <div class="metric-card__label">Uptime</div>
+        <div class="metric-card__description">Guaranteed reliability</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-card__value">150ms</div>
+        <div class="metric-card__label">Average Load Time</div>
+        <div class="metric-card__description">Lightning fast performance</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-card__value">24/7</div>
+        <div class="metric-card__label">Support</div>
+        <div class="metric-card__description">Always here to help</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="cta-section__content">
+      <h2 class="cta-section__title">Ready to transform your digital presence?</h2>
+      <p class="cta-section__description">
+        Let's build something amazing together. Get in touch with our team to discuss your project.
+      </p>
+      <div class="cta-section__actions">
+        <button class="btn btn--primary btn--large">Start Your Project</button>
+        <button class="btn btn--secondary-light btn--large">Schedule a Call</button>
+      </div>
+    </div>
   </section>
 </div>
