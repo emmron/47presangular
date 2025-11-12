@@ -1,0 +1,38 @@
+<div class="game-card">
+  <div class="game-image" *ngIf="game.imageUrl">
+    <img [src]="game.imageUrl" [alt]="game.title" />
+  </div>
+  <div class="game-content">
+    <h3 class="game-title">{{ game.title }}</h3>
+    <div class="game-meta">
+      <span class="game-developer">{{ game.developer }}</span>
+      <span class="game-publisher" *ngIf="game.publisher"> | {{ game.publisher }}</span>
+    </div>
+    <p class="game-description">{{ game.description }}</p>
+
+    <div class="game-genres" *ngIf="game.genre && game.genre.length > 0">
+      <span class="genre-tag" *ngFor="let genre of game.genre">{{ genre }}</span>
+    </div>
+
+    <div class="game-platforms" *ngIf="game.platform && game.platform.length > 0">
+      <strong>Platform:</strong> {{ game.platform.join(', ') }}
+    </div>
+
+    <div class="game-release">
+      <strong>Released:</strong> {{ game.releaseDate }}
+    </div>
+
+    <div class="game-features" *ngIf="game.features && game.features.length > 0">
+      <strong>Features:</strong>
+      <ul>
+        <li *ngFor="let feature of game.features">{{ feature }}</li>
+      </ul>
+    </div>
+
+    <div class="game-actions">
+      <button *ngIf="game.steamUrl" class="steam-btn" (click)="openSteamPage()">
+        View on Steam
+      </button>
+    </div>
+  </div>
+</div>

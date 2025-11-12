@@ -1,0 +1,22 @@
+[
+  {
+    "id": "squirrelmageddon",
+    "title": "Squirrelmageddon!",
+    "description": "A 3rd/1st person, dark humor, sci-fi, run and gun, high score squirrel wave shooter for 1-4 LAN or online players. Set in a dark future where genetically engineered squirrels have overrun the planet. This solo-developed indie game uses Unreal Engine with both custom and marketplace assets.",
+    "platform": ["PC", "Steam"],
+    "steamUrl": "https://store.steampowered.com/app/1470670/Squirrelmageddon/",
+    "releaseDate": "October 12, 2021",
+    "genre": ["Action", "Shooter", "Indie", "Co-op", "Dark Humor", "Sci-Fi"],
+    "imageUrl": "/assets/images/games/squirrelmageddon.jpg",
+    "developer": "OA Games",
+    "publisher": "The Streets Network",
+    "features": [
+      "1-4 Player Co-op (LAN or Online)",
+      "3rd/1st Person Perspective",
+      "High Score Wave Shooter",
+      "Dark Humor Sci-Fi Setting",
+      "Unreal Engine",
+      "Solo Developed"
+    ]
+  }
+]
