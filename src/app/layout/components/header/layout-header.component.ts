@@ -6,6 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./layout-header.component.scss']
 })
 export class LayoutHeaderComponent {
-  readonly title = 'Aussie Cricket Pulse';
-  readonly subtitle = 'Real-time intelligence across Australian cricket';
+  readonly title = 'Cyan';
+  readonly subtitle = 'Empowering digital experiences with modern web solutions';
 }
